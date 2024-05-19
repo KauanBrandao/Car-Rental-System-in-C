@@ -19,7 +19,7 @@ void corrigirAcentuacao(){
 }
 
 void creditos(){
-	printf("Desenvolvido por: Caio Navarro, Emanuel Lucas, Gustavo Santos, Kauan Brandao, Miguel Ribeiro e Samuel Falcão\n\n");
+	printf("Desenvolvido por: Caio Navarro, Emanuel Lucas, Gustavo Santos, Kauan Brandao, Miguel Neto e Samuel Falcão\n\n");
 	system("pause");
 	system("cls");
 	menuPrincipal();
