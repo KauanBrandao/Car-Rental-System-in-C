@@ -80,5 +80,7 @@ void cadastrarVeiculo(){
 	system("cls");
 	
 	printf("**** CARRO CADASTRADO COM SUCESSO ****");
+	
+	system("pause");
 	menuFuncionario();
 }
