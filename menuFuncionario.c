@@ -62,3 +62,23 @@ void menuFuncionario(){
 	system("cls");
 	controleMenuFuncionario(opcao);
 }
+
+void cadastrarVeiculo(){
+	char nomecarros [40]
+	char modelocarros [40]
+	int codigocarros [4]
+	
+	printf("Digite o nome do carro: \n");
+	scanf("%s", nomecarros);
+	
+	printf("Digite o modelo do carro: \n");
+	scanf("%s", modelocarros);
+	
+	printf("Digite o codígo para esse veículo: \n");
+	scanf("%d", codigocarros);
+	
+	system("cls");
+	
+	printf("**** CARRO CADASTRADO COM SUCESSO ****");
+	menuFuncionario();
+}
