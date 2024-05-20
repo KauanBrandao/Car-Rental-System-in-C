@@ -7,10 +7,10 @@ void menuFuncionario();
 void controleMenuFuncionario(int opcao){
 	switch(opcao){
 		case 1:
-			//cadastrarVeiculo();
+			cadastrarVeiculo();
 			break;
 		case 2:
-			//loginCliente();
+			//removerVeiculo();
 			break;
 		case 3:
 			//carrosDisponiveis();
@@ -64,9 +64,9 @@ void menuFuncionario(){
 }
 
 void cadastrarVeiculo(){
-	char nomecarros [40]
-	char modelocarros [40]
-	int codigocarros [4]
+	char nomecarros [40];
+	char modelocarros [40];
+	int codigocarros [4];
 	
 	printf("Digite o nome do carro: \n");
 	scanf("%s", nomecarros);
