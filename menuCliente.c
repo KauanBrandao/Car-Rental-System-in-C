@@ -46,3 +46,19 @@ void menuCliente(){
 	system("cls");
 	controleMenuCliente(escolha);
 }
+
+void regrasLocadora(){
+	
+	printf("******** REGRAS LOCADORA ********\n ");
+	
+	printf("1. O CARRO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
+	printf("2. O CARRO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
+	printf("3. O CARRO DEVE SER ENTREGUE LAVADO\n");
+	printf("4. O LOCADOR DEVE SER RESPONSÁVEL POR QUAISQUER DANO AO VEÍCULO.\n");
+	printf("5. MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
+	printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
+	printf("7. O CAUÇÃO DEVE SER PAGO COM ANTECEDÊNCIA PAGO NO PIX OU EM ESPÉCIE\n");
+	printf("8. PAGAMENTO DA LOCAÇÃO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 12X/ JUROS DE 2% DO CARTÃO), OU EM ESPÉCIE\n");
+	
+	
+}
