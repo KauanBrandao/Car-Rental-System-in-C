@@ -24,17 +24,6 @@ double calcularValorTotal(double valorDiaria, int diasLocados) {
 void gerarNotaFiscal() {
     NotaFiscal nota;
 
-    setlocale(LC_ALL, "");
-
-    // Coletando as informações do cliente
-    printf("Digite o nome do cliente: ");
-    fgets(nota.nomeCliente, 100, stdin);
-    nota.nomeCliente[strcspn(nota.nomeCliente, "\n")] = 0; 
-
-    printf("Digite o CPF/CNPJ do cliente: ");
-    fgets(nota.cpfCnpj, 20, stdin);
-    nota.cpfCnpj[strcspn(nota.cpfCnpj, "\n")] = 0; 
-
     // Coletando as informações do carro e locação
     printf("Digite o modelo do carro: ");
     fgets(nota.carro, 50, stdin);
@@ -43,10 +32,12 @@ void gerarNotaFiscal() {
     printf("Digite a data de locação (DD/MM/AAAA): ");
     fgets(nota.dataLocacao, 11, stdin);
     nota.dataLocacao[strcspn(nota.dataLocacao, "\n")] = 0; 
+    
+    fflush(stdin);
      
     printf("Digite a data de devolução (DD/MM/AAAA): ");
     fgets(nota.dataDevolucao, 11, stdin);
-    nota.dataDevolucao[strcspn(nota.dataDevolucao, "\n")] = 0; 
+    nota.dataDevolucao[strcspn(nota.dataDevolucao, "\n")] = 0;
 
     printf("Digite o valor da diária: ");
     scanf("%lf", &nota.valorDiaria);
@@ -74,7 +65,7 @@ void gerarNotaFiscal() {
 }
 
 int main() {
+	setlocale(LC_ALL, "");
     gerarNotaFiscal();
     return 0;
 }
-
