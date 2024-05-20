@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+extern void menuPrincipal();
+
 void menuCliente();
 void registroCliente();
 void loginCliente();
@@ -138,6 +140,8 @@ void controleMenuCliente(int opcao){
 		case 6:
 			regrasLocadora();
 			break;
+		case 7: 
+			menuPrincipal();
 		default:
 			printf("Escolha uma opção válida!\n\n");
 			menuCliente();
@@ -155,7 +159,8 @@ void menuCliente(){
 	printf("|4 - Alugar um veiculo\n");
 	printf("|5 - Simular Locação\n");
 	printf("|6 - Regras da locadora\n");
-	printf("Escolha uma opção [1-6]: ");
+	printf("|7 - Voltar ao menu inicial\n");
+	printf("Escolha uma opção [1-7]: ");
 	scanf("%d", &escolha);
 	
 	system("cls");
