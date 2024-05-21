@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <locale.h>
 
-extern void menuCliente();
-extern void loginFuncionario();
+#include "menuCliente.c"
+#include "menuFuncionario.c"
+
 void menuPrincipal();
 
 struct RegistroDePessoa{
@@ -57,7 +58,7 @@ void menuPrincipal(){
 	printf("|2 - Menu de funcionários\n");
 	printf("|3 - Créditos\n");
 	printf("|4 - Sair do sistema\n");
-	printf("Escolha uma opção: ");
+	printf("Escolha uma opção [1-4]: ");
 	scanf("%d", &escolha);
 	
 	system("cls");
