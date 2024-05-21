@@ -10,6 +10,8 @@ typedef struct {
     int codigo;
 } Veiculo;
 
+extern void menuPrincipal();
+
 void menuFuncionario();
 void cadastrarVeiculo();
 void removerVeiculo();
@@ -32,6 +34,9 @@ void controleMenuFuncionario(int opcao) {
         case 4:
             // consultarLocacoes();
             break;
+        case 5: 
+        	menuPrincipal();
+        	break;
         default:
             printf("Escolha uma opção válida!\n\n");
             menuFuncionario();
@@ -70,6 +75,7 @@ void menuFuncionario() {
     printf("|2 - Remover veiculos\n");
     printf("|3 - Buscar veiculos\n");
     printf("|4 - Consultar locações\n");    
+    printf("|5 - Voltar para o menu inicial\n");
     printf("Escolha uma opção: ");
     scanf("%d", &opcao);
     
