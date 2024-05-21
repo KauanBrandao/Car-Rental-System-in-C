@@ -159,7 +159,7 @@ void menuCliente(){
 	printf("|4 - Alugar um veiculo\n");
 	printf("|5 - Simular Locação\n");
 	printf("|6 - Regras da locadora\n");
-	printf("|7 - Voltar ao menu inicial\n");
+	printf("|7 - Voltar para o menu inicial\n");
 	printf("Escolha uma opção [1-7]: ");
 	scanf("%d", &escolha);
 	
