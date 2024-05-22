@@ -17,6 +17,10 @@ struct Cliente{
     char senha[20];
 } info;
 
+typedef Carro{
+	char carrosDisponiveis[50];
+} carros;
+
 bool menorIdade(){
 	if(info.idade < 18){
 		return true;
@@ -118,6 +122,29 @@ void regrasLocadora(){
 	system("pause");
 	system("cls");
 	return menuCliente();
+}
+
+void simularAluguel(){ 
+     int i, dias;
+     float preco_diario = 100.0; 
+
+     printf(" ### Simular Aluguel ### \n\n");
+     carrosDisponiveis();
+
+     printf("Digite o número do carro que deseja simular o aluguel: ");
+     scanf("%d", &i);
+    
+     if (i < 1 || i > total_carros || !carros[i - 1].disponivel) {
+        printf("Carro inválido ou não disponível.\n");
+     } else {
+        printf("Digite o número de dias que deseja alugar: ");
+        scanf("%d", &dias);
+        printf("Custo total para alugar o %s, %d por %d dias é: R$%.2f\n", 
+            carros[i - 1].modelo, carros[i - 1].ano, dias, preco_diario * dias);
+     }
+      system("pause");
+      system("cls");
+      menuCliente();
 }
 
 void controleMenuCliente(int opcao){
