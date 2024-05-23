@@ -9,6 +9,7 @@ struct Veiculo{
     char nome[40];
     char modelo[15];
     int codigo;
+    char valorDiaria[10];
 } veiculos[MAX_VEICULOS];
 
 int totalVeiculos = 0;
@@ -107,9 +108,12 @@ void cadastrarVeiculo(){
 	printf("Escreva o modelo do carro: ");
     gets(veiculos->modelo);
     
+    printf("Informe o valor da diária do veículo: \n");
+    gets(veiculos[totalVeiculos].valorDiaria);
+    
     if(modeloValido(veiculos->modelo)){
     	printf("\nDigite o código para esse veículo: ");
-    	scanf(" %d", &veiculos->codigo);
+    	scanf(" %d", &veiculos[totalVeiculos].codigo);
 
     	totalVeiculos++;
     	system("cls");

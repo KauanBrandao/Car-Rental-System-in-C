@@ -9,13 +9,15 @@ void menuCliente();
 void registroCliente();
 void loginCliente();
 
+int cliente = 0;
+
 struct Cliente{
     char nomeCliente[50];
     char cpfCnpj[20];
     int idade;
     char usuario[20];
     char senha[20];
-} info;
+} info[];
 
 typedef Carro{
 	char carrosDisponiveis[50];
@@ -36,15 +38,18 @@ bool usuarioOuSenhaInvalido(char usuarioOuSenha[20]){
 }
 
 void registroCliente(){
+	
 	fflush(stdin);
 	printf("Digite o seu nome: ");
-    gets(info.nomeCliente);
+    //gets(info[cliente].nomeCliente);
     
     printf("\nDigite o seu CPF/CNPJ: ");
-    gets(info.cpfCnpj);
+    //gets(info[cliente].cpfCnpj);
+    
+    //verificação do tamanho de caracteres do cpf/cnpj 
     
     printf("\nDigite a sua idade: ");
-    scanf(" %d", &info.idade);
+    //scanf(" %d", &info[cliente].idade);
     
     if(menorIdade()){
     	printf("\nVocê tem menos de 18 anos e por isso não poderá concluir o cadastro!\n");
@@ -55,7 +60,7 @@ void registroCliente(){
 	
 	fflush(stdin);
 	printf("\nEscolha um usuário (MAX 20 CARACTERES): ");
-	gets(info.usuario);
+	//gets(info[cliente].usuario);
 	
 	if(usuarioOuSenhaInvalido(info.usuario)){
 		system("cls");
@@ -64,7 +69,7 @@ void registroCliente(){
 	}
 	
 	printf("\nEscolha uma senha (MAX 20 CARACTERES): ");
-	gets(info.senha);
+	//gets(info[cliente].senha);
 	
 	if(usuarioOuSenhaInvalido(info.senha)){
 		system("cls");
@@ -73,13 +78,14 @@ void registroCliente(){
 	}
 	
 	printf("\nCadastro concluído!\n");
+	//cliente++;
 	system("pause");
 	system("cls");
 	menuCliente();
 }
 
 bool loginInvalido(char usuario[20], char senha[20]){
-	if(strcmp(usuario, info.usuario) != 0 || strcmp(senha, info.senha) != 0){
+	//if(strcmp(usuario, info[cliente].usuario) != 0 || strcmp(senha, info[cliente].senha) != 0){
 		return true;
 	}
 	return false;
@@ -124,39 +130,20 @@ void regrasLocadora(){
 	return menuCliente();
 }
 
-void simularAluguel(){ 
-     int i, dias;
-     float preco_diario = 100.0; 
 
-     printf(" ### Simular Aluguel ### \n\n");
-     carrosDisponiveis();
-
-     printf("Digite o número do carro que deseja simular o aluguel: ");
-     scanf("%d", &i);
-    
-     if (i < 1 || i > total_carros || !carros[i - 1].disponivel) {
-        printf("Carro inválido ou não disponível.\n");
-     } else {
-        printf("Digite o número de dias que deseja alugar: ");
-        scanf("%d", &dias);
-        printf("Custo total para alugar o %s, %d por %d dias é: R$%.2f\n", 
-            carros[i - 1].modelo, carros[i - 1].ano, dias, preco_diario * dias);
-     }
-      system("pause");
-      system("cls");
-      menuCliente();
-}
 
 void controleMenuCliente(int opcao){
 	switch(opcao){
 		case 1:
 			registroCliente();
+				
 			break;
 		case 2:
 			loginCliente();
 			break;
 		case 3:
 			//carrosDisponiveis();
+			//Colocar a opção do cliente escolher qual o modelo de carro para printar os carros disponíveis 
 			break;
 		case 4:
 			//alugarVeiculo();
@@ -169,6 +156,9 @@ void controleMenuCliente(int opcao){
 			break;
 		case 7: 
 			menuPrincipal();
+		case 8: 
+			//mostrar informações 
+			// buscar o cpf para mostrar as informações do usuario
 		default:
 			printf("Escolha uma opção válida!\n\n");
 			menuCliente();
