@@ -5,6 +5,8 @@
 #include "menuCliente.c"
 #include "menuFuncionario.c"
 
+extern void menuClienteRegistro();
+extern void loginFuncionario();
 void menuPrincipal();
 
 struct RegistroDePessoa{
@@ -27,21 +29,21 @@ void creditos(){
 }
 
 void sair(){
-	printf("Saindo...");
+	printf("Obriado por usar nosso sistema!");
 }
 
 void controleMenuPrincipal(int escolha){
 	switch(escolha){
-		case 1:
-			menuCliente();
+		case '1':
+			menuClienteRegistro();
 			break;
-		case 2:
+		case '2':
 			loginFuncionario();
 			break;
-		case 3:
+		case '3':
 			creditos();
 			break;
-		case 4:
+		case '4':
 			sair();
 			exit(0);
 		default:
@@ -51,7 +53,7 @@ void controleMenuPrincipal(int escolha){
 }
 
 void menuPrincipal(){
-	int escolha; 
+	char escolha; 
 	
 	printf("------- Menu Inicial -------\n\n");
 	printf("|1 - Menu de clientes\n");
@@ -59,7 +61,7 @@ void menuPrincipal(){
 	printf("|3 - Créditos\n");
 	printf("|4 - Sair do sistema\n");
 	printf("Escolha uma opção [1-4]: ");
-	scanf("%d", &escolha);
+	scanf(" %c", &escolha);
 	
 	system("cls");
 	controleMenuPrincipal(escolha);

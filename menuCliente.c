@@ -3,13 +3,15 @@
 #include <stdbool.h>
 #include <string.h>
 
+extern int totalVeiculos;
 extern void menuPrincipal();
 
 void menuCliente();
 void registroCliente();
 void loginCliente();
+void menuClienteRegistro();
 
-int cliente = 0;
+int codigoCliente = 0;
 
 struct Cliente{
     char nomeCliente[50];
@@ -17,14 +19,10 @@ struct Cliente{
     int idade;
     char usuario[20];
     char senha[20];
-} info[];
-
-typedef Carro{
-	char carrosDisponiveis[50];
-} carros;
+} info[100];
 
 bool menorIdade(){
-	if(info.idade < 18){
+	if(info[codigoCliente].idade < 18){
 		return true;
 	}
 	return false;
@@ -38,57 +36,56 @@ bool usuarioOuSenhaInvalido(char usuarioOuSenha[20]){
 }
 
 void registroCliente(){
-	
 	fflush(stdin);
 	printf("Digite o seu nome: ");
-    //gets(info[cliente].nomeCliente);
+    gets(info[codigoCliente].nomeCliente);
     
     printf("\nDigite o seu CPF/CNPJ: ");
-    //gets(info[cliente].cpfCnpj);
-    
-    //verificação do tamanho de caracteres do cpf/cnpj 
+    gets(info[codigoCliente].cpfCnpj);
     
     printf("\nDigite a sua idade: ");
-    //scanf(" %d", &info[cliente].idade);
+    scanf(" %d", &info[codigoCliente].idade);
     
     if(menorIdade()){
     	printf("\nVocê tem menos de 18 anos e por isso não poderá concluir o cadastro!\n");
     	system("pause");
     	system("cls");
-		return menuCliente();
+		return menuPrincipal();
 	}
 	
 	fflush(stdin);
 	printf("\nEscolha um usuário (MAX 20 CARACTERES): ");
-	//gets(info[cliente].usuario);
+	gets(info[codigoCliente].usuario);
 	
-	if(usuarioOuSenhaInvalido(info.usuario)){
+	if(usuarioOuSenhaInvalido(info[codigoCliente].usuario)){
 		system("cls");
 		printf("ERROR: Usuário maior que 20 caracteres!\n\n");
 		return registroCliente();
 	}
 	
 	printf("\nEscolha uma senha (MAX 20 CARACTERES): ");
-	//gets(info[cliente].senha);
+	gets(info[codigoCliente].senha);
 	
-	if(usuarioOuSenhaInvalido(info.senha)){
+	if(usuarioOuSenhaInvalido(info[codigoCliente].senha)){
 		system("cls");
 		printf("ERROR: Senha maior que 20 caracteres!\n\n");
 		return registroCliente();
 	}
 	
+	codigoCliente++;
 	printf("\nCadastro concluído!\n");
-	//cliente++;
 	system("pause");
 	system("cls");
-	menuCliente();
+	menuClienteRegistro();
 }
 
 bool loginInvalido(char usuario[20], char senha[20]){
-	//if(strcmp(usuario, info[cliente].usuario) != 0 || strcmp(senha, info[cliente].senha) != 0){
-		return true;
-	}
-	return false;
+	for (int i = 0; i < codigoCliente; i++) {
+        if (strcmp(usuario, info[i].usuario) == 0 && strcmp(senha, info[i].senha) == 0) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void loginCliente(){
@@ -113,6 +110,38 @@ void loginCliente(){
 	menuCliente();
 }
 
+void menuClienteRegistro(){
+	char opcao;
+	
+	printf("******* Faça seu Registro/Login *******\n\n");
+	
+	printf("|1 - Registro\n");
+	printf("|2 - Login\n");
+	printf("|Escolha uma opção [1-2]: ");
+	scanf(" %c", &opcao);
+	
+	if(opcao == '1'){
+		system("cls");
+		registroCliente();
+	}else if(opcao == '2'){
+		system("cls");
+		loginCliente();
+	}else{
+		system("cls");
+		printf("Opção inválida!\n\n");
+		return menuClienteRegistro();
+	}
+}
+
+void carrosDisponiveis(){
+	if (totalVeiculos == 0){
+        printf("Nenhum veículo cadastrado!\n\n");
+        system("pause");
+        system("cls");
+        return menuCliente();
+    }
+}
+
 void regrasLocadora(){
 	printf("******** REGRAS LOCADORA ********\n\n");
 	
@@ -130,35 +159,54 @@ void regrasLocadora(){
 	return menuCliente();
 }
 
-
+void minhasInfo(){
+	char cpfCnpj[20];
+	
+	fflush(stdin);
+	printf("Informe seu CPF/CNPJ: ");
+	gets(cpfCnpj);
+	
+	for(int i = 0; i < codigoCliente; i++){
+		if(strcmp(info[i].cpfCnpj, cpfCnpj)==0){
+			system("cls");
+			printf("Usuário encontrado.\n\n");
+	
+			printf("Nome: %s\n", info[i].nomeCliente);
+			printf("Idade: %d\n", info[i].idade);
+			printf("CPF: %s\n", info[i].cpfCnpj);
+			printf("Usuário de Login: %s\n\n", info[i].usuario);
+			
+			system("pause");
+			system("cls");
+			return menuCliente();
+		}
+	}
+	
+	system("cls");
+	printf("Usuário não encontrado.\n\n");
+	return menuCliente();
+}
 
 void controleMenuCliente(int opcao){
 	switch(opcao){
-		case 1:
-			registroCliente();
-				
+		case '1':
+			carrosDisponiveis();
 			break;
-		case 2:
-			loginCliente();
-			break;
-		case 3:
-			//carrosDisponiveis();
-			//Colocar a opção do cliente escolher qual o modelo de carro para printar os carros disponíveis 
-			break;
-		case 4:
+		case '2':
 			//alugarVeiculo();
 			break;
-		case 5:
+		case '3':
 			//simularAluguel();
 			break;
-		case 6:
+		case '4':
 			regrasLocadora();
 			break;
-		case 7: 
+		case '5': 
 			menuPrincipal();
-		case 8: 
-			//mostrar informações 
-			// buscar o cpf para mostrar as informações do usuario
+			break;
+		case '6':
+			minhasInfo();
+			break;
 		default:
 			printf("Escolha uma opção válida!\n\n");
 			menuCliente();
@@ -166,20 +214,20 @@ void controleMenuCliente(int opcao){
 }
 
 void menuCliente(){
-	int escolha;
+	char opcao;
 	
 	printf("******* Menu de Clientes *******\n\n");
 	
-	printf("|1 - Registro\n");
-	printf("|2 - Login\n");
-	printf("|3 - Carros disponíveis\n");
-	printf("|4 - Alugar um veiculo\n");
-	printf("|5 - Simular Locação\n");
-	printf("|6 - Regras da locadora\n");
-	printf("|7 - Voltar para o menu inicial\n");
-	printf("Escolha uma opção [1-7]: ");
-	scanf("%d", &escolha);
+	printf("|1 - Carros disponíveis\n");
+	printf("|2 - Alugar um veiculo\n");
+	printf("|3 - Simular Locação\n");
+	printf("|4 - Regras da locadora\n");
+	printf("|5 - Voltar para o menu inicial\n");
+	printf("|6- Minhas informações\n");
+	printf("Escolha uma opção [1-5]: ");
+	scanf(" %c", &opcao);
 	
 	system("cls");
-	controleMenuCliente(escolha);
+	controleMenuCliente(opcao);
 }
+
