@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
+#include <string.h>
 
-#define MAX_VEICULOS 100
+#include "menuFuncionario.h"
+#include "menuCliente.h"
 
 extern void menuPrincipal();
 
@@ -11,14 +12,6 @@ void menuFuncionario();
 void cadastrarVeiculo();
 void removerVeiculo();
 void buscarVeiculo();
-
-struct Veiculo{
-    char nome[40];
-    char categoria[15];
-    int codigo;
-} veiculos[MAX_VEICULOS];
-
-int totalVeiculos = 0;
 
 void loginFuncionario(){
     char login[10];
@@ -43,6 +36,80 @@ void loginFuncionario(){
     }
 }
 
+void buscarUsuario() {
+	char opcao;
+    char cpfCnpj[18];
+    char usuario[20];
+    bool encontrado = false;
+
+    fflush(stdin);
+    printf("Fazer pesquisa por:\n");
+    printf("1 - CPF\n");
+    printf("2 - Usuário\n");
+    printf("3 - Voltar\n");
+    printf("Escolha [1-3]: ");
+    scanf(" %c", &opcao);
+    
+    if(opcao == '1'){
+    	system("cls");
+    	fflush(stdin);
+    	printf("Informe o CPF/CNPJ: ");
+    	gets(cpfCnpj);
+    	
+    	for (int i = 0; i < codigoCliente; i++) {
+	        if (strcmp(cpfCnpj, info[i].cpfCnpj) == 0) {
+	        	encontrado = true;
+	            system("cls");
+	            printf("Usuário encontrado.\n\n");
+	
+	            printf("Nome: %s\n", info[i].nomeCliente);
+	            printf("Idade: %d\n", info[i].idade);
+	            printf("CPF: %s\n", info[i].cpfCnpj);
+	            printf("Usuário de Login: %s\n\n", info[i].usuario);
+	            
+	            system("pause");
+	            system("cls");
+				return menuFuncionario();
+	        }
+	    }
+	}else if(opcao == '2'){
+		system("cls");
+		fflush(stdin);
+		printf("Informe o usuário: ");
+    	gets(usuario);
+    	
+    	for (int i = 0; i < codigoCliente; i++) {
+	        if (strcmp(usuario, info[i].usuario) == 0) {
+	        	encontrado = true;
+	            system("cls");
+	            printf("Usuário encontrado.\n\n");
+	
+	            printf("Nome: %s\n", info[i].nomeCliente);
+	            printf("Idade: %d\n", info[i].idade);
+	            printf("CPF: %s\n", info[i].cpfCnpj);
+	            printf("Usuário de Login: %s\n\n", info[i].usuario);
+	            
+	            system("pause");
+	            system("cls");
+				return menuFuncionario();
+	        }
+	    }
+	}else if(opcao == '3'){
+		system("cls");
+		return menuFuncionario();
+	}else{
+		system("cls");
+		printf("Opção inválida!\n\n");
+		return buscarUsuario();
+	}
+	
+	if(! encontrado){
+		system("cls");
+    	printf("Usuário não encontrado.\n\n");
+    	return menuFuncionario();
+	}
+}
+
 void controleMenuFuncionario(int opcao){
     switch(opcao) {
         case '1':
@@ -60,6 +127,9 @@ void controleMenuFuncionario(int opcao){
         case '5': 
         	menuPrincipal();
         	break;
+        case '6':
+        	buscarUsuario();
+        	break;
         default:
             printf("Escolha uma opção válida!\n\n");
             menuFuncionario();
@@ -76,7 +146,8 @@ void menuFuncionario(){
     printf("|3 - Buscar veiculos\n");
     printf("|4 - Consultar locações\n");    
     printf("|5 - Voltar para o menu inicial\n");
-    printf("Escolha uma opção [1-5]: ");
+    printf("|6 - Buscar usuário\n");
+    printf("Escolha uma opção [1-6]: ");
     scanf(" %c", &opcao);
     
     system("cls");
@@ -105,7 +176,7 @@ void cadastrarVeiculo(){
 	printf("-> SUV\n");
 	printf("-> Picape\n");
 	printf("Escreva a categoria do carro: ");
-    gets(veiculos->categoria);
+    gets(veiculos[totalVeiculos].categoria);
     
     if(modeloValido(veiculos->categoria)){
     	printf("\nDigite o código para esse veículo: ");
@@ -139,7 +210,7 @@ void removerVeiculo(){
         return menuFuncionario();
     }
     
-    printf("Buscar veículo por: \n");
+    printf("Remover veículo por: \n");
     printf("1. Código\n");
     printf("2. Nome\n");
     printf("Escolha uma opção: ");
@@ -159,7 +230,7 @@ void removerVeiculo(){
            				veiculos[i] = veiculos[i + 1];
         			}
         			totalVeiculos--;
-        			printf("\nVeículo de codigo '%d' removido! \n\n", codigoCarro);
+        			printf("\nVeículo de código '%d' removido! \n\n", codigoCarro);
 	                
 	                system("pause");
 	                system("cls");
@@ -275,4 +346,3 @@ void buscarVeiculo(){
     system("cls");
     menuFuncionario();
 }
-

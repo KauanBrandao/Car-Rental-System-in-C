@@ -4,18 +4,10 @@
 
 #include "menuCliente.c"
 #include "menuFuncionario.c"
+#include "menuFuncionario.h"
+#include "menuCliente.h"
 
-extern void menuClienteRegistro();
-extern void loginFuncionario();
 void menuPrincipal();
-
-struct RegistroDePessoa{
-	char nome[50];
-	int dataNascimento;
-	char cpf[15];
-	char usuario[20];
-	char senha[20];
-} cliente; 
 
 void corrigirAcentuacao(){
 	setlocale(LC_ALL, "Portuguese");
@@ -29,7 +21,7 @@ void creditos(){
 }
 
 void sair(){
-	printf("Obriado por usar nosso sistema!");
+	printf("Obrigado por usar nosso sistema!");
 }
 
 void controleMenuPrincipal(int escolha){
