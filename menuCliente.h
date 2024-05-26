@@ -10,6 +10,12 @@ struct Cliente {
 } info[];
 
 int codigoCliente = 0;
+extern void menuPrincipal();
+
+void menuClienteRegistro();
+void menuCliente();
+void registroCliente();
+void loginCliente();
 void menuClienteRegistro();
 
 #endif

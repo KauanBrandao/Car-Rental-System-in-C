@@ -10,6 +10,12 @@ struct Veiculo{
 } veiculos[MAX_VEICULOS];
 
 int totalVeiculos = 0;
+extern void menuPrincipal();
+
+void menuFuncionario();
+void cadastrarVeiculo();
+void removerVeiculo();
+void buscarVeiculo();
 void loginFuncionario();
 
 #endif

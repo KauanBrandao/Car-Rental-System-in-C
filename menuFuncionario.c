@@ -6,13 +6,6 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
-extern void menuPrincipal();
-
-void menuFuncionario();
-void cadastrarVeiculo();
-void removerVeiculo();
-void buscarVeiculo();
-
 void loginFuncionario(){
     char login[10];
     char senha[10];
@@ -34,124 +27,6 @@ void loginFuncionario(){
         printf("Login ou senha inválidos.\n\n");
         loginFuncionario();
     }
-}
-
-void buscarUsuario() {
-	char opcao;
-    char cpfCnpj[18];
-    char usuario[20];
-    bool encontrado = false;
-
-    fflush(stdin);
-    printf("Fazer pesquisa por:\n");
-    printf("1 - CPF\n");
-    printf("2 - Usuário\n");
-    printf("3 - Voltar\n");
-    printf("Escolha [1-3]: ");
-    scanf(" %c", &opcao);
-    
-    if(opcao == '1'){
-    	system("cls");
-    	fflush(stdin);
-    	printf("Informe o CPF/CNPJ: ");
-    	gets(cpfCnpj);
-    	
-    	for (int i = 0; i < codigoCliente; i++) {
-	        if (strcmp(cpfCnpj, info[i].cpfCnpj) == 0) {
-	        	encontrado = true;
-	            system("cls");
-	            printf("Usuário encontrado.\n\n");
-	
-	            printf("Nome: %s\n", info[i].nomeCliente);
-	            printf("Idade: %d\n", info[i].idade);
-	            printf("CPF: %s\n", info[i].cpfCnpj);
-	            printf("Usuário de Login: %s\n\n", info[i].usuario);
-	            
-	            system("pause");
-	            system("cls");
-				return menuFuncionario();
-	        }
-	    }
-	}else if(opcao == '2'){
-		system("cls");
-		fflush(stdin);
-		printf("Informe o usuário: ");
-    	gets(usuario);
-    	
-    	for (int i = 0; i < codigoCliente; i++) {
-	        if (strcmp(usuario, info[i].usuario) == 0) {
-	        	encontrado = true;
-	            system("cls");
-	            printf("Usuário encontrado.\n\n");
-	
-	            printf("Nome: %s\n", info[i].nomeCliente);
-	            printf("Idade: %d\n", info[i].idade);
-	            printf("CPF: %s\n", info[i].cpfCnpj);
-	            printf("Usuário de Login: %s\n\n", info[i].usuario);
-	            
-	            system("pause");
-	            system("cls");
-				return menuFuncionario();
-	        }
-	    }
-	}else if(opcao == '3'){
-		system("cls");
-		return menuFuncionario();
-	}else{
-		system("cls");
-		printf("Opção inválida!\n\n");
-		return buscarUsuario();
-	}
-	
-	if(! encontrado){
-		system("cls");
-    	printf("Usuário não encontrado.\n\n");
-    	return menuFuncionario();
-	}
-}
-
-void controleMenuFuncionario(int opcao){
-    switch(opcao) {
-        case '1':
-            cadastrarVeiculo();
-            break;
-        case '2':
-            removerVeiculo();
-            break;
-        case '3':
-            buscarVeiculo();
-            break;
-        case '4':
-            //consultarLocacoes();
-            break;
-        case '5': 
-        	menuPrincipal();
-        	break;
-        case '6':
-        	buscarUsuario();
-        	break;
-        default:
-            printf("Escolha uma opção válida!\n\n");
-            menuFuncionario();
-    }
-}
-
-void menuFuncionario(){
-    char opcao;
-    
-    printf("******* Menu de Funcionário *******\n\n");
-    
-    printf("|1 - Cadastrar veiculo\n");
-    printf("|2 - Remover veiculos\n");
-    printf("|3 - Buscar veiculos\n");
-    printf("|4 - Consultar locações\n");    
-    printf("|5 - Voltar para o menu inicial\n");
-    printf("|6 - Buscar usuário\n");
-    printf("Escolha uma opção [1-6]: ");
-    scanf(" %c", &opcao);
-    
-    system("cls");
-    controleMenuFuncionario(opcao);
 }
 
 bool modeloValido(char categoria[40]){
@@ -345,4 +220,126 @@ void buscarVeiculo(){
     system("pause");
     system("cls");
     menuFuncionario();
+}
+
+void consultarLocacoes(){
+	//A fazer
+}
+
+void buscarUsuario() {
+	char opcao;
+    char cpfCnpj[18];
+    char usuario[20];
+    bool encontrado = false;
+
+    fflush(stdin);
+    printf("Fazer pesquisa por:\n");
+    printf("1 - CPF\n");
+    printf("2 - Usuário\n");
+    printf("3 - Voltar\n");
+    printf("Escolha [1-3]: ");
+    scanf(" %c", &opcao);
+    
+    if(opcao == '1'){
+    	system("cls");
+    	fflush(stdin);
+    	printf("Informe o CPF/CNPJ: ");
+    	gets(cpfCnpj);
+    	
+    	for (int i = 0; i < codigoCliente; i++) {
+	        if (strcmp(cpfCnpj, info[i].cpfCnpj) == 0) {
+	        	encontrado = true;
+	            system("cls");
+	            printf("Usuário encontrado.\n\n");
+	
+	            printf("Nome: %s\n", info[i].nomeCliente);
+	            printf("Idade: %d\n", info[i].idade);
+	            printf("CPF: %s\n", info[i].cpfCnpj);
+	            printf("Usuário de Login: %s\n\n", info[i].usuario);
+	            
+	            system("pause");
+	            system("cls");
+				return menuFuncionario();
+	        }
+	    }
+	}else if(opcao == '2'){
+		system("cls");
+		fflush(stdin);
+		printf("Informe o usuário: ");
+    	gets(usuario);
+    	
+    	for (int i = 0; i < codigoCliente; i++) {
+	        if (strcmp(usuario, info[i].usuario) == 0) {
+	        	encontrado = true;
+	            system("cls");
+	            printf("Usuário encontrado.\n\n");
+	
+	            printf("Nome: %s\n", info[i].nomeCliente);
+	            printf("Idade: %d\n", info[i].idade);
+	            printf("CPF: %s\n", info[i].cpfCnpj);
+	            printf("Usuário de Login: %s\n\n", info[i].usuario);
+	            
+	            system("pause");
+	            system("cls");
+				return menuFuncionario();
+	        }
+	    }
+	}else if(opcao == '3'){
+		system("cls");
+		return menuFuncionario();
+	}else{
+		system("cls");
+		printf("Opção inválida!\n\n");
+		return buscarUsuario();
+	}
+	
+	if(! encontrado){
+		system("cls");
+    	printf("Usuário não encontrado.\n\n");
+    	return menuFuncionario();
+	}
+}
+
+void controleMenuFuncionario(int opcao){
+    switch(opcao) {
+        case '1':
+            cadastrarVeiculo();
+            break;
+        case '2':
+            removerVeiculo();
+            break;
+        case '3':
+            buscarVeiculo();
+            break;
+        case '4':
+            //consultarLocacoes();
+            break;
+        case '5': 
+        	menuPrincipal();
+        	break;
+        case '6':
+        	buscarUsuario();
+        	break;
+        default:
+            printf("Escolha uma opção válida!\n\n");
+            menuFuncionario();
+    }
+}
+
+void menuFuncionario(){
+    char opcao;
+    
+    printf("******* Menu de Funcionário *******\n\n");
+    
+    printf("|1 - Cadastrar veiculo\n");
+    printf("|2 - Remover veiculos\n");
+    printf("|3 - Buscar veiculos\n");
+    printf("|4 - Consultar locações\n");    
+    printf("|5 - Voltar para o menu inicial\n");
+    printf("|6 - Buscar usuário\n");
+    printf("Escolha uma opção [1-6]: ");
+    scanf(" %c", &opcao);
+    
+    system("cls");
+    controleMenuFuncionario(opcao);
 }
