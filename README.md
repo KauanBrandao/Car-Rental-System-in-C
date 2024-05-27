@@ -6,9 +6,14 @@ Professor e orientador: Victor Moak
 
 Alunos: Kauan Brandão, Emanuel Lucas, Samuel Falcão, Caio Navarro, Gustavo Santos e Miguel Moreira.
 
-Locadora de Carros: Localizo
+Locadora de Carros: Localizo 
+
+MAPA DE FUNCIONALIDADES:
+
 *** Menu inicial ***
+
 Menu de Clientes
+
 - Registro: Registra o cliente para que ele possa acessar o menu de opções após realizar o cadastro (Nome, Data de Nascimento, CPF, Usuário e Senha);
 
 - Login: Faz o login do cliente somente após o registro e mostra as opções disponíveis abaixo
