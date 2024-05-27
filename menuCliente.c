@@ -6,6 +6,9 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
+
+
+
 bool menorIdade(int idade) {
     if (idade < 18) {
         return true;
@@ -193,6 +196,58 @@ void minhasInfo() {
     printf("Usuário não encontrado.\n\n");
     return menuCliente();
 }
+
+/*void alugarVeiculo(){
+	char carro[20];
+	int dias;
+	float precoDiariaCarro, 
+	float totalValor = dias * precoDiariaCarro;
+	
+	
+	printf("***** ALUGUEL DE CARROS *****");
+	
+	registroCliente();
+	carrosDisponiveis();
+	
+	
+	
+	printf("Qual carro você deseja alugar? ");
+	fflushin(stdin);
+	gets(carro);
+	
+	printf("Quantos dias você vai passar com o carro");
+	scanf("%d", &dias);
+	
+	printf("O valor do carro é: %f ", precoDiariaCarro);
+	
+	printf("O Valor total da locação é: %f ", totalValor);
+	
+	FUNÇÃO AINDA NÃO ESTÁ COMPLETA POIS NÃO DECIDIMOS ONDE VAMOS ARMAZENAR AS INFORMAÇÕES (ARQUIVO OU VETOR)
+	
+}*/
+
+/*void simularAluguel(){
+	
+	char carroSimulacao[20];
+	int diaSimulacao;
+	float precoDiariaSimulacao;
+	float totalValorSimulacao = diaSimulacao * precoSimulacao;
+	
+	printf("$$$$$$$ SIMULAÇÃO DA LOCAÇÃO $$$$$$$");
+	
+	printf("Qual carro deseja alugar? ");
+	gets(carroSimulacao);
+	
+	printf("Quantos dias você deseja passar com o carro? ");
+	scanf("%d", diaSimulacao);
+	
+	printf("###### RESULTADO DA SIMULAÇÃO DA LOCAÇÃO ######\n");
+	printf("O carro que você escolheu foi: %s", carroSimulacao);
+	printf("\nDias: %d", diaSimulacao);
+	printf("\n O preço da diaria do carro é: %f", precoDiariaSimulacao);
+	printf("\n Valor total da locação: %f ", totalValorSimulacao);
+	
+}*/
 
 void controleMenuCliente(int opcao) {
     switch (opcao) {
