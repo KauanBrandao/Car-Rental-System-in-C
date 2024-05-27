@@ -6,7 +6,7 @@ Professor e orientador: Victor Moak
 
 Alunos: Kauan Brandão, Emanuel Lucas, Samuel Falcão, Caio Navarro, Gustavo Santos e Miguel Moreira.
 
-Locadora de Carros: Localizo 
+Locadora de Carros: Locanai
 
 MAPA DE FUNCIONALIDADES:
 
