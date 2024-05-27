@@ -30,7 +30,8 @@ Menu de Clientes
 
 --- Minhas informações --> Mostra as informações do usuário, (Nome, Data de Nascimento, CPF, Usuário e Senha);
 
-Menu de Funcionários
+Menu de Funcionários:
+
 - Login:
 
 --- Cadastrar veículos --> Cadastra os veículos (Nome, Categoria, Ano, Quilometragem, Código);
@@ -44,8 +45,12 @@ Menu de Funcionários
 --- Voltar para o menu inicial --> Retorna ao menu inicial; 
 
 --- Buscar usuário --> Busca os usuários cadastrados;
+
 Créditos
+
 --- Mostra os desenvolvedores do sistema;
+
 Sair do sistema 
+
 --- Encerra o programa;
 
