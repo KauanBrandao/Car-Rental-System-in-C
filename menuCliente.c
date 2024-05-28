@@ -39,7 +39,7 @@ void registroCliente(){
     scanf(" %d", &info[codigoCliente].idade);
 
     if (menorIdade(info[codigoCliente].idade)) {
-        printf("\nVocÍ tem menos de 18 anos e por isso n„o poder· concluir o cadastro!\n");
+        printf("\nVoc√™ tem menos de 18 anos e por isso n√£o poder√° concluir o cadastro!\n");
         system("pause");
         system("cls");
         return menuPrincipal();
@@ -51,17 +51,17 @@ void registroCliente(){
     
     if(cpfInvalido(info[codigoCliente].cpfCnpj)){
     	system("cls");
-    	printf("CPF inv·lido, tente novamente!\n\n");
+    	printf("CPF inv√°lido, tente novamente!\n\n");
     	return registroCliente();
 	}
 
     fflush(stdin);
-    printf("\nEscolha um usu·rio (MAX 20 CARACTERES): ");
+    printf("\nEscolha um usu√°rio (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].usuario);
 
     if (usuarioOuSenhaInvalido(info[codigoCliente].usuario)) {
         system("cls");
-        printf("ERROR: Usu·rio maior que 20 caracteres!\n\n");
+        printf("ERROR: Usu√°rio maior que 20 caracteres!\n\n");
         return registroCliente();
     }
 
@@ -75,7 +75,7 @@ void registroCliente(){
     }
 
     codigoCliente++;
-    printf("\nCadastro concluÌdo!\n");
+    printf("\nCadastro conclu√≠do!\n");
     system("pause");
     system("cls");
     menuClienteRegistro();
@@ -93,20 +93,20 @@ bool loginInvalido(char usuario[20], char senha[20]) {
 void loginCliente(){
     char usuario[20];
     char senha[20];
-
+	
     fflush(stdin);
-    printf("Insira seu nome de usu·rio: ");
+    printf("Insira seu nome de usu√°rio: ");
     gets(usuario);
 
     printf("\nInsira sua senha: ");
     gets(senha);
     
+	
     if (loginInvalido(usuario, senha)) {
         system("cls");
-        printf("Usu·rio ou senha inv·lidos. Tente novamente\n\n");
+        printf("Usu√°rio ou senha inv√°lidos. Tente novamente\n");
         return loginCliente();
-    }
-    
+    }  
     printf("\nLogin efetuado com sucesso.\n");
     system("pause");
     system("cls");
@@ -116,11 +116,12 @@ void loginCliente(){
 void menuClienteRegistro() {
     char opcao;
 
-    printf("******* FaÁa seu Registro/Login *******\n\n");
+    printf("******* Fa√ßa seu Registro/Login *******\n\n");
 
     printf("|1 - Registro\n");
     printf("|2 - Login\n");
-    printf("|Escolha uma opÁ„o [1-2]: ");
+    printf("|3 - Voltar para o menu inicial\n");
+    printf("|Escolha uma op√ß√£o [1-3]: ");
     scanf(" %c", &opcao);
 
     if (opcao == '1') {
@@ -129,23 +130,26 @@ void menuClienteRegistro() {
     } else if (opcao == '2') {
         system("cls");
         loginCliente();
-    } else {
+    } else if (opcao == '3') {
+    	system("cls");
+    	menuPrincipal();
+	} else {
         system("cls");
-        printf("OpÁ„o inv·lida!\n\n");
+        printf("Op√ß√£o inv√°lida!\n\n");
         return menuClienteRegistro();
     }
 }
 
 void carrosDisponiveis() {
     if (totalVeiculos == 0) {
-        printf("Nenhum veÌculo cadastrado!\n\n");
+        printf("Nenhum ve√≠culo cadastrado!\n\n");
     }
 
     for (int i = 0; i < totalVeiculos; i++) {
     	printf("Carro %d\n", i+1);
         printf("Nome: %s\n", veiculos[i].nome);
         printf("Categoria: %s\n", veiculos[i].categoria);
-        printf("CÛdigo: %d\n\n", veiculos[i].codigo);
+        printf("C√≥digo: %d\n\n", veiculos[i].codigo);
         printf("-----------\n");
     }
     system("pause");
@@ -159,11 +163,11 @@ void regrasLocadora() {
     printf("1. O CARRO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
     printf("2. O CARRO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
     printf("3. O CARRO DEVE SER ENTREGUE LIMPO\n");
-    printf("4. O LOCADOR DEVE SER RESPONS¡VEL POR QUAISQUER DANOS AO VEÕCULO.\n");
-    printf("5. MULTAS DE TR¬NSITO S√O RESPONSABILIDADE DO LOCADOR\n");
-    printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÕCULO\n");
-    printf("7. A CAU«√O DEVE SER PAGA COM ANTECED NCIA\n");
-    printf("8. PAGAMENTO DEVE SER FEITO VIA PIX, NO CART√O (EM AT… 12X/ JUROS DE 2% DO CART√O), OU EM ESP…CIE\n\n");
+    printf("4. O LOCADOR DEVE SER RESPONS√ÅVEL POR QUAISQUER DANOS AO VE√çCULO.\n");
+    printf("5. MULTAS DE TR√ÇNSITO S√ÉO RESPONSABILIDADE DO LOCADOR\n");
+    printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VE√çCULO\n");
+    printf("7. A CAU√á√ÉO DEVE SER PAGA COM ANTECED√äNCIA\n");
+    printf("8. PAGAMENTO DEVE SER FEITO VIA PIX, NO CART√ÉO (EM AT√â 12X/ JUROS DE 2% DO CART√ÉO), OU EM ESP√âCIE\n\n");
 
     system("pause");
     system("cls");
@@ -180,12 +184,12 @@ void minhasInfo() {
     for (int i = 0; i < codigoCliente; i++) {
         if (strcmp(info[i].cpfCnpj, cpfCnpj) == 0) {
             system("cls");
-            printf("Usu·rio encontrado.\n\n");
+            printf("Usu√°rio encontrado.\n\n");
 
             printf("Nome: %s\n", info[i].nomeCliente);
             printf("Idade: %d\n", info[i].idade);
             printf("CPF: %s\n", info[i].cpfCnpj);
-            printf("Usu·rio de Login: %s\n\n", info[i].usuario);
+            printf("Usu√°rio de Login: %s\n\n", info[i].usuario);
 
             system("pause");
             system("cls");
@@ -193,7 +197,7 @@ void minhasInfo() {
         }
     }
     system("cls");
-    printf("Usu·rio n„o encontrado.\n\n");
+    printf("Usu√°rio n√£o encontrado.\n\n");
     return menuCliente();
 }
 
@@ -211,18 +215,18 @@ void minhasInfo() {
 	
 	
 	
-	printf("Qual carro vocÍ deseja alugar? ");
+	printf("Qual carro voc√™ deseja alugar? ");
 	fflushin(stdin);
 	gets(carro);
 	
-	printf("Quantos dias vocÍ vai passar com o carro");
+	printf("Quantos dias voc√™ vai passar com o carro");
 	scanf("%d", &dias);
 	
-	printf("O valor do carro È: %f ", precoDiariaCarro);
+	printf("O valor do carro √©: %f ", precoDiariaCarro);
 	
-	printf("O Valor total da locaÁ„o È: %f ", totalValor);
+	printf("O Valor total da loca√ß√£o √©: %f ", totalValor);
 	
-	FUN«√O AINDA N√O EST¡ COMPLETA POIS N√O DECIDIMOS ONDE VAMOS ARMAZENAR AS INFORMA«’ES (ARQUIVO OU VETOR)
+	FUN√á√ÉO AINDA N√ÉO EST√Å COMPLETA POIS N√ÉO DECIDIMOS ONDE VAMOS ARMAZENAR AS INFORMA√á√ïES (ARQUIVO OU VETOR)
 	
 }*/
 
@@ -233,19 +237,19 @@ void minhasInfo() {
 	float precoDiariaSimulacao;
 	float totalValorSimulacao = diaSimulacao * precoSimulacao;
 	
-	printf("$$$$$$$ SIMULA«√O DA LOCA«√O $$$$$$$");
+	printf("$$$$$$$ SIMULA√á√ÉO DA LOCA√á√ÉO $$$$$$$");
 	
 	printf("Qual carro deseja alugar? ");
 	gets(carroSimulacao);
 	
-	printf("Quantos dias vocÍ deseja passar com o carro? ");
+	printf("Quantos dias voc√™ deseja passar com o carro? ");
 	scanf("%d", diaSimulacao);
 	
-	printf("###### RESULTADO DA SIMULA«√O DA LOCA«√O ######\n");
-	printf("O carro que vocÍ escolheu foi: %s", carroSimulacao);
+	printf("###### RESULTADO DA SIMULA√á√ÉO DA LOCA√á√ÉO ######\n");
+	printf("O carro que voc√™ escolheu foi: %s", carroSimulacao);
 	printf("\nDias: %d", diaSimulacao);
-	printf("\n O preÁo da diaria do carro È: %f", precoDiariaSimulacao);
-	printf("\n Valor total da locaÁ„o: %f ", totalValorSimulacao);
+	printf("\n O pre√ßo da diaria do carro √©: %f", precoDiariaSimulacao);
+	printf("\n Valor total da loca√ß√£o: %f ", totalValorSimulacao);
 	
 }*/
 
@@ -270,7 +274,7 @@ void controleMenuCliente(int opcao) {
             minhasInfo();
             break;
         default:
-            printf("Escolha uma opÁ„o v·lida!\n\n");
+            printf("Escolha uma op√ß√£o v√°lida!\n\n");
             menuCliente();
     }
 }
@@ -280,13 +284,13 @@ void menuCliente() {
 
     printf("******* Menu de Clientes *******\n\n");
 
-    printf("|1 - Carros disponÌveis\n");
+    printf("|1 - Carros dispon√≠veis\n");
     printf("|2 - Alugar um veiculo\n");
-    printf("|3 - Simular LocaÁ„o\n");
+    printf("|3 - Simular Loca√ß√£o\n");
     printf("|4 - Regras da locadora\n");
     printf("|5 - Voltar para o menu inicial\n");
-    printf("|6 - Minhas informaÁıes\n");
-    printf("Escolha uma opÁ„o [1-6]: ");
+    printf("|6 - Minhas informa√ß√µes\n");
+    printf("Escolha uma op√ß√£o [1-6]: ");
     scanf(" %c", &opcao);
 
     system("cls");
