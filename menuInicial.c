@@ -14,7 +14,7 @@ void corrigirAcentuacao(){
 }
 
 void creditos(){
-	printf("Desenvolvido por: Caio Navarro, Emanuel Lucas, Gustavo Santos, Kauan Brandao, Miguel Neto e Samuel Falc√£o\n\n");
+	printf("Desenvolvido por: Caio Navarro, Emanuel Lucas, Gustavo Santos, Kauan Brand„o, Miguel Neto e Samuel Falc„o\n\n");
 	system("pause");
 	system("cls");
 	menuPrincipal();
@@ -39,7 +39,7 @@ void controleMenuPrincipal(char opcao){
 			sair();
 			exit(0);
 		default:
-			printf("Escolha uma op√ß√£o v√°lida!\n\n");
+			printf("Escolha uma opÁ„o v·lida!\n\n");
 			menuPrincipal();
 	}
 }
@@ -49,10 +49,10 @@ void menuPrincipal(){
 	
 	printf("------- Menu Inicial -------\n\n");
 	printf("|1 - Menu de clientes\n");
-	printf("|2 - Menu de funcion√°rios\n");
-	printf("|3 - Cr√©ditos\n");
+	printf("|2 - Menu de funcion·rios\n");
+	printf("|3 - CrÈditos\n");
 	printf("|4 - Sair do sistema\n");
-	printf("Escolha uma op√ß√£o [1-4]: ");
+	printf("Escolha uma opÁ„o [1-4]: ");
 	scanf(" %c", &opcao);
 	
 	system("cls");

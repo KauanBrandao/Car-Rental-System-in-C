@@ -24,7 +24,7 @@ void loginFuncionario(){
         menuFuncionario();
     } else {
         system("cls");
-        printf("Login ou senha invÃ¡lidos.\n\n");
+        printf("Login ou senha inválidos.\n\n");
         loginFuncionario();
     }
 }
@@ -38,7 +38,7 @@ bool categoriaInvalida(char categoria[10]){
 
 void cadastrarVeiculo(){
     if (totalVeiculos >= MAX_VEICULOS) {
-        printf("Limite de veÃ­culos cadastrados atingido!\n\n");
+        printf("Limite de veículos cadastrados atingido!\n\n");
         return;
     }
 	
@@ -55,7 +55,7 @@ void cadastrarVeiculo(){
     
     if(categoriaInvalida(veiculos[totalVeiculos].categoria)){
     	system("cls");
-    	printf("Categoria de carro invÃ¡lida! Tente novamente\n\n");
+    	printf("Categoria de carro inválida! Tente novamente\n\n");
     	return cadastrarVeiculo();
 	}
 	
@@ -66,10 +66,10 @@ void cadastrarVeiculo(){
 	scanf(" %f", &veiculos[totalVeiculos].quilometragem);
 	
 	fflush(stdin);
-	printf("\nDigite o cÃ³digo para esse veÃ­culo: ");
+	printf("\nDigite o código para esse veículo: ");
     scanf(" %s", veiculos[totalVeiculos].codigo);
 	
-	printf("\nInforme o valor da diÃ¡ria do carro (R$): ");
+	printf("\nInforme o valor da diária do carro (R$): ");
 	scanf(" %f", &veiculos[totalVeiculos].valorDiaria);
 	
     totalVeiculos++;
@@ -90,23 +90,23 @@ void removerVeiculo(){
 	bool carroEncontrado = false;
 	
     if (totalVeiculos == 0) {
-        printf("Nenhum veÃ­culo cadastrado!\n\n");
+        printf("Nenhum veículo cadastrado!\n\n");
         system("pause");
         system("cls");
         return menuFuncionario();
     }
     
-    printf("Remover veÃ­culo por: \n");
-    printf("1. CÃ³digo\n");
+    printf("Remover veículo por: \n");
+    printf("1. Código\n");
     printf("2. Nome\n");
-    printf("Escolha uma opÃ§Ã£o: ");
+    printf("Escolha uma opção: ");
     scanf(" %c", &opcao);
     
     switch(opcao){
     	case '1':
     		fflush(stdin);
     		system("cls");
-    		printf("Informe o cÃ³digo do veÃ­culo: ");
+    		printf("Informe o código do veículo: ");
     		gets(codigoCarro);
     		
     		for (int i = 0; i < totalVeiculos; i++) {
@@ -117,7 +117,7 @@ void removerVeiculo(){
            				veiculos[i] = veiculos[i + 1];
         			}
         			totalVeiculos--;
-        			printf("\nVeÃ­culo de cÃ³digo '%s' removido! \n\n", codigoCarro);
+        			printf("\nVeículo de código '%s' removido! \n\n", codigoCarro);
 	                
 	                system("pause");
 	                system("cls");
@@ -128,7 +128,7 @@ void removerVeiculo(){
         case '2':
         	fflush(stdin);
         	system("cls");
-    		printf("Informe o nome do veÃ­culo: ");
+    		printf("Informe o nome do veículo: ");
     		gets(nomeCarro);
     		
     		for(int i = 0; i < totalVeiculos; i++){
@@ -139,7 +139,7 @@ void removerVeiculo(){
            				veiculos[i] = veiculos[i + 1];
         			}
         			totalVeiculos--;
-        			printf("\nO veÃ­culo '%s' foi removido! \n\n", nomeCarro);
+        			printf("\nO veículo '%s' foi removido! \n\n", nomeCarro);
 	                
 	                system("pause");
 	                system("cls");
@@ -149,12 +149,12 @@ void removerVeiculo(){
 			break;
 		default:
 			system("cls");
-			printf("OpÃ§Ã£o InvÃ¡lida!\n\n");
+			printf("Opção Inválida!\n\n");
 			return removerVeiculo();
 	}
 
     if (!carroEncontrado){
-        printf("\nVeÃ­culo nÃ£o encontrado!\n");
+        printf("\nVeículo não encontrado!\n");
 	}
 
     system("pause");
@@ -169,23 +169,23 @@ void buscarVeiculo(){
 	bool carroEncontrado = false;
 	
     if (totalVeiculos == 0) {
-        printf("Nenhum veÃ­culo cadastrado!\n\n");
+        printf("Nenhum veículo cadastrado!\n\n");
         system("pause");
         system("cls");
         return menuFuncionario();
     }
 
-    printf("Buscar veÃ­culo por: \n");
-    printf("1. CÃ³digo\n");
+    printf("Buscar veículo por: \n");
+    printf("1. Código\n");
     printf("2. Nome\n");
-    printf("Escolha uma opÃ§Ã£o: ");
+    printf("Escolha uma opção: ");
     scanf(" %c", &opcao);
 
     switch(opcao){
     	case '1':
     		fflush(stdin);
         	system("cls");
-    		printf("Informe o cÃ³digo do veÃ­culo: ");
+    		printf("Informe o código do veículo: ");
     		gets(codigoCarro);
 
 	        for (int i = 0; i < totalVeiculos; i++) {
@@ -196,8 +196,8 @@ void buscarVeiculo(){
 	                printf("Categoria: %s\n", veiculos[i].categoria);
 	                printf("Ano: %s\n", veiculos[i].ano);
 	                printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
-	                printf("Valor da diÃ¡ria: %.fR$\n", veiculos[i].valorDiaria);
-	                printf("CÃ³digo: %s\n\n", veiculos[i].codigo);
+	                printf("Valor da diária: %.fR$\n", veiculos[i].valorDiaria);
+	                printf("Código: %s\n\n", veiculos[i].codigo);
 	                
 	                system("pause");
 	                system("cls");
@@ -208,7 +208,7 @@ void buscarVeiculo(){
 	    case '2':
 	    	fflush(stdin);
 	    	system("cls");
-    		printf("Informe o nome do veÃ­culo: ");
+    		printf("Informe o nome do veículo: ");
     		gets(nomeCarro);
     		
     		for(int i = 0; i < totalVeiculos; i++){
@@ -219,8 +219,8 @@ void buscarVeiculo(){
 	                printf("Categoria: %s\n", veiculos[i].categoria);
 	                printf("Ano: %s\n", veiculos[i].ano);
 	                printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
-	                printf("Valor da diÃ¡ria: %.fR$\n", veiculos[i].valorDiaria);
-	                printf("CÃ³digo: %s\n\n", veiculos[i].codigo);
+	                printf("Valor da diária: %.fR$\n", veiculos[i].valorDiaria);
+	                printf("Código: %s\n\n", veiculos[i].codigo);
 	                
 	                system("pause");
 	                system("cls");
@@ -230,12 +230,12 @@ void buscarVeiculo(){
 			break;
 		default:
 			system("cls");
-			printf("OpÃ§Ã£o InvÃ¡lida!\n\n");
+			printf("Opção Inválida!\n\n");
 			return buscarVeiculo();
 		}
 	
 	if (!carroEncontrado){
-        printf("\nVeÃ­culo nÃ£o encontrado!\n");
+        printf("\nVeículo não encontrado!\n");
 	}
 	
     system("pause");
@@ -256,7 +256,7 @@ void buscarUsuario() {
     fflush(stdin);
     printf("Fazer pesquisa por:\n");
     printf("1 - CPF\n");
-    printf("2 - UsuÃ¡rio\n");
+    printf("2 - Usuário\n");
     printf("3 - Voltar\n");
     printf("Escolha [1-3]: ");
     scanf(" %c", &opcao);
@@ -271,12 +271,12 @@ void buscarUsuario() {
 	        if (strcmp(cpfCnpj, info[i].cpfCnpj) == 0) {
 	        	encontrado = true;
 	            system("cls");
-	            printf("UsuÃ¡rio encontrado.\n\n");
+	            printf("Usuário encontrado.\n\n");
 	
 	            printf("Nome: %s\n", info[i].nomeCliente);
 	            printf("Idade: %d\n", info[i].idade);
 	            printf("CPF: %s\n", info[i].cpfCnpj);
-	            printf("UsuÃ¡rio de Login: %s\n\n", info[i].usuario);
+	            printf("Usuário de Login: %s\n\n", info[i].usuario);
 	            
 	            system("pause");
 	            system("cls");
@@ -286,19 +286,19 @@ void buscarUsuario() {
 	}else if(opcao == '2'){
 		system("cls");
 		fflush(stdin);
-		printf("Informe o usuÃ¡rio: ");
+		printf("Informe o usuário: ");
     	gets(usuario);
     	
     	for (int i = 0; i < codigoCliente; i++) {
 	        if (strcmp(usuario, info[i].usuario) == 0) {
 	        	encontrado = true;
 	            system("cls");
-	            printf("UsuÃ¡rio encontrado.\n\n");
+	            printf("Usuário encontrado.\n\n");
 	
 	            printf("Nome: %s\n", info[i].nomeCliente);
 	            printf("Idade: %d\n", info[i].idade);
 	            printf("CPF: %s\n", info[i].cpfCnpj);
-	            printf("UsuÃ¡rio de Login: %s\n\n", info[i].usuario);
+	            printf("Usuário de Login: %s\n\n", info[i].usuario);
 	            
 	            system("pause");
 	            system("cls");
@@ -310,13 +310,13 @@ void buscarUsuario() {
 		return menuFuncionario();
 	}else{
 		system("cls");
-		printf("OpÃ§Ã£o invÃ¡lida!\n\n");
+		printf("Opção inválida!\n\n");
 		return buscarUsuario();
 	}
 	
 	if(! encontrado){
 		system("cls");
-    	printf("UsuÃ¡rio nÃ£o encontrado.\n\n");
+    	printf("Usuário não encontrado.\n\n");
     	return menuFuncionario();
 	}
 }
@@ -342,7 +342,7 @@ void controleMenuFuncionario(char opcao){
         	buscarUsuario();
         	break;
         default:
-            printf("Escolha uma opÃ§Ã£o vÃ¡lida!\n\n");
+            printf("Escolha uma opção válida!\n\n");
             menuFuncionario();
     }
 }
@@ -350,15 +350,15 @@ void controleMenuFuncionario(char opcao){
 void menuFuncionario(){
     char opcao;
     
-    printf("******* Menu de FuncionÃ¡rio *******\n\n");
+    printf("******* Menu de Funcionário *******\n\n");
     
     printf("|1 - Cadastrar veiculo\n");
     printf("|2 - Remover veiculos\n");
     printf("|3 - Buscar veiculos\n");
-    printf("|4 - Consultar locaÃ§Ãµes\n");    
+    printf("|4 - Consultar locações\n");    
     printf("|5 - Voltar para o menu inicial\n");
-    printf("|6 - Buscar usuÃ¡rio\n");
-    printf("Escolha uma opÃ§Ã£o [1-6]: ");
+    printf("|6 - Buscar usuário\n");
+    printf("Escolha uma opção [1-6]: ");
     scanf(" %c", &opcao);
     
     system("cls");
