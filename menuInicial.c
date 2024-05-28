@@ -24,8 +24,8 @@ void sair(){
 	printf("Obrigado por usar nosso sistema!");
 }
 
-void controleMenuPrincipal(int escolha){
-	switch(escolha){
+void controleMenuPrincipal(char opcao){
+	switch(opcao){
 		case '1':
 			menuClienteRegistro();
 			break;
@@ -45,7 +45,7 @@ void controleMenuPrincipal(int escolha){
 }
 
 void menuPrincipal(){
-	char escolha; 
+	char opcao; 
 	
 	printf("------- Menu Inicial -------\n\n");
 	printf("|1 - Menu de clientes\n");
@@ -53,13 +53,14 @@ void menuPrincipal(){
 	printf("|3 - Créditos\n");
 	printf("|4 - Sair do sistema\n");
 	printf("Escolha uma opção [1-4]: ");
-	scanf(" %c", &escolha);
+	scanf(" %c", &opcao);
+	
 	system("cls");
-	controleMenuPrincipal(escolha);
+	controleMenuPrincipal(opcao);
 }  
 
 int main(){
-	corrigirAcentuacao();
+	setlocale(LC_ALL, "Portuguese");
 	
 	menuPrincipal();
 }

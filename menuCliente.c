@@ -6,9 +6,6 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
-
-
-
 bool menorIdade(int idade) {
     if (idade < 18) {
         return true;
@@ -100,7 +97,6 @@ void loginCliente(){
 
     printf("\nInsira sua senha: ");
     gets(senha);
-    
 	
     if (loginInvalido(usuario, senha)) {
         system("cls");
@@ -144,15 +140,18 @@ void carrosDisponiveis() {
     if (totalVeiculos == 0) {
         printf("Nenhum veículo cadastrado!\n\n");
     }
-
-    for (int i = 0; i < totalVeiculos; i++) {
-    	printf("Carro %d\n", i+1);
-        printf("Nome: %s\n", veiculos[i].nome);
-        printf("Categoria: %s\n", veiculos[i].categoria);
-        printf("Código: %d\n\n", veiculos[i].codigo);
-        printf("-----------\n");
-    }
-    system("pause");
+	
+	for (int i = 0; i < totalVeiculos; i++) {
+	   	printf("Carro %d\n", i+1);
+	    printf("Nome: %s\n", veiculos[i].nome);
+	    printf("Categoria: %s\n", veiculos[i].categoria);
+	    printf("Ano: %s\n", veiculos[i].ano);
+	    printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
+	    printf("Valor da diária: %.fR$\n", veiculos[i].valorDiaria);
+	    printf("-----------\n");
+	}
+	
+	system("pause");
     system("cls");
     return menuCliente();
 }
@@ -253,7 +252,7 @@ void minhasInfo() {
 	
 }*/
 
-void controleMenuCliente(int opcao) {
+void controleMenuCliente(char opcao) {
     switch (opcao) {
         case '1':
             carrosDisponiveis();

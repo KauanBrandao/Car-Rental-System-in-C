@@ -29,8 +29,8 @@ void loginFuncionario(){
     }
 }
 
-bool modeloValido(char categoria[40]){
-	if(strcmp(categoria, "Hatch") ==0 || strcmp(categoria, "Sedan") ==0 || strcmp(categoria, "SUV") ==0 || strcmp(categoria, "Picape") ==0){
+bool categoriaInvalida(char categoria[10]){
+	if(strcmp(categoria, "Hatch") !=0 && strcmp(categoria, "Sedan") !=0 && strcmp(categoria, "SUV") !=0 && strcmp(categoria, "Picape") !=0){
 		return true;
 	}
 	return false;
@@ -50,31 +50,42 @@ void cadastrarVeiculo(){
 	printf("-> Sedan\n");
 	printf("-> SUV\n");
 	printf("-> Picape\n");
-	printf("Escreva a categoria do carro: ");
+	printf("Escreva a categoria do carro (Ex. Hatch): ");
     gets(veiculos[totalVeiculos].categoria);
     
-    if(modeloValido(veiculos->categoria)){
-    	printf("\nDigite o código para esse veículo: ");
-    	scanf(" %d", &veiculos[totalVeiculos].codigo);
-
-    	totalVeiculos++;
+    if(categoriaInvalida(veiculos[totalVeiculos].categoria)){
     	system("cls");
-	
-    	printf("**** CARRO CADASTRADO COM SUCESSO ****\n\n");
-
-   	 	system("pause");
-   		system("cls");
-    	return menuFuncionario();
+    	printf("Categoria de carro inválida! Tente novamente\n\n");
+    	return cadastrarVeiculo();
 	}
 	
+	printf("\nInforme o ano do carro: ");
+	scanf(" %s", veiculos[totalVeiculos].ano);
+	
+	printf("\nInforme a quilometragem do carro (km): ");
+	scanf(" %f", &veiculos[totalVeiculos].quilometragem);
+	
+	fflush(stdin);
+	printf("\nDigite o código para esse veículo: ");
+    scanf(" %s", veiculos[totalVeiculos].codigo);
+	
+	printf("\nInforme o valor da diária do carro (R$): ");
+	scanf(" %f", &veiculos[totalVeiculos].valorDiaria);
+	
+    totalVeiculos++;
     system("cls");
-    printf("Modelo de carro inválido! Tente novamente\n\n");
-    return cadastrarVeiculo();
+	
+    printf("**** CARRO CADASTRADO COM SUCESSO ****\n\n");
+
+   	system("pause");
+   	system("cls");
+    return menuFuncionario();
+	
 }
 
 void removerVeiculo(){
 	char opcao;
-	int codigoCarro;
+	char codigoCarro[10];
 	char nomeCarro[40];
 	bool carroEncontrado = false;
 	
@@ -93,19 +104,20 @@ void removerVeiculo(){
     
     switch(opcao){
     	case '1':
+    		fflush(stdin);
     		system("cls");
     		printf("Informe o código do veículo: ");
-    		scanf(" %d", &codigoCarro);
+    		gets(codigoCarro);
     		
     		for (int i = 0; i < totalVeiculos; i++) {
-            	if (veiculos[i].codigo == codigoCarro) {
+            	if (strcmp(veiculos[i].codigo, codigoCarro)==0) {
 	            	carroEncontrado = true;
 	                
 	                for (int i = carroEncontrado; i < totalVeiculos - 1; i++) {
            				veiculos[i] = veiculos[i + 1];
         			}
         			totalVeiculos--;
-        			printf("\nVeículo de código '%d' removido! \n\n", codigoCarro);
+        			printf("\nVeículo de código '%s' removido! \n\n", codigoCarro);
 	                
 	                system("pause");
 	                system("cls");
@@ -114,19 +126,20 @@ void removerVeiculo(){
         	}
         	break;
         case '2':
+        	fflush(stdin);
         	system("cls");
     		printf("Informe o nome do veículo: ");
-    		scanf(" %s", nomeCarro);
+    		gets(nomeCarro);
     		
     		for(int i = 0; i < totalVeiculos; i++){
-    			if(strcmp(nomeCarro, veiculos[i].nome)==0) {
+    			if(strcmp(nomeCarro, veiculos[i].nome) ==0) {
     				carroEncontrado = true;
 	                
 	                for (int i = carroEncontrado; i < totalVeiculos - 1; i++) {
            				veiculos[i] = veiculos[i + 1];
         			}
         			totalVeiculos--;
-        			printf("\nVeículo '%s' removido! \n\n", nomeCarro);
+        			printf("\nO veículo '%s' foi removido! \n\n", nomeCarro);
 	                
 	                system("pause");
 	                system("cls");
@@ -151,7 +164,7 @@ void removerVeiculo(){
 
 void buscarVeiculo(){
 	char opcao;
-	int codigoCarro;
+	char codigoCarro[10];
 	char nomeCarro[40];
 	bool carroEncontrado = false;
 	
@@ -170,17 +183,21 @@ void buscarVeiculo(){
 
     switch(opcao){
     	case '1':
+    		fflush(stdin);
         	system("cls");
     		printf("Informe o código do veículo: ");
-    		scanf(" %d", &codigoCarro);
+    		gets(codigoCarro);
 
 	        for (int i = 0; i < totalVeiculos; i++) {
-	            if (veiculos[i].codigo == codigoCarro) {
+	            if (strcmp(veiculos[i].codigo, codigoCarro) ==0) {
 	                carroEncontrado = true;
 	                
 	                printf("\nNome: %s\n", veiculos[i].nome);
 	                printf("Categoria: %s\n", veiculos[i].categoria);
-	                printf("Código: %d\n\n", veiculos[i].codigo);
+	                printf("Ano: %s\n", veiculos[i].ano);
+	                printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
+	                printf("Valor da diária: %.fR$\n", veiculos[i].valorDiaria);
+	                printf("Código: %s\n\n", veiculos[i].codigo);
 	                
 	                system("pause");
 	                system("cls");
@@ -189,9 +206,10 @@ void buscarVeiculo(){
 	    	}
 	    	break;
 	    case '2':
+	    	fflush(stdin);
 	    	system("cls");
     		printf("Informe o nome do veículo: ");
-    		scanf(" %s", nomeCarro);
+    		gets(nomeCarro);
     		
     		for(int i = 0; i < totalVeiculos; i++){
     			if(strcmp(nomeCarro, veiculos[i].nome)==0) {
@@ -199,7 +217,10 @@ void buscarVeiculo(){
 	                
 	                printf("\nNome: %s\n", veiculos[i].nome);
 	                printf("Categoria: %s\n", veiculos[i].categoria);
-	                printf("Código: %d\n\n", veiculos[i].codigo);
+	                printf("Ano: %s\n", veiculos[i].ano);
+	                printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
+	                printf("Valor da diária: %.fR$\n", veiculos[i].valorDiaria);
+	                printf("Código: %s\n\n", veiculos[i].codigo);
 	                
 	                system("pause");
 	                system("cls");
@@ -300,7 +321,7 @@ void buscarUsuario() {
 	}
 }
 
-void controleMenuFuncionario(int opcao){
+void controleMenuFuncionario(char opcao){
     switch(opcao) {
         case '1':
             cadastrarVeiculo();

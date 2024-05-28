@@ -6,7 +6,10 @@
 struct Veiculo{
     char nome[40];
     char categoria[15];
-    int codigo;
+    char codigo[10];
+    char ano[10];
+    float quilometragem;
+    float valorDiaria;
 } veiculos[MAX_VEICULOS];
 
 int totalVeiculos = 0;
