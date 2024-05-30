@@ -3,6 +3,7 @@
 
 struct Cliente {
     char nomeCliente[50];
+    char dataDeNascimento[11];
     char cpfCnpj[20];
     int idade;
     char usuario[20];

@@ -20,6 +20,13 @@ bool usuarioOuSenhaInvalido(char usuarioOuSenha[20]){
     return false;
 }
 
+bool dataDeNascimentoInvalida(char dataDeNascimento[11]){
+	if(strlen(dataDeNascimento) < 11){
+		return true;
+	}
+	return false;
+}
+
 bool cpfInvalido(char cpf[20]){
 	if(strlen(cpf) < 11){
 		return true;
@@ -43,6 +50,16 @@ void registroCliente(){
     }
 	
 	fflush(stdin);
+    printf("\nInforme a sua Data de Nascimento: ");
+    gets(info[codigoCliente].dataDeNascimento);
+    
+    if(dataDeNascimentoInvalida(info[codigoCliente].dataDeNascimento)){
+    	system("cls");
+    	printf("Data de nascimento inválida, tente novamente!\n\n");
+    	return registroCliente();
+	}
+	
+	fflush(stdin);
     printf("\nDigite o seu CPF/CNPJ: ");
     gets(info[codigoCliente].cpfCnpj);
     
@@ -52,7 +69,6 @@ void registroCliente(){
     	return registroCliente();
 	}
 
-    fflush(stdin);
     printf("\nEscolha um usuário (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].usuario);
 
@@ -163,11 +179,10 @@ void regrasLocadora(){
     printf("2. O VEÍCULO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
     printf("3. O VEÍCULO DEVE SER ENTREGUE LIMPO\n");
     printf("4. O LOCADOR DEVE SER RESPONSÁVEL POR QUAISQUER DANOS AO VEÍCULO.\n");
-    printf("5. AS MULTAS DE TRÃNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
+    printf("5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
     printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
     printf("7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n");
-    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃƒO (EM ATÉ 12X/ COM JUROS DE 2%), OU EM ESPÉCIE\n\n");
-
+    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 12X/ COM JUROS DE 2%), OU EM ESPÉCIE\n\n");                                                   
     system("pause");
     system("cls");
     return menuCliente();
@@ -187,6 +202,7 @@ void minhasInfo() {
 
             printf("Nome: %s\n", info[i].nomeCliente);
             printf("Idade: %d\n", info[i].idade);
+            printf("Data de Nascimento %s", info[i].dataDeNascimento);
             printf("CPF: %s\n", info[i].cpfCnpj);
             
             if(strcmp(info[i].carroAlugado, "") ==0){
