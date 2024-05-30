@@ -8,6 +8,7 @@ Alunos: Kauan Brandão, Emanuel Lucas, Samuel Falcão, Caio Navarro, Gustavo San
 
 Locadora de Carros: Locanai
 
+------------------------------------------------------------------------------------------------------------------------------------------------------
 MAPA DE FUNCIONALIDADES:
 
 *** Menu inicial ***
