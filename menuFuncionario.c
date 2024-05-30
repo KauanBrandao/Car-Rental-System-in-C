@@ -17,7 +17,7 @@ void loginFuncionario(){
     printf("\nInsira a senha: ");
     scanf(" %s", senha);
     
-    if(strcmp(login, "ADMIN") == 0 && strcmp(senha, "0000") == 0) {
+    if(strcmp(login, "ADMIN") == 0 && strcmp(senha, "0000") == 0){
         printf("\nLogin bem sucedido!\n");
         system("pause");
         system("cls");
@@ -66,11 +66,12 @@ void cadastrarVeiculo(){
 	scanf(" %f", &veiculos[totalVeiculos].quilometragem);
 	
 	fflush(stdin);
+	printf("\nInforme o valor da diária do carro (R$): ");
+	scanf(" %f", &veiculos[totalVeiculos].valorDiaria);
+	
 	printf("\nDigite o código para esse veículo: ");
     scanf(" %s", veiculos[totalVeiculos].codigo);
 	
-	printf("\nInforme o valor da diária do carro (R$): ");
-	scanf(" %f", &veiculos[totalVeiculos].valorDiaria);
 	
     totalVeiculos++;
     system("cls");
@@ -276,6 +277,13 @@ void buscarUsuario() {
 	            printf("Nome: %s\n", info[i].nomeCliente);
 	            printf("Idade: %d\n", info[i].idade);
 	            printf("CPF: %s\n", info[i].cpfCnpj);
+	            
+	            if(strcmp(info[i].carroAlugado, "") ==0){
+	            	printf("Carro alugado: Nenhum\n");
+				}else{
+					printf("Carro alugado: %s\n", info[i].carroAlugado);
+				}
+				
 	            printf("Usuário de Login: %s\n\n", info[i].usuario);
 	            
 	            system("pause");
@@ -298,6 +306,13 @@ void buscarUsuario() {
 	            printf("Nome: %s\n", info[i].nomeCliente);
 	            printf("Idade: %d\n", info[i].idade);
 	            printf("CPF: %s\n", info[i].cpfCnpj);
+	            
+	            if(strcmp(info[i].carroAlugado, "") ==0){
+	            	printf("Carro alugado: Nenhum\n");
+				}else{
+					printf("Carro alugado: %s\n", info[i].carroAlugado);
+				}
+				
 	            printf("Usuário de Login: %s\n\n", info[i].usuario);
 	            
 	            system("pause");
@@ -336,10 +351,10 @@ void controleMenuFuncionario(char opcao){
             //consultarLocacoes();
             break;
         case '5': 
-        	menuPrincipal();
+        	buscarUsuario();
         	break;
         case '6':
-        	buscarUsuario();
+        	menuPrincipal();
         	break;
         default:
             printf("Escolha uma opção válida!\n\n");
@@ -356,8 +371,8 @@ void menuFuncionario(){
     printf("|2 - Remover veiculos\n");
     printf("|3 - Buscar veiculos\n");
     printf("|4 - Consultar locações\n");    
-    printf("|5 - Voltar para o menu inicial\n");
-    printf("|6 - Buscar usuário\n");
+    printf("|5 - Buscar usuário\n");
+    printf("|6 - Voltar para o menu inicial\n");
     printf("Escolha uma opção [1-6]: ");
     scanf(" %c", &opcao);
     
