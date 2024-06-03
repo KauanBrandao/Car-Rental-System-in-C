@@ -53,7 +53,7 @@ void registroCliente(){
     	return registroCliente();
 	}
 
-    printf("\nEscolha um usuário (MAX 20 CARACTERES): ");
+    printf("\nEscolha seu usuário/ID (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].usuario);
 
     if (usuarioOuSenhaInvalido(info[codigoCliente].usuario)){
@@ -62,7 +62,7 @@ void registroCliente(){
         return registroCliente();
     }
 
-    printf("\nEscolha uma senha (MAX 20 CARACTERES): ");
+    printf("\nEscolha sua senha (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].senha);
 
     if (usuarioOuSenhaInvalido(info[codigoCliente].senha)) {
@@ -90,6 +90,7 @@ bool loginInvalido(char usuario[20], char senha[20]){
 void loginCliente(){
     char usuario[20];
     char senha[20];
+    char operador [10];
 	
     fflush(stdin);
     printf("Insira seu nome de usuário: ");
@@ -100,8 +101,11 @@ void loginCliente(){
 	
     if (loginInvalido(usuario, senha)) {
         system("cls");
-        printf("Usuário ou senha inválidos. Tente novamente\n");
-        return loginCliente();
+        printf("Usuário ou senha inválidos, voltando para o menu inicial... \n");
+        system("pause");
+        system("cls");
+        return menuPrincipal();
+        
     }  
     printf("\nLogin efetuado com sucesso.\n");
     system("pause");
@@ -146,7 +150,7 @@ void carrosDisponiveis(){
 	    printf("Nome: %s\n", veiculos[i].nome);
 	    printf("Categoria: %s\n", veiculos[i].categoria);
 	    printf("Ano: %s\n", veiculos[i].ano);
-	    printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
+	    printf("Quilometragem: %.fkm\n", veiculos[i].quilometragem);
 	    printf("Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
 	    printf("-----------\n");
 	}

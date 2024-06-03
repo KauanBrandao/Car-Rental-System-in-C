@@ -8,7 +8,7 @@ struct Cliente {
     char usuario[20];
     char senha[20];
     char carroAlugado[40];
-} info[];
+}info[10];
 
 int codigoCliente = 0;
 extern void menuPrincipal();
