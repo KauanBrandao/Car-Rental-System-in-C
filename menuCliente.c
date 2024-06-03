@@ -6,13 +6,6 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
-bool menorIdade(int idade){
-    if (idade < 18) {
-        return true;
-    }
-    return false;
-}
-
 bool usuarioOuSenhaInvalido(char usuarioOuSenha[20]){
     if (strlen(usuarioOuSenha) > 20) {
         return true;
@@ -20,8 +13,8 @@ bool usuarioOuSenhaInvalido(char usuarioOuSenha[20]){
     return false;
 }
 
-bool dataDeNascimentoInvalida(char dataDeNascimento[11]){
-	if(strlen(dataDeNascimento) < 11){
+bool menorIdade(int ano){
+	if(ano > 2006){
 		return true;
 	}
 	return false;
@@ -38,25 +31,16 @@ void registroCliente(){
     fflush(stdin);
     printf("Digite o seu nome: ");
     gets(info[codigoCliente].nomeCliente);
-    
-    printf("\nDigite a sua idade: ");
-    scanf(" %d", &info[codigoCliente].idade);
-
-    if (menorIdade(info[codigoCliente].idade)){
-        printf("\nVocê tem menos de 18 anos e por isso não poderá concluir o cadastro!\n");
-        system("pause");
-        system("cls");
-        return menuPrincipal();
-    }
 	
 	fflush(stdin);
-    printf("\nInforme a sua Data de Nascimento: ");
-    gets(info[codigoCliente].dataDeNascimento);
+    printf("\nInforme a sua Data de Nascimento (DD MM AA): ");
+    scanf("%d %d %d", &info[codigoCliente].dia, &info[codigoCliente].mes, &info[codigoCliente].ano);
     
-    if(dataDeNascimentoInvalida(info[codigoCliente].dataDeNascimento)){
+    if(menorIdade(info[codigoCliente].ano)){
+    	printf("\nVocê tem menos de 18 anos e por isso não poderá terminar o cadastro!\n\n");
+    	system("pause");
     	system("cls");
-    	printf("Data de nascimento inválida, tente novamente!\n\n");
-    	return registroCliente();
+    	return menuPrincipal();
 	}
 	
 	fflush(stdin);
@@ -201,8 +185,7 @@ void minhasInfo() {
             printf("Usuário encontrado.\n\n");
 
             printf("Nome: %s\n", info[i].nomeCliente);
-            printf("Idade: %d\n", info[i].idade);
-            printf("Data de Nascimento %s", info[i].dataDeNascimento);
+            printf("Data de Nascimento %d/%d/%d", info[i].dia, info[i].mes, info[i].ano);
             printf("CPF: %s\n", info[i].cpfCnpj);
             
             if(strcmp(info[i].carroAlugado, "") ==0){

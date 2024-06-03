@@ -275,7 +275,7 @@ void buscarUsuario() {
 	            printf("Usuário encontrado.\n\n");
 	
 	            printf("Nome: %s\n", info[i].nomeCliente);
-	            printf("Idade: %d\n", info[i].idade);
+	            printf("Data de nascimento: %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);
 	            printf("CPF: %s\n", info[i].cpfCnpj);
 	            
 	            if(strcmp(info[i].carroAlugado, "") ==0){
@@ -304,7 +304,7 @@ void buscarUsuario() {
 	            printf("Usuário encontrado.\n\n");
 	
 	            printf("Nome: %s\n", info[i].nomeCliente);
-	            printf("Idade: %d\n", info[i].idade);
+	            printf("Data de nascimento: %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);
 	            printf("CPF: %s\n", info[i].cpfCnpj);
 	            
 	            if(strcmp(info[i].carroAlugado, "") ==0){
