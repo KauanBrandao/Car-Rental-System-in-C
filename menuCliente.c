@@ -100,11 +100,23 @@ void loginCliente(){
     gets(senha);
 	
     if (loginInvalido(usuario, senha)) {
+    	int opcao;
         system("cls");
-        printf("Usuário ou senha inválidos, voltando para o menu inicial... \n");
+        printf("Usuário ou senha inválidos \n");
         system("pause");
         system("cls");
-        return menuPrincipal();
+        printf("dejesa tentar novamente 1 = SIM / 0 = NAO ?");
+        scanf("%d", &opcao);
+        system("cls");
+        if(opcao == 1){
+        	system("pause");
+        	system("cls");
+        	return loginCliente();
+        	
+		}else {
+			return menuPrincipal();
+		}
+        
         
     }  
     printf("\nLogin efetuado com sucesso.\n");
