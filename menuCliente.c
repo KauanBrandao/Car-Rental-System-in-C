@@ -105,20 +105,19 @@ void loginCliente(){
         printf("Usuário ou senha inválidos \n");
         system("pause");
         system("cls");
-        printf("dejesa tentar novamente 1 = SIM / 0 = NAO ?");
+        printf("Deseja tentar novamente? \n1- Sim  \n2- Não ");
+        printf("\nEscolha uma opção: ");
         scanf("%d", &opcao);
         system("cls");
         if(opcao == 1){
-        	system("pause");
         	system("cls");
         	return loginCliente();
         	
 		}else {
 			return menuPrincipal();
-		}
-        
-        
-    }  
+		}          
+    } 
+	 
     printf("\nLogin efetuado com sucesso.\n");
     system("pause");
     system("cls");
@@ -243,6 +242,13 @@ void alugarVeiculo(){
 			system("cls");
 			printf("Informe o veículo que deseja alugar (Ex. Celta): ");
 			gets(nomeCarro);
+		 	
+			if (totalVeiculos == 0) {
+                printf("\nNão há carros cadastrados!\n\n");
+                system("pause");
+                system("cls");
+                return menuCliente();
+            }
 			
 			for(int i = 0; i < totalVeiculos; i++){
 				if(strcmp(nomeCarro, veiculos[i].nome) ==0){

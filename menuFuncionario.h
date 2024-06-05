@@ -2,6 +2,7 @@
 #define MENUFUNCIONARIO_H
 
 #define MAX_VEICULOS 100
+#define MAX_LOCAÇÕES 100
 
 struct Veiculo{
     char nome[40];
