@@ -2,17 +2,20 @@
 #define MENUFUNCIONARIO_H
 
 #define MAX_VEICULOS 100
-#define MAX_LOCAÇÕES 100
+#define MAX_LOCACOES 100
 
 struct Veiculo{
     char nome[40];
     char categoria[15];
     char codigo[10];
     char ano[10];
+    int dias;
     float quilometragem;
     float valorDiaria;
+    bool ativo;
 } veiculos[MAX_VEICULOS];
 
+int totalLocacoes = 0;
 int totalVeiculos = 0;
 extern void menuPrincipal();
 

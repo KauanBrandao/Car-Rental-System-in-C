@@ -244,7 +244,7 @@ void buscarVeiculo(){
     menuFuncionario();
 }
 
-/*
+
 void consultarLocacoes(){
 	if (totalLocacoes == 0) {
         printf("Nenhuma locação registrada!\n\n");
@@ -255,21 +255,22 @@ void consultarLocacoes(){
 
     printf("**** Lista de locações ****\n\n");
     for (int i = 0; i < totalLocacoes; i++) {
-        printf("Cliente: %s\n", locacoes[i].cliente);
-        printf("Carro: %s\n", locacoes[i].carro);
-        printf("Data de Início: %s\n", locacoes[i].dataInicio);
-        printf("Data de Término: %s\n", locacoes[i].dataTermino);
-        if(locacoes[i].ativo) {
+    	printf("Cliente %d\n", i+1);
+        printf("Cliente: %s\n", info[i].nomeCliente);
+        printf("Carro: %s\n", veiculos[i].nome);
+        printf("Dias Reservados: %d\n", veiculos[i].dias);
+        printf("----------------------\n");
+        /*if(veiculos[i].ativo) {
         	printf("Status: Ativo\n\n");	
 		} else {
 			printf("Status: Concluído\n\n");
-		}
+		}*/
     }
     system("pause");
     system("cls");
     return menuFuncionario();
 }
-*/
+
 
 void buscarUsuario() {
 	char opcao;
@@ -371,7 +372,7 @@ void controleMenuFuncionario(char opcao){
             buscarVeiculo();
             break;
         case '4':
-            //consultarLocacoes();
+            consultarLocacoes();
             break;
         case '5': 
         	buscarUsuario();

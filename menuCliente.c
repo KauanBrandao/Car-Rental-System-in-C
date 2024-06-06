@@ -100,22 +100,27 @@ void loginCliente(){
     gets(senha);
 	
     if (loginInvalido(usuario, senha)) {
-    	int opcao;
+    	char opcao;
         system("cls");
         printf("Usuário ou senha inválidos \n");
         system("pause");
         system("cls");
         printf("Deseja tentar novamente? \n1- Sim  \n2- Não ");
         printf("\nEscolha uma opção: ");
-        scanf("%d", &opcao);
+        scanf(" %c", &opcao);
         system("cls");
-        if(opcao == 1){
+        if(opcao == '1'){
         	system("cls");
         	return loginCliente();
         	
-		}else {
+		}else if(opcao == '2') {
+			system("cls");
 			return menuPrincipal();
-		}          
+		} else {
+			system("cls");
+			printf("Opção Inválida!!!\n\n");
+			return menuPrincipal();		
+		} 
     } 
 	 
     printf("\nLogin efetuado com sucesso.\n");
@@ -225,7 +230,6 @@ void alugarVeiculo(){
 	char nomeCarro[40];
 	char opcao;
 	char confirmar;
-	int dias;
 	float valorTotal;
 	bool carroEncontrado = false;
 	
@@ -260,11 +264,11 @@ void alugarVeiculo(){
 					printf("Categoria: %s\n", veiculos[i].categoria);
 					printf("Valor da diária: %.2f\n\n", veiculos[i].valorDiaria);
 					
-					fflush(stdin);
+					fflush(stdin);			
 					printf("Quantos dias deseja alugar?: ");
-					scanf(" %d", &dias);
+					scanf(" %d", &veiculos[i].dias);
 					
-					valorTotal = dias * veiculos[i].valorDiaria;
+					valorTotal = veiculos[i].dias * veiculos[i].valorDiaria;
 					
 					fflush(stdin);
 					printf("\nDeseja alugar '%s' por R$%.2f? [S/N]: ", veiculos[i].nome, valorTotal);
@@ -276,6 +280,7 @@ void alugarVeiculo(){
 						}
 						system("cls");
 						printf("Carro alugado!\n\n");
+						totalLocacoes++;
 						return menuCliente();
 					}else if(confirmar == 'N' || confirmar == 'n'){
 						printf("\nOperação cancelada.\n");
