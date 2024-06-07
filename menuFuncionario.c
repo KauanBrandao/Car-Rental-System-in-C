@@ -37,6 +37,8 @@ bool categoriaInvalida(char categoria[10]){
 }
 
 void cadastrarVeiculo(){
+	char categoria[15];
+	
     if (totalVeiculos >= MAX_VEICULOS) {
         printf("Limite de veículos cadastrados atingido!\n\n");
         return;
@@ -51,9 +53,23 @@ void cadastrarVeiculo(){
 	printf("-> SUV\n");
 	printf("-> Picape\n");
 	printf("Escreva a categoria do carro (Ex. Hatch): ");
-    gets(veiculos[totalVeiculos].categoria);
+	gets(categoria);
+	
+    if (strcmp(categoria, "Hatch") == 0) {
+    	veiculos[totalVeiculos].hatch;
+	} else if (strcmp(categoria, "Sedan") == 0) {
+		veiculos[totalVeiculos].sedan;
+	} else if (strcmp(categoria, "SUV") == 0) {
+		veiculos[totalVeiculos].suv;
+	} else if (strcmp(categoria, "Picape") == 0) {
+		veiculos[totalVeiculos].picape;
+	} else {
+		system("cls");
+		printf("Categoria Inválida. Tente novamente!\n\n")
+		return cadastrarVeiculo();
+	}
     
-    if(categoriaInvalida(veiculos[totalVeiculos].categoria)){
+    if(categoriaInvalida(categoria)){
     	system("cls");
     	printf("Categoria de carro inválida! Tente novamente\n\n");
     	return cadastrarVeiculo();

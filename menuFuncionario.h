@@ -6,7 +6,10 @@
 
 struct Veiculo{
     char nome[40];
-    char categoria[15];
+    char hatch[10];
+    char sedan[10];
+    char suv[10];
+    char picape[10];
     char codigo[10];
     char ano[10];
     int dias;
