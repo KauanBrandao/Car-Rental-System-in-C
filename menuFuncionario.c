@@ -36,6 +36,16 @@ bool categoriaInvalida(char categoria[10]){
 	return false;
 }
 
+bool codigoVeiculoInvalido(char codigo[10]){
+	for(int i = 0; i < totalVeiculos; i++){
+		if(strcmp(codigo, veiculos[i].codigo) ==0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+
 void cadastrarVeiculo(){
 	char categoria[15];
 	
@@ -53,25 +63,11 @@ void cadastrarVeiculo(){
 	printf("-> SUV\n");
 	printf("-> Picape\n");
 	printf("Escreva a categoria do carro (Ex. Hatch): ");
-	gets(categoria);
-	
-    if (strcmp(categoria, "Hatch") == 0) {
-    	veiculos[totalVeiculos].hatch;
-	} else if (strcmp(categoria, "Sedan") == 0) {
-		veiculos[totalVeiculos].sedan;
-	} else if (strcmp(categoria, "SUV") == 0) {
-		veiculos[totalVeiculos].suv;
-	} else if (strcmp(categoria, "Picape") == 0) {
-		veiculos[totalVeiculos].picape;
-	} else {
-		system("cls");
-		printf("Categoria Inválida. Tente novamente!\n\n")
-		return cadastrarVeiculo();
-	}
+	gets(veiculos[totalVeiculos].categoria);
     
-    if(categoriaInvalida(categoria)){
+    if(categoriaInvalida(veiculos[totalVeiculos].categoria)){
     	system("cls");
-    	printf("Categoria de carro inválida! Tente novamente\n\n");
+    	printf("Erro: Categoria de carro inválida! Tente novamente\n\n");
     	return cadastrarVeiculo();
 	}
 	
@@ -87,12 +83,17 @@ void cadastrarVeiculo(){
 	
 	printf("\nDigite o código para esse veículo: ");
     scanf(" %s", veiculos[totalVeiculos].codigo);
-	
+    
+    if(codigoVeiculoInvalido(veiculos[totalVeiculos].codigo)){
+    	system("cls");
+    	printf("Erro: Já existe um veículo com esse código!\n\n");
+    	return menuFuncionario();
+	}
 	
     totalVeiculos++;
     system("cls");
 	
-    printf("**** CARRO CADASTRADO COM SUCESSO ****\n\n");
+    printf("**** Carro cadastrado com sucesso ****\n\n");
 
    	system("pause");
    	system("cls");
@@ -260,7 +261,6 @@ void buscarVeiculo(){
     menuFuncionario();
 }
 
-
 void consultarLocacoes(){
 	if (totalLocacoes == 0) {
         printf("Nenhuma locação registrada!\n\n");
@@ -271,22 +271,16 @@ void consultarLocacoes(){
 
     printf("**** Lista de locações ****\n\n");
     for (int i = 0; i < totalLocacoes; i++) {
-    	printf("Cliente %d\n", i+1);
+    	printf("Cliente n %d\n", i+1);
         printf("Cliente: %s\n", info[i].nomeCliente);
         printf("Carro: %s\n", veiculos[i].nome);
         printf("Dias Reservados: %d\n", veiculos[i].dias);
-        printf("----------------------\n");
-        /*if(veiculos[i].ativo) {
-        	printf("Status: Ativo\n\n");	
-		} else {
-			printf("Status: Concluído\n\n");
-		}*/
+        printf("--------------------\n\n");
     }
     system("pause");
     system("cls");
     return menuFuncionario();
 }
-
 
 void buscarUsuario() {
 	char opcao;

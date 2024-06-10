@@ -6,8 +6,8 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
-bool usuarioOuSenhaInvalido(char usuarioOuSenha[20]){
-    if (strlen(usuarioOuSenha) > 20) {
+bool usuarioOuSenhaInvalido(char usuario[20], char senha[20]){
+    if (strlen(usuario) > 20 || strlen(senha) > 20) {
         return true;
     }
     return false;
@@ -25,6 +25,16 @@ bool cpfInvalido(char cpf[20]){
 		return true;
 	}
 	return false;
+}
+
+bool usuarioExistente(char usuario[20]){
+	for(int i =0; i < codigoCliente; i++){
+		if(strcmp(usuario, info[i].usuario) == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 
 void registroCliente(){
@@ -55,20 +65,20 @@ void registroCliente(){
 
     printf("\nEscolha seu usuário/ID (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].usuario);
-
-    if (usuarioOuSenhaInvalido(info[codigoCliente].usuario)){
-        system("cls");
-        printf("ERROR: Usuário maior que 20 caracteres!\n\n");
-        return registroCliente();
-    }
+    
+    if(usuarioExistente(info[codigoCliente].usuario)){
+    	system("cls");	
+		printf("Erro: Este nome de usuário já está em uso!\n\n");
+		return menuClienteRegistro();
+	}
 
     printf("\nEscolha sua senha (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].senha);
 
-    if (usuarioOuSenhaInvalido(info[codigoCliente].senha)) {
+    if (usuarioOuSenhaInvalido(info[codigoCliente].usuario, info[codigoCliente].senha)) {
         system("cls");
-        printf("ERROR: Senha maior que 20 caracteres!\n\n");
-        return registroCliente();
+        printf("ERROR: Usuário ou senha maior que 20 caracteres!\n\n");
+        return menuClienteRegistro();
     }
 
     codigoCliente++;
@@ -105,23 +115,22 @@ void loginCliente(){
         printf("Usuário ou senha inválidos \n");
         system("pause");
         system("cls");
-        printf("Deseja tentar novamente? \n1- Sim  \n2- Não ");
-        printf("\nEscolha uma opção: ");
+        printf("Deseja tentar novamente? [S/N]: ");
         scanf(" %c", &opcao);
         system("cls");
-        if(opcao == '1'){
+        
+        if(opcao == 'S' || opcao == 's'){
         	system("cls");
         	return loginCliente();
-        	
-		}else if(opcao == '2') {
+		}else if(opcao == 'N' || opcao == 'n'){
 			system("cls");
 			return menuPrincipal();
 		} else {
 			system("cls");
-			printf("Opção Inválida!!!\n\n");
+			printf("Opção Inválida!\n\n");
 			return menuPrincipal();		
-		} 
-    } 
+		}
+    }
 	 
     printf("\nLogin efetuado com sucesso.\n");
     system("pause");
@@ -166,9 +175,9 @@ void carrosDisponiveis(){
 	    printf("Nome: %s\n", veiculos[i].nome);
 	    printf("Categoria: %s\n", veiculos[i].categoria);
 	    printf("Ano: %s\n", veiculos[i].ano);
-	    printf("Quilometragem: %.fkm\n", veiculos[i].quilometragem);
+	    printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
 	    printf("Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
-	    printf("-----------\n");
+	    printf("------------------\n\n");
 	}
 	
 	system("pause");
@@ -177,7 +186,7 @@ void carrosDisponiveis(){
 }
 
 void regrasLocadora(){
-    printf("******** REGRAS LOCADORA ********\n\n");
+    printf("******** Regras da Locadora ********\n\n");
 
     printf("1. O VEÍCULO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
     printf("2. O VEÍCULO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
@@ -205,7 +214,7 @@ void minhasInfo() {
             printf("Usuário encontrado.\n\n");
 
             printf("Nome: %s\n", info[i].nomeCliente);
-            printf("Data de Nascimento %d/%d/%d", info[i].dia, info[i].mes, info[i].ano);
+            printf("Data de Nascimento %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);
             printf("CPF: %s\n", info[i].cpfCnpj);
             
             if(strcmp(info[i].carroAlugado, "") ==0){
@@ -213,7 +222,6 @@ void minhasInfo() {
 			}else{
 				printf("Carro alugado: %s\n", info[i].carroAlugado);
 			}
-        
             printf("Usuário de Login: %s\n\n", info[i].usuario);
 
             system("pause");
@@ -227,7 +235,7 @@ void minhasInfo() {
 }
 
 void alugarVeiculo(){
-	char nomeCarro[40];
+	char nomeCarro[100];
 	char opcao;
 	char confirmar;
 	float valorTotal;
@@ -242,20 +250,20 @@ void alugarVeiculo(){
 	
 	switch(opcao){
 		case '1':
-			fflush(stdin);
-			system("cls");
-			printf("Informe o veículo que deseja alugar (Ex. Celta): ");
-			gets(nomeCarro);
-		 	
 			if (totalVeiculos == 0) {
                 printf("\nNão há carros cadastrados!\n\n");
                 system("pause");
                 system("cls");
                 return menuCliente();
             }
+            
+			fflush(stdin);
+			system("cls");
+			printf("Informe o nome do veículo que deseja alugar (Ex. Gol): ");
+			gets(nomeCarro);
 			
 			for(int i = 0; i < totalVeiculos; i++){
-				if(strcmp(nomeCarro, veiculos[i].nome) ==0){
+				if(strcmp(nomeCarro, veiculos[i].nome) == 0 && veiculos[i].disponivel){
 					system("cls");
 					carroEncontrado = true;
 					printf("Veículo '%s' encontrado!\n\n", nomeCarro);
@@ -278,9 +286,14 @@ void alugarVeiculo(){
 						for(int j = 0; j < codigoCliente; j++){
 							strcpy(info[j].carroAlugado, nomeCarro);
 						}
+							
 						system("cls");
 						printf("Carro alugado!\n\n");
+						
+						totalVeiculos++;
 						totalLocacoes++;
+						veiculos[i].disponivel = false;
+							
 						return menuCliente();
 					}else if(confirmar == 'N' || confirmar == 'n'){
 						printf("\nOperação cancelada.\n");
@@ -292,14 +305,14 @@ void alugarVeiculo(){
 						printf("Opção inválida!\n\n");
 						return alugarVeiculo();
 					}
-				}
-				if(!carroEncontrado){
-					system("cls");
-					printf("Carro não encontrado.\n\n");
-					return menuCliente();
+					
+					if(!carroEncontrado){
+						system("cls");
+						printf("Carro não encontrado ou já alugado.\n\n");
+						return menuCliente();
+					}
 				}
 			}
-			
 			break;
 		case '2':
 			system("cls");
@@ -320,7 +333,7 @@ void simularAluguel(){
 	printf("***** Simular locação *****\n\n");
 	
 	fflush(stdin);
-	printf("Qual veículo deseja simular locação? (Ex. Celta): ");
+	printf("Qual veículo deseja simular locação? (Ex. Gol): ");
 	gets(carroSimulacao);
 	
 	for(int i = 0; i < totalVeiculos; i++){
