@@ -237,14 +237,15 @@ void minhasInfo() {
 void alugarVeiculo(){
 	char nomeCarro[100];
 	char opcao;
+	char formapagamento;
 	char confirmar;
 	float valorTotal;
 	bool carroEncontrado = false;
 	
 	printf("***** Alugar carro *****\n\n");
 	
-	printf("1- Escolher carro\n");
-	printf("2- Voltar ao menu\n");
+	printf("|1- Escolher carro\n");
+	printf("|2- Voltar ao menu\n");
 	printf("Escolha [1-2]: ");
 	scanf(" %c", &opcao);
 	
@@ -281,6 +282,9 @@ void alugarVeiculo(){
 					fflush(stdin);
 					printf("\nDeseja alugar '%s' por R$%.2f? [S/N]: ", veiculos[i].nome, valorTotal);
 					scanf(" %c", &confirmar);
+					
+					fflush(stdin);
+					formadePagamento();
 					
 					if(confirmar == 'S' || confirmar == 's'){
 						for(int j = 0; j < codigoCliente; j++){
@@ -323,6 +327,63 @@ void alugarVeiculo(){
 			printf("Opção inválida! Tente novamente\n\n");
 			alugarVeiculo();
 	}	
+}
+
+void formadePagamento(){
+    char opcao;
+
+	printf("***** forma de pagamento *****\n\n");
+	
+	printf("|1- PIX\n");
+	printf("|2- CARTÃO\n");
+	printf("|3- DINHEIRO\n");
+	scanf(" %c", &opcao);
+	
+	switch(opcao){
+		case '1':
+			 printf("aqui está o QR CODE para o pagamento!\n\n");
+			 printf("##########  ##########\n");
+             printf("##########  ##########\n");
+             printf("##      ##  ##      ##\n");
+             printf("##  ##  ##  ##  ##  ##\n");
+             printf("##  ##  ##  ##  ##  ##\n");
+             printf("##      ##  ##      ##\n");
+             printf("##########  ##########\n");
+             printf("##  ##  ##  ##  ##  ##\n");
+             printf("######################\n");
+             printf("######  ######  ######\n");
+             printf("##    ####    ####    \n");
+             printf("##  ##  ######  ######\n");
+             printf("##  ##      ##    ##  \n");
+             printf("##  ######  ##  ######\n");
+             printf("##    ##  ####  ####  \n");
+             printf("######  ##  ##  ##  ##\n");
+             printf("######################\n\n");
+        
+		system("cls");
+	    alugarVeiculo();     
+	    
+	   case '2':
+	         printf("Forma de pagamento aceita! Dirija-se a recepção antes de pegar o carro, para efetuar o pagamento:\n");
+		
+		system("cls");
+		alugarVeiculo();
+		
+	   case	'3':
+	        printf("Forma de pagamento aceita! Dirija-se a recepção antes de pegar o carro, para efetuar o pagamento:\n"); 	
+			
+		system("cls");
+		alugarVeiculo();
+		
+		case '4':
+		    default:
+			system("cls");
+			printf("Opção inválida! Tente novamente\n\n");
+			system("pause");
+			system("cls");
+			formadePagamento();		
+	         
+	} 
 }
 
 void simularAluguel(){

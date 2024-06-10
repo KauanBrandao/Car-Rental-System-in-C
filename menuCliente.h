@@ -18,5 +18,6 @@ void menuCliente();
 void registroCliente();
 void loginCliente();
 void menuClienteRegistro();
+void formadePagamento();
 
 #endif
