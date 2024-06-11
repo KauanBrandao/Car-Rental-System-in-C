@@ -115,9 +115,9 @@ void removerVeiculo(){
     }
     
     printf("Remover veículo por: \n");
-    printf("1. Código\n");
-    printf("2. Nome\n");
-    printf("Escolha uma opção: ");
+    printf("|1. Código\n");
+    printf("|2. Nome\n");
+    printf("Escolha uma opção [1-2]: ");
     scanf(" %c", &opcao);
     
     switch(opcao){
@@ -194,9 +194,9 @@ void buscarVeiculo(){
     }
 
     printf("Buscar veículo por: \n");
-    printf("1. Código\n");
-    printf("2. Nome\n");
-    printf("Escolha uma opção: ");
+    printf("|1. Código\n");
+    printf("|2. Nome\n");
+    printf("Escolha uma opção [1-2]: ");
     scanf(" %c", &opcao);
 
     switch(opcao){

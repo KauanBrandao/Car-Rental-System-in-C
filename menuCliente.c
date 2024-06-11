@@ -195,7 +195,7 @@ void regrasLocadora(){
     printf("5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
     printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
     printf("7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n");
-    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 12X/ COM JUROS DE 2%), OU EM ESPÉCIE\n\n");                                                   
+    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2% AO MêS), OU EM ESPÉCIE\n\n");                                                   
     system("pause");
     system("cls");
     return menuCliente();
@@ -252,7 +252,7 @@ void alugarVeiculo(){
 	switch(opcao){
 		case '1':
 			if (totalVeiculos == 0) {
-                printf("\nNão há carros cadastrados!\n\n");
+                printf("\nNão há veículos cadastrados!\n\n");
                 system("pause");
                 system("cls");
                 return menuCliente();
@@ -312,7 +312,7 @@ void alugarVeiculo(){
 					
 					if(!carroEncontrado){
 						system("cls");
-						printf("Carro não encontrado ou já alugado.\n\n");
+						printf("Veículo não encontrado ou já alugado.\n\n");
 						return menuCliente();
 					}
 				}
@@ -329,10 +329,11 @@ void alugarVeiculo(){
 	}	
 }
 
-void formadePagamento(){
+void formaDePagamento(){
     char opcao;
-
-	printf("***** forma de pagamento *****\n\n");
+	char escolha;
+	
+	printf("***** Pagamento *****\n\n");
 	
 	printf("|1- PIX\n");
 	printf("|2- CARTÃO\n");
@@ -341,39 +342,33 @@ void formadePagamento(){
 	
 	switch(opcao){
 		case '1':
-			 printf("aqui está o QR CODE para o pagamento!\n\n");
-			 printf("##########  ##########\n");
-             printf("##########  ##########\n");
-             printf("##      ##  ##      ##\n");
-             printf("##  ##  ##  ##  ##  ##\n");
-             printf("##  ##  ##  ##  ##  ##\n");
-             printf("##      ##  ##      ##\n");
-             printf("##########  ##########\n");
-             printf("##  ##  ##  ##  ##  ##\n");
-             printf("######################\n");
-             printf("######  ######  ######\n");
-             printf("##    ####    ####    \n");
-             printf("##  ##  ######  ######\n");
-             printf("##  ##      ##    ##  \n");
-             printf("##  ######  ##  ######\n");
-             printf("##    ##  ####  ####  \n");
-             printf("######  ##  ##  ##  ##\n");
-             printf("######################\n\n");
-        
-		system("cls");
-	    alugarVeiculo();     
+			printf("E-mail para PIX - locanai.pix@gmail.com");
+			system("cls");
+	    	alugarVeiculo();    
+			break; 
 	    
 	   case '2':
-	         printf("Forma de pagamento aceita! Dirija-se a recepção antes de pegar o carro, para efetuar o pagamento:\n");
-		
-		system("cls");
-		alugarVeiculo();
+	         printf("Débito ou crédito?\n");
+	         printf("Para selecionar débito, digite 1\n");
+	         printf("Para selecionar crédito, digite 2\n");
+	         scanf(" %c", &escolha);
+	         
+				if (escolha == '1') {
+					printf("Aproxime ou insira o cartão.");
+				} else if(escolha == '2') {
+					printf("Dividimos em até 6x sem juros ou 10x com juros");
+				} else {
+					printf("Opção inválida, tente novamente.");
+				}
+				system("cls");
+				alugarVeiculo();
+				break;
 		
 	   case	'3':
-	        printf("Forma de pagamento aceita! Dirija-se a recepção antes de pegar o carro, para efetuar o pagamento:\n"); 	
-			
-		system("cls");
-		alugarVeiculo();
+	        printf("Dirija-se à recepção para efetuar o pagamento, lá mesmo entregarão a chave e o documento do veículo.\n"); 	
+			system("cls");
+			alugarVeiculo();
+			break;
 		
 		case '4':
 		    default:
@@ -381,7 +376,7 @@ void formadePagamento(){
 			printf("Opção inválida! Tente novamente\n\n");
 			system("pause");
 			system("cls");
-			formadePagamento();		
+			formaDePagamento();		
 	         
 	} 
 }
@@ -394,7 +389,7 @@ void simularAluguel(){
 	printf("***** Simular locação *****\n\n");
 	
 	fflush(stdin);
-	printf("Qual veículo deseja simular locação? (Ex. Gol): ");
+	printf("Qual veículo deseja simular a locação? (Ex. Gol): ");
 	gets(carroSimulacao);
 	
 	for(int i = 0; i < totalVeiculos; i++){
@@ -407,9 +402,9 @@ void simularAluguel(){
 			
 			fflush(stdin);
 			system("cls");
-			printf("##### Resultado da simulação #####\n\n");
+			printf("##### Simulação #####\n\n");
 			printf("Veículo escolhido: %s\n", carroSimulacao);
-			printf("Dias: %d\n", diaSimulacao);
+			printf("Quantidade de dias: %d\n", diaSimulacao);
 			printf("Valor da diária: %.2f\n", diariaCarro);
 			
 			float valorTotal = diariaCarro * diaSimulacao;
@@ -423,7 +418,7 @@ void simularAluguel(){
 	
 	if(! carroEncontrado){
 		system("cls");
-		printf("Carro não encontrado!\n\n");
+		printf("Veículo não encontrado!\n\n");
 		return menuCliente();
 	}
 }
@@ -461,7 +456,7 @@ void menuCliente(){
 
     printf("|1 - Carros disponíveis\n");
     printf("|2 - Alugar um veiculo\n");
-    printf("|3 - Simular Locação\n");
+    printf("|3 - Simular locação\n");
     printf("|4 - Regras da locadora\n");
     printf("|5 - Minhas informações\n");
     printf("|6 - Voltar para o menu inicial\n");
