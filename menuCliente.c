@@ -80,6 +80,21 @@ void registroCliente(){
         printf("ERROR: Usuário ou senha maior que 20 caracteres!\n\n");
         return menuClienteRegistro();
     }
+    
+    FILE *file = fopen("clientes.txt", "a");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+
+    fprintf(file, "Nome: %s\n", info[codigoCliente].nomeCliente);
+    fprintf(file, "Data de Nascimento: %02d %02d %04d\n", info[codigoCliente].dia, info[codigoCliente].mes, info[codigoCliente].ano);
+    fprintf(file, "CPF/CNPJ: %s\n", info[codigoCliente].cpfCnpj);
+    fprintf(file, "Usuário: %s\n", info[codigoCliente].usuario);
+    fprintf(file, "Senha: %s\n", info[codigoCliente].senha);
+    fprintf(file, "---------------------------\n");
+
+    fclose(file);
 
     codigoCliente++;
     printf("\nCadastro concluído!\n");
@@ -166,24 +181,45 @@ void menuClienteRegistro(){
     }
 }
 
-void carrosDisponiveis(){
+void carrosDisponiveis() {
     if (totalVeiculos == 0) {
         printf("Nenhum veículo cadastrado!\n\n");
+        return; 
     }
+    
+    for (int i = 0; i < totalVeiculos; i++) {
+        printf("Carro %d\n", i+1);
+        printf("Nome: %s\n", veiculos[i].nomeVeiculo);
+        printf("Categoria: %s\n", veiculos[i].categoria);
+        printf("Ano: %s\n", veiculos[i].ano);
+        printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
+        printf("Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
+        printf( "------------------\n\n");
+    }
+    
+    FILE *file = fopen("CarrosDisponiveis.txt", "a");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+    
+
+    for (int i = 0; i < totalVeiculos; i++) {
+        fprintf(file, "Carro %d\n", i+1);
+        fprintf(file, "Nome: %s\n", veiculos[i].nomeVeiculo);
+        fprintf(file, "Categoria: %s\n", veiculos[i].categoria);
+        fprintf(file, "Ano: %s\n", veiculos[i].ano);
+        fprintf(file, "Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
+        fprintf(file, "Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
+        fprintf(file, "------------------\n\n");
+    }
+
+    fclose(file); 
 	
-	for (int i = 0; i < totalVeiculos; i++) {
-	   	printf("Carro %d\n", i+1);
-	    printf("Nome: %s\n", veiculos[i].nomeVeiculo);
-	    printf("Categoria: %s\n", veiculos[i].categoria);
-	    printf("Ano: %s\n", veiculos[i].ano);
-	    printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
-	    printf("Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
-	    printf("------------------\n\n");
-	}
-	
-	system("pause");
+    system("pause");
     system("cls");
     return menuCliente();
+    
 }
 
 void regrasLocadora(){

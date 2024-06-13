@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
+
 
 #include "menuFuncionario.h"
 #include "menuCliente.h"
@@ -30,10 +32,17 @@ void loginFuncionario(){
 }
 
 bool categoriaInvalida(char categoria[10]){
-	if(strcmp(categoria, "Hatch") !=0 && strcmp(categoria, "Sedan") !=0 && strcmp(categoria, "SUV") !=0 && strcmp(categoria, "Picape") !=0){
-		return true;
-	}
-	return false;
+    for (int i = 0; categoria[i] != '\0'; i++) {
+        categoria[i] = tolower(categoria[i]);
+    }
+
+    if(strcmp(categoria, "hatch") != 0 && 
+       strcmp(categoria, "sedan") != 0 && 
+       strcmp(categoria, "suv") != 0 && 
+       strcmp(categoria, "picape") != 0) {
+        return true;
+    }
+    return false;
 }
 
 bool codigoVeiculoInvalido(char codigo[10]){
@@ -64,6 +73,7 @@ void cadastrarVeiculo(){
 	printf("-> Picape\n");
 	printf("Escreva a categoria do carro (Ex. Hatch): ");
 	gets(veiculos[totalVeiculos].categoria);
+    
     
     if(categoriaInvalida(veiculos[totalVeiculos].categoria)){
     	system("cls");
@@ -278,6 +288,7 @@ void consultarLocacoes(){
         printf("Dias Reservados: %d\n", veiculos[i].dias);
         printf("--------------------\n\n");
     }
+    
     system("pause");
     system("cls");
     return menuFuncionario();
