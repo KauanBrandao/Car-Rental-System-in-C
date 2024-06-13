@@ -280,6 +280,13 @@ void alugarVeiculo(){
 	
 	printf("***** Alugar carro *****\n\n");
 	
+    if (strcmp(info[clienteAtual].carroAlugado, "") != 0) {
+        printf("Você já possui um carro alugado.\n\n");
+        system("pause");
+        system("cls");
+        return menuCliente();
+    }
+    
 	printf("|1- Escolher carro\n");
 	printf("|2- Voltar ao menu\n");
 	printf("Escolha [1-2]: ");
@@ -370,6 +377,7 @@ void simularAluguel(){
 	
 	printf("***** Simular locação *****\n\n");
 	
+
 	fflush(stdin);
 	printf("Qual veículo deseja simular a locação? (Ex. Gol): ");
 	gets(carroSimulacao);
