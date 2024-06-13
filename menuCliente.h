@@ -8,7 +8,7 @@ struct Cliente {
     char usuario[20];
     char senha[20];
     char carroAlugado[40];
-}info[10];
+}info[]; // FAVOR NAO COLOCAR NUMERO NA ARRAY, POIS É UMA ARRAY SEM TAMANHO!!!!!!!!!!!
 
 int codigoCliente = 0;
 extern void menuPrincipal();
@@ -19,5 +19,7 @@ void registroCliente();
 void loginCliente();
 void menuClienteRegistro();
 void formadePagamento();
+
+int clienteAtual = -1;
 
 #endif

@@ -5,7 +5,7 @@
 #define MAX_LOCACOES 100
 
 struct Veiculo{
-    char nome[40];
+    char nomeVeiculo[40];
     char codigo[10];
     char categoria[10];
     char ano[10];

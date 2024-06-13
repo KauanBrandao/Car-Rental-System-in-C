@@ -56,7 +56,7 @@ void cadastrarVeiculo(){
 	
 	fflush(stdin);
     printf("Informe o nome do carro: ");
-    gets(veiculos[totalVeiculos].nome);
+    gets(veiculos[totalVeiculos].nomeVeiculo);
 	
 	printf("\n-> Hatch\n");
 	printf("-> Sedan\n");
@@ -90,6 +90,7 @@ void cadastrarVeiculo(){
     	return menuFuncionario();
 	}
 	
+	veiculos[totalVeiculos].disponivel = true;
     totalVeiculos++;
     system("cls");
 	
@@ -150,7 +151,7 @@ void removerVeiculo(){
     		gets(nomeCarro);
     		
     		for(int i = 0; i < totalVeiculos; i++){
-    			if(strcmp(nomeCarro, veiculos[i].nome) ==0) {
+    			if(strcmp(nomeCarro, veiculos[i].nomeVeiculo) ==0) {
     				carroEncontrado = true;
 	                
 	                for (int i = carroEncontrado; i < totalVeiculos - 1; i++) {
@@ -210,7 +211,7 @@ void buscarVeiculo(){
 	            if (strcmp(veiculos[i].codigo, codigoCarro) ==0) {
 	                carroEncontrado = true;
 	                
-	                printf("\nNome: %s\n", veiculos[i].nome);
+	                printf("\nNome: %s\n", veiculos[i].nomeVeiculo);
 	                printf("Categoria: %s\n", veiculos[i].categoria);
 	                printf("Ano: %s\n", veiculos[i].ano);
 	                printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
@@ -230,10 +231,10 @@ void buscarVeiculo(){
     		gets(nomeCarro);
     		
     		for(int i = 0; i < totalVeiculos; i++){
-    			if(strcmp(nomeCarro, veiculos[i].nome)==0) {
+    			if(strcmp(nomeCarro, veiculos[i].nomeVeiculo)==0) {
     				carroEncontrado = true;
 	                
-	                printf("\nNome: %s\n", veiculos[i].nome);
+	                printf("\nNome: %s\n", veiculos[i].nomeVeiculo);
 	                printf("Categoria: %s\n", veiculos[i].categoria);
 	                printf("Ano: %s\n", veiculos[i].ano);
 	                printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
@@ -271,9 +272,9 @@ void consultarLocacoes(){
 
     printf("**** Lista de locações ****\n\n");
     for (int i = 0; i < totalLocacoes; i++) {
-    	printf("Cliente n %d\n", i+1);
-        printf("Cliente: %s\n", info[i].nomeCliente);
-        printf("Carro: %s\n", veiculos[i].nome);
+    	printf("Cliente nº %d\n", i+1);
+        printf("Nome: %s\n", info[i].nomeCliente);
+        printf("Carro: %s\n", veiculos[i].nomeVeiculo);
         printf("Dias Reservados: %d\n", veiculos[i].dias);
         printf("--------------------\n\n");
     }

@@ -28,7 +28,7 @@ bool cpfInvalido(char cpf[20]){
 }
 
 bool usuarioExistente(char usuario[20]){
-	for(int i =0; i < codigoCliente; i++){
+	for(int i = 0; i < codigoCliente; i++){
 		if(strcmp(usuario, info[i].usuario) == 0){
 			return true;
 		}else{
@@ -63,7 +63,7 @@ void registroCliente(){
     	return registroCliente();
 	}
 
-    printf("\nEscolha seu usuário/ID (MAX 20 CARACTERES): ");
+    printf("\nEscolha seu usuário (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].usuario);
     
     if(usuarioExistente(info[codigoCliente].usuario)){
@@ -91,6 +91,7 @@ void registroCliente(){
 bool loginInvalido(char usuario[20], char senha[20]){
     for (int i = 0; i < codigoCliente; i++) {
         if (strcmp(usuario, info[i].usuario) == 0 && strcmp(senha, info[i].senha) == 0) {
+        	clienteAtual = i;
             return false;
         }
     }
@@ -172,7 +173,7 @@ void carrosDisponiveis(){
 	
 	for (int i = 0; i < totalVeiculos; i++) {
 	   	printf("Carro %d\n", i+1);
-	    printf("Nome: %s\n", veiculos[i].nome);
+	    printf("Nome: %s\n", veiculos[i].nomeVeiculo);
 	    printf("Categoria: %s\n", veiculos[i].categoria);
 	    printf("Ano: %s\n", veiculos[i].ano);
 	    printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
@@ -194,8 +195,8 @@ void regrasLocadora(){
     printf("4. O LOCADOR DEVE SER RESPONSÁVEL POR QUAISQUER DANOS AO VEÍCULO.\n");
     printf("5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
     printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
-    printf("7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n");
-    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2% AO MêS), OU EM ESPÉCIE\n\n");                                                   
+    printf("7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n\n");
+    //printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2% AO MÊS), OU EM ESPÉCIE\n\n ");                                                   
     system("pause");
     system("cls");
     return menuCliente();
@@ -235,9 +236,8 @@ void minhasInfo() {
 }
 
 void alugarVeiculo(){
-	char nomeCarro[100];
+	char nomeCarro[40];
 	char opcao;
-	char formapagamento;
 	char confirmar;
 	float valorTotal;
 	bool carroEncontrado = false;
@@ -264,39 +264,35 @@ void alugarVeiculo(){
 			gets(nomeCarro);
 			
 			for(int i = 0; i < totalVeiculos; i++){
-				if(strcmp(nomeCarro, veiculos[i].nome) == 0 && veiculos[i].disponivel){
+				if(strcmp(nomeCarro, veiculos[i].nomeVeiculo) == 0 && veiculos[i].disponivel == true){
 					system("cls");
 					carroEncontrado = true;
 					printf("Veículo '%s' encontrado!\n\n", nomeCarro);
-					
-					printf("Nome: %s\n", veiculos[i].nome);
+						
+					printf("Nome: %s\n", veiculos[i].nomeVeiculo);
 					printf("Categoria: %s\n", veiculos[i].categoria);
 					printf("Valor da diária: %.2f\n\n", veiculos[i].valorDiaria);
-					
+						
 					fflush(stdin);			
 					printf("Quantos dias deseja alugar?: ");
 					scanf(" %d", &veiculos[i].dias);
-					
+						
 					valorTotal = veiculos[i].dias * veiculos[i].valorDiaria;
-					
+						
 					fflush(stdin);
-					printf("\nDeseja alugar '%s' por R$%.2f? [S/N]: ", veiculos[i].nome, valorTotal);
+					printf("\nDeseja alugar '%s' por R$%.2f? [S/N]: ", veiculos[i].nomeVeiculo, valorTotal);
 					scanf(" %c", &confirmar);
-					
+						
 					fflush(stdin);
-					formadePagamento();
-					
+						
 					if(confirmar == 'S' || confirmar == 's'){
-						for(int j = 0; j < codigoCliente; j++){
-							strcpy(info[j].carroAlugado, nomeCarro);
-						}
-							
+						strcpy(info[clienteAtual].carroAlugado, nomeCarro);
+								
 						system("cls");
 						printf("Carro alugado!\n\n");
-						
-						totalVeiculos++;
-						totalLocacoes++;
+							
 						veiculos[i].disponivel = false;
+						totalLocacoes++;
 							
 						return menuCliente();
 					}else if(confirmar == 'N' || confirmar == 'n'){
@@ -309,76 +305,26 @@ void alugarVeiculo(){
 						printf("Opção inválida!\n\n");
 						return alugarVeiculo();
 					}
-					
-					if(!carroEncontrado){
-						system("cls");
-						printf("Veículo não encontrado ou já alugado.\n\n");
-						return menuCliente();
-					}
 				}
 			}
+					
+			if(!carroEncontrado){
+				system("cls");
+				printf("Veículo não encontrado ou já alugado.\n\n");
+				return menuCliente();
+			}
 			break;
+			
 		case '2':
 			system("cls");
 			menuCliente();
 			break;
+			
 		default:
 			system("cls");
 			printf("Opção inválida! Tente novamente\n\n");
 			alugarVeiculo();
 	}	
-}
-
-void formaDePagamento(){
-    char opcao;
-	char escolha;
-	
-	printf("***** Pagamento *****\n\n");
-	
-	printf("|1- PIX\n");
-	printf("|2- CARTÃO\n");
-	printf("|3- DINHEIRO\n");
-	scanf(" %c", &opcao);
-	
-	switch(opcao){
-		case '1':
-			printf("E-mail para PIX - locanai.pix@gmail.com");
-			system("cls");
-	    	alugarVeiculo();    
-			break; 
-	    
-	   case '2':
-	         printf("Débito ou crédito?\n");
-	         printf("Para selecionar débito, digite 1\n");
-	         printf("Para selecionar crédito, digite 2\n");
-	         scanf(" %c", &escolha);
-	         
-				if (escolha == '1') {
-					printf("Aproxime ou insira o cartão.");
-				} else if(escolha == '2') {
-					printf("Dividimos em até 6x sem juros ou 10x com juros");
-				} else {
-					printf("Opção inválida, tente novamente.");
-				}
-				system("cls");
-				alugarVeiculo();
-				break;
-		
-	   case	'3':
-	        printf("Dirija-se à recepção para efetuar o pagamento, lá mesmo entregarão a chave e o documento do veículo.\n"); 	
-			system("cls");
-			alugarVeiculo();
-			break;
-		
-		case '4':
-		    default:
-			system("cls");
-			printf("Opção inválida! Tente novamente\n\n");
-			system("pause");
-			system("cls");
-			formaDePagamento();		
-	         
-	} 
 }
 
 void simularAluguel(){
@@ -393,7 +339,7 @@ void simularAluguel(){
 	gets(carroSimulacao);
 	
 	for(int i = 0; i < totalVeiculos; i++){
-		if(strcmp(carroSimulacao, veiculos[i].nome) ==0){
+		if(strcmp(carroSimulacao, veiculos[i].nomeVeiculo) ==0){
 			carroEncontrado = true;
 			printf("\nQuantos dias você deseja passar com o veículo? ");
 			scanf(" %d", &diaSimulacao);
