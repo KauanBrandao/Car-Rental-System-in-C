@@ -30,6 +30,36 @@ void loginFuncionario(){
         loginFuncionario();
     }
 }
+void liberarVeiculo(char codigo[]) {
+    for (int i = 0; i < totalVeiculos; i++) {
+        if (strcmp(veiculos[i].codigo, codigo) == 0) {
+            if (!veiculos[i].disponivel) {
+                veiculos[i].disponivel = true;
+                printf("Veículo %s liberado com sucesso.\n", veiculos[i].nomeVeiculo);
+                system("pause");
+                system("cls");
+                menuFuncionario();
+            } else {
+                printf("O veículo %s já está disponível.\n", veiculos[i].nomeVeiculo);
+                system("pause");
+                system("cls");
+                menuFuncionario();
+            }
+        }
+    }
+    printf("Veículo com código %s não encontrado.\n", codigo);
+    system("pause");
+    system("cls");
+    menuFuncionario();
+}
+
+void auxLiberarveiculo(){
+	char codigo[10];
+	
+	printf("Digite o código do veículo a ser liberado: ");
+    scanf(" %s", codigo);
+    liberarVeiculo(codigo);
+}
 
 bool categoriaInvalida(char categoria[10]){
     for (int i = 0; categoria[i] != '\0'; i++) {
@@ -391,17 +421,21 @@ void controleMenuFuncionario(char opcao){
             removerVeiculo();
             break;
         case '3':
+    		auxLiberarveiculo();
+    		break;
+        case '4':
             buscarVeiculo();
             break;
-        case '4':
+        case '5':
             consultarLocacoes();
             break;
-        case '5': 
+        case '6': 
         	buscarUsuario();
         	break;
-        case '6':
+        case '7':
         	menuPrincipal();
         	break;
+
         default:
             printf("Escolha uma opção válida!\n\n");
             menuFuncionario();
@@ -415,11 +449,12 @@ void menuFuncionario(){
     
     printf("|1 - Cadastrar veiculo\n");
     printf("|2 - Remover veiculos\n");
-    printf("|3 - Buscar veiculos\n");
-    printf("|4 - Consultar locações\n");    
-    printf("|5 - Buscar usuário\n");
-    printf("|6 - Voltar para o menu inicial\n");
-    printf("Escolha uma opção [1-6]: ");
+    printf("|3 - Liberar veículo\n");
+    printf("|4 - Buscar veiculos\n");
+    printf("|5 - Consultar locações\n");    
+    printf("|6 - Buscar usuário\n");
+    printf("|7 - Voltar para o menu inicial\n");
+    printf("Escolha uma opção [1-7]: ");
     scanf(" %c", &opcao);
     
     system("cls");

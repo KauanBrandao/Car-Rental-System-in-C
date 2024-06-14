@@ -37,6 +37,10 @@ bool usuarioExistente(char usuario[20]){
 	}
 }
 
+bool clienteTemCarroAlugado(int indiceCliente) {
+    return strcmp(info[indiceCliente].carroAlugado, "") != 0;
+}
+
 void registroCliente(){
     fflush(stdin);
     printf("Digite o seu nome: ");
@@ -220,6 +224,24 @@ void carrosDisponiveis() {
     system("cls");
     return menuCliente();
     
+}
+
+void devolverCarro(int indiceCliente) {
+    if (!clienteTemCarroAlugado(indiceCliente)) {
+        printf("Você não possui nenhum carro alugado.\n\n");
+        system("pause");
+        system("cls");
+        menuCliente();
+        return;
+    }
+
+    printf("Você está devolvendo o carro %s.\n", info[indiceCliente].carroAlugado);
+    strcpy(info[indiceCliente].carroAlugado, "");
+
+    printf("Carro devolvido com sucesso.\n\n");
+    system("pause");
+    system("cls");
+    menuCliente();
 }
 
 void regrasLocadora(){
@@ -425,14 +447,18 @@ void controleMenuCliente(char opcao){
             simularAluguel();
             break;
         case '4':
+        	devolverCarro(clienteAtual);
+        	break;
+        case '5':
             regrasLocadora();
             break;
-        case '5':
+        case '6':
             minhasInfo();
             break;
-        case '6':
+        case '7':
             menuPrincipal();
             break;
+            
         default:
             printf("Escolha uma opção válida!\n\n");
             menuCliente();
@@ -447,10 +473,11 @@ void menuCliente(){
     printf("|1 - Carros disponíveis\n");
     printf("|2 - Alugar um veiculo\n");
     printf("|3 - Simular locação\n");
-    printf("|4 - Regras da locadora\n");
-    printf("|5 - Minhas informações\n");
-    printf("|6 - Voltar para o menu inicial\n");
-    printf("|Escolha uma opção [1-6]: ");
+    printf("|4 - Devolver veículo\n");
+    printf("|5 - Regras da locadora\n");
+    printf("|6 - Minhas informações\n");
+    printf("|7 - Voltar para o menu inicial\n");
+    printf("|Escolha uma opção [1-7]: ");
     scanf(" %c", &opcao);
 
     system("cls");
