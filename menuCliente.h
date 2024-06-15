@@ -8,6 +8,7 @@ struct Cliente {
     char usuario[20];
     char senha[20];
     char carroAlugado[40];
+    float custoAluguel;
 }info[]; // FAVOR NAO COLOCAR NUMERO NA ARRAY, POIS É UMA ARRAY SEM TAMANHO!!!!!!!!!!!
 
 int codigoCliente = 0;
