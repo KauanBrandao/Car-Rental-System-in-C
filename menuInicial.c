@@ -14,14 +14,14 @@ void corrigirAcentuacao(){
 }
 
 void creditos(){
-	printf("Desenvolvido por: Caio Navarro, Emanuel Lucas, Gustavo Santos, Kauan Brandão, Miguel Neto e Samuel Falcão\n\n");
+	printf("\033[32mDesenvolvido por: Caio Navarro, Emanuel Lucas, Gustavo Santos, Kauan Brandão, Miguel Neto e Samuel Falcão\n\n");
 	system("pause");
 	system("cls");
 	menuPrincipal();
 }
 
 void sair(){
-	printf("Obrigado por usar nosso sistema!");
+	printf("\033[32mObrigado por usar nosso sistema!");
 }
 
 void controleMenuPrincipal(char opcao){

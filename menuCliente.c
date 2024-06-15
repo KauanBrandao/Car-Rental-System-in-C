@@ -52,7 +52,7 @@ void registroCliente(){
     scanf("%d %d %d", &info[codigoCliente].dia, &info[codigoCliente].mes, &info[codigoCliente].ano);
     
     if(menorIdade(info[codigoCliente].ano)){
-    	printf("\nVocê tem menos de 18 anos e por isso não poderá terminar o cadastro!\n\n");
+    	printf("\033[31m\nVocê tem menos de 18 anos e por isso não poderá terminar o cadastro!\n\n");
     	system("pause");
     	system("cls");
     	return menuPrincipal();
@@ -64,7 +64,7 @@ void registroCliente(){
     
     if(cpfInvalido(info[codigoCliente].cpfCnpj)){
     	system("cls");
-    	printf("CPF inválido, tente novamente!\n\n");
+    	printf("\033[31mCPF inválido, tente novamente!\n\n");
     	return registroCliente();
 	}
 
@@ -73,7 +73,7 @@ void registroCliente(){
     
     if(usuarioExistente(info[codigoCliente].usuario)){
     	system("cls");	
-		printf("Erro: Este nome de usuário já está em uso!\n\n");
+		printf("\033[31mErro: Este nome de usuário já está em uso!\n\n");
 		return menuClienteRegistro();
 	}
 
@@ -82,13 +82,13 @@ void registroCliente(){
 
     if (usuarioOuSenhaInvalido(info[codigoCliente].usuario, info[codigoCliente].senha)) {
         system("cls");
-        printf("ERROR: Usuário ou senha maior que 20 caracteres!\n\n");
+        printf("\033[31mERROR: Usuário ou senha maior que 20 caracteres!\n\n");
         return menuClienteRegistro();
     }
     
     FILE *file = fopen("clientes.txt", "a");
     if (file == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
+        printf("\033[31mErro ao abrir o arquivo!\n");
         return;
     }
 
@@ -102,7 +102,7 @@ void registroCliente(){
     fclose(file);
 
     codigoCliente++;
-    printf("\nCadastro concluído!\n");
+    printf("\033[32m\nCadastro concluído!\n");
     system("pause");
     system("cls");
     menuClienteRegistro();
@@ -133,7 +133,7 @@ void loginCliente(){
     if (loginInvalido(usuario, senha)) {
     	char opcao;
         system("cls");
-        printf("Usuário ou senha inválidos \n");
+        printf("\033[31mUsuário ou senha inválidos \n");
         system("pause");
         system("cls");
         printf("Deseja tentar novamente? [S/N]: ");
@@ -148,12 +148,12 @@ void loginCliente(){
 			return menuPrincipal();
 		} else {
 			system("cls");
-			printf("Opção Inválida!\n\n");
+			printf("\033[31mOpção Inválida!\n\n");
 			return menuPrincipal();		
 		}
     }
 	 
-    printf("\nLogin efetuado com sucesso.\n");
+    printf("\033[32m\nLogin efetuado com sucesso.\n");
     system("pause");
     system("cls");
     menuCliente();
@@ -181,14 +181,14 @@ void menuClienteRegistro(){
     	menuPrincipal();
 	} else {
         system("cls");
-        printf("Opção inválida!\n\n");
+        printf("\033[31mOpção inválida!\n\n");
         return menuClienteRegistro();
     }
 }
 
 void carrosDisponiveis() {
     if (totalVeiculos == 0) {
-        printf("Nenhum veículo cadastrado!\n\n");
+        printf("\033[31mNenhum veículo cadastrado!\n\n");
         return; 
     }
     
@@ -215,7 +215,7 @@ void vistoriaCarro(int indiceCliente) {
 	float percentualAumento;
 	
     if (!clienteTemCarroAlugado(indiceCliente)) {
-        printf("Cliente não possui carro alugado para vistoria.\n");
+        printf("\033[31mCliente não possui carro alugado para vistoria.\n");
         return menuCliente();
     }
 
@@ -249,8 +249,8 @@ void vistoriaCarro(int indiceCliente) {
     	percentualAumento = 1 + (0.1 * totalProblemas); 
     	valorTotal = veiculos[indiceCliente].valorDiaria * veiculos[indiceCliente].dias * percentualAumento;
     	
-        printf("Houve problemas encontrados durante a vistoria.\n");
-        printf("Custo da locação foi aumentado em %d%%.\n\n", 10 * totalProblemas);
+        printf("\033[31mHouve problemas encontrados durante a vistoria.\n");
+        printf("\033[33mCusto da locação foi aumentado em %d%%.\n\n", 10 * totalProblemas);
         
         sleep(3);
         
@@ -266,7 +266,7 @@ void vistoriaCarro(int indiceCliente) {
         int valorPagoCentavos = round(valorPago * 100);
 
         if (valorPagoCentavos == valorTotalCentavos) {
-            printf("Pagamento recebido.\n");
+            printf("\033[32mPagamento recebido.\n");
             
             totalLocacoes--;
     		strcpy(info[indiceCliente].carroAlugado, "");
@@ -277,20 +277,20 @@ void vistoriaCarro(int indiceCliente) {
 			system("cls");
 			return menuCliente();
         } else {
-            printf("Valor pago é diferente. Devolução não concluída.\n\n");
+            printf("\033[31mValor pago é diferente. Devolução não concluída.\n\n");
             system("pause");
             system("cls");
             return menuCliente();
         }
     }
     if(totalProblemas == 0){
-        printf("Vistoria concluída. Carro em bom estado.\n\n");
+        printf("\033[32mVistoria concluída. Carro em bom estado.\n\n");
         
         totalLocacoes--;
     	strcpy(info[indiceCliente].carroAlugado, "");
     	veiculos[clienteAtual].disponivel = true;
     
-		printf("Carro devolvido com sucesso.\n\n");
+		printf("\033[32mCarro devolvido com sucesso.\n\n");
 		system("pause");
 		system("cls");
 		return menuCliente();
@@ -299,11 +299,11 @@ void vistoriaCarro(int indiceCliente) {
 
 void devolverCarro(int indiceCliente) {
     if (!clienteTemCarroAlugado(indiceCliente)) {
-        printf("Você não possui nenhum carro alugado.\n\n");
+        printf("\033[31mVocê não possui nenhum carro alugado.\n\n");
         return menuCliente();
     }
 
-    printf("Você está devolvendo o carro %s.\n\n", info[indiceCliente].carroAlugado);
+    printf("\033[32mVocê está devolvendo o carro %s.\n\n", info[indiceCliente].carroAlugado);
 	system("pause");
 	
 	system("cls");
@@ -320,7 +320,7 @@ void regrasLocadora(){
     printf("5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
     printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
     printf("7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n\n");
-    //printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2% AO MÊS), OU EM ESPÉCIE\n\n ");                                                   
+    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2% AO MÊS), OU EM ESPÉCIE\n\n ");                                                   
     system("pause");
     system("cls");
     return menuCliente();
@@ -345,7 +345,7 @@ void minhasInfo() {
             if(strcmp(info[i].carroAlugado, "") ==0){
             	printf("Carro alugado: Nenhum\n");
 			}else{
-				printf("Carro alugado: %s\n", info[i].carroAlugado);
+				printf("\033[32mCarro alugado: %s\n", info[i].carroAlugado);
 			}
             printf("Usuário de Login: %s\n\n", info[i].usuario);
 
@@ -355,7 +355,7 @@ void minhasInfo() {
         }
     }
     system("cls");
-    printf("Usuário não encontrado.\n\n");
+    printf("\033[31mUsuário não encontrado.\n\n");
     return menuCliente();
 }
 
@@ -369,7 +369,7 @@ void alugarVeiculo(){
 	printf("***** Alugar carro *****\n\n");
 	
     if (strcmp(info[clienteAtual].carroAlugado, "") != 0) {
-        printf("Você já possui um carro alugado.\n\n");
+        printf("\033[33mVocê já possui um carro alugado.\n\n");
         system("pause");
         system("cls");
         return menuCliente();
@@ -383,7 +383,7 @@ void alugarVeiculo(){
 	switch(opcao){
 		case '1':
 			if (totalVeiculos == 0) {
-                printf("\nNão há veículos cadastrados!\n\n");
+                printf("\033[31m\nNão há veículos cadastrados!\n\n");
                 system("pause");
                 system("cls");
                 return menuCliente();
@@ -398,7 +398,7 @@ void alugarVeiculo(){
 				if(strcmp(nomeCarro, veiculos[i].nomeVeiculo) == 0 && veiculos[i].disponivel == true){
 					system("cls");
 					carroEncontrado = true;
-					printf("Veículo '%s' encontrado!\n\n", nomeCarro);
+					printf("\033[32mVeículo '%s' encontrado!\n\n", nomeCarro);
 						
 					printf("Nome: %s\n", veiculos[i].nomeVeiculo);
 					printf("Categoria: %s\n", veiculos[i].categoria);
@@ -420,20 +420,20 @@ void alugarVeiculo(){
 						strcpy(info[clienteAtual].carroAlugado, nomeCarro);
 								
 						system("cls");
-						printf("Carro alugado!\n\n");
+						printf("\033[32mCarro alugado!\n\n");
 							
 						veiculos[i].disponivel = false;
 						totalLocacoes++;
 							
 						return menuCliente();
 					}else if(confirmar == 'N' || confirmar == 'n'){
-						printf("\nOperação cancelada.\n");
+						printf("\033[31m\nOperação cancelada.\n");
 						system("pause");
 						system("cls");
 						return menuCliente();
 					}else{
 						system("cls");
-						printf("Opção inválida!\n\n");
+						printf("\033[31mOpção inválida!\n\n");
 						return alugarVeiculo();
 					}
 				}
@@ -441,7 +441,7 @@ void alugarVeiculo(){
 					
 			if(!carroEncontrado){
 				system("cls");
-				printf("Veículo não encontrado ou já alugado.\n\n");
+				printf("\033[31mVeículo não encontrado ou já alugado.\n\n");
 				return menuCliente();
 			}
 			break;
@@ -453,7 +453,7 @@ void alugarVeiculo(){
 			
 		default:
 			system("cls");
-			printf("Opção inválida! Tente novamente\n\n");
+			printf("\033[31mOpção inválida! Tente novamente\n\n");
 			alugarVeiculo();
 	}	
 }
@@ -496,7 +496,7 @@ void simularAluguel(){
 	
 	if(! carroEncontrado){
 		system("cls");
-		printf("Veículo não encontrado!\n\n");
+		printf("\033[31mVeículo não encontrado!\n\n");
 		return menuCliente();
 	}
 }

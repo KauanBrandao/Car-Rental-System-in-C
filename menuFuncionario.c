@@ -19,13 +19,13 @@ void loginFuncionario(){
     scanf(" %s", senha);
     
     if(strcmp(login, "ADMIN") == 0 && strcmp(senha, "0000") == 0){
-        printf("\nLogin bem sucedido!\n");
+        printf("\033[32m\nLogin bem sucedido!\n");
         system("pause");
         system("cls");
         menuFuncionario();
     } else {
         system("cls");
-        printf("Login ou senha inválidos.\n\n");
+        printf("\033[31mLogin ou senha inválidos.\n\n");
         loginFuncionario();
     }
 }
@@ -34,7 +34,7 @@ void liberarVeiculo(char codigo[]) {
         if (strcmp(veiculos[i].codigo, codigo) == 0) {
             if (!veiculos[i].disponivel) {
                 veiculos[i].disponivel = true;
-                printf("Veículo %s liberado com sucesso.\n\n", veiculos[i].nomeVeiculo);
+                printf("\033[32mVeículo %s liberado com sucesso.\n\n", veiculos[i].nomeVeiculo);
                 
                 totalLocacoes--;
     			strcpy(info[clienteAtual].carroAlugado, "");
@@ -44,14 +44,14 @@ void liberarVeiculo(char codigo[]) {
                 system("cls");
                 menuFuncionario();
             } else {
-                printf("O veículo %s já está disponível.\n\n", veiculos[i].nomeVeiculo);
+                printf("\033[32mO veículo %s já está disponível.\n\n", veiculos[i].nomeVeiculo);
                 system("pause");
                 system("cls");
                 menuFuncionario();
             }
         }
     }
-    printf("Veículo com código %s não encontrado.\n\n", codigo);
+    printf("\033[31mVeículo com código %s não encontrado.\n\n", codigo);
     system("pause");
     system("cls");
     menuFuncionario();
@@ -93,7 +93,7 @@ void cadastrarVeiculo(){
 	char categoria[15];
 	
     if (totalVeiculos >= MAX_VEICULOS) {
-        printf("Limite de veículos cadastrados atingido!\n\n");
+        printf("\033[31mLimite de veículos cadastrados atingido!\n\n");
         return;
     }
 	
@@ -111,7 +111,7 @@ void cadastrarVeiculo(){
     
     if(categoriaInvalida(veiculos[totalVeiculos].categoria)){
     	system("cls");
-    	printf("Erro: Categoria de carro inválida! Tente novamente\n\n");
+    	printf("\033[31mErro: Categoria de carro inválida! Tente novamente\n\n");
     	return cadastrarVeiculo();
 	}
 	
@@ -130,13 +130,13 @@ void cadastrarVeiculo(){
     
     if(codigoVeiculoInvalido(veiculos[totalVeiculos].codigo)){
     	system("cls");
-    	printf("Erro: Já existe um veículo com esse código!\n\n");
+    	printf("\033[31mErro: Já existe um veículo com esse código!\n\n");
     	return menuFuncionario();
 	}
 	
 	FILE *file = fopen("CarrosDisponiveis.txt", "a");
     if (file == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
+        printf("\033[31mErro ao abrir o arquivo!\n");
         return;
     }
     
@@ -197,7 +197,7 @@ void removerVeiculo(){
            				veiculos[i] = veiculos[i + 1];
         			}
         			totalVeiculos--;
-        			printf("\nVeículo de código '%s' removido! \n\n", codigoCarro);
+        			printf("\033[32m\nVeículo de código '%s' removido! \n\n", codigoCarro);
 	                
 	                system("pause");
 	                system("cls");
@@ -219,7 +219,7 @@ void removerVeiculo(){
            				veiculos[i] = veiculos[i + 1];
         			}
         			totalVeiculos--;
-        			printf("\nO veículo '%s' foi removido! \n\n", nomeCarro);
+        			printf("\033[31m\nO veículo '%s' foi removido! \n\n", nomeCarro);
 	                
 	                system("pause");
 	                system("cls");
@@ -229,12 +229,12 @@ void removerVeiculo(){
 			break;
 		default:
 			system("cls");
-			printf("Opção Inválida!\n\n");
+			printf("\033[31mOpção Inválida!\n\n");
 			return removerVeiculo();
 	}
 
     if (!carroEncontrado){
-        printf("\nVeículo não encontrado!\n");
+        printf("\033[31m\nVeículo não encontrado!\n");
 	}
 
     system("pause");
@@ -249,7 +249,7 @@ void buscarVeiculo(){
 	bool carroEncontrado = false;
 	
     if (totalVeiculos == 0) {
-        printf("Nenhum veículo cadastrado!\n\n");
+        printf("\033[31mNenhum veículo cadastrado!\n\n");
         system("pause");
         system("cls");
         return menuFuncionario();
@@ -310,12 +310,12 @@ void buscarVeiculo(){
 			break;
 		default:
 			system("cls");
-			printf("Opção Inválida!\n\n");
+			printf("\033[31mOpção Inválida!\n\n");
 			return buscarVeiculo();
 		}
 	
 	if (!carroEncontrado){
-        printf("\nVeículo não encontrado!\n");
+        printf("\033[31m\nVeículo não encontrado!\n");
 	}
 	
     system("pause");
@@ -325,7 +325,7 @@ void buscarVeiculo(){
 
 void consultarLocacoes(){
 	if (totalLocacoes == 0) {
-        printf("Nenhuma locação registrada!\n\n");
+        printf("\033[31mNenhuma locação registrada!\n\n");
         system("pause");
         system("cls");
         return menuFuncionario();
@@ -422,13 +422,13 @@ void buscarUsuario() {
 		return menuFuncionario();
 	}else{
 		system("cls");
-		printf("Opção inválida!\n\n");
+		printf("\033[31mOpção inválida!\n\n");
 		return buscarUsuario();
 	}
 	
 	if(! encontrado){
 		system("cls");
-    	printf("Usuário não encontrado.\n\n");
+    	printf("\033[31mUsuário não encontrado.\n\n");
     	return menuFuncionario();
 	}
 }
@@ -458,7 +458,7 @@ void controleMenuFuncionario(char opcao){
         	break;
 
         default:
-            printf("Escolha uma opção válida!\n\n");
+            printf("\033[31mEscolha uma opção válida!\n\n");
             menuFuncionario();
     }
 }
