@@ -9,7 +9,7 @@ struct Cliente {
     char senha[20];
     char carroAlugado[40];
     float custoAluguel;
-}info[]; // FAVOR NAO COLOCAR NUMERO NA ARRAY, POIS É UMA ARRAY SEM TAMANHO!!!!!!!!!!!
+}info[]; 
 
 int codigoCliente = 0;
 extern void menuPrincipal();
@@ -20,6 +20,7 @@ void registroCliente();
 void loginCliente();
 void menuClienteRegistro();
 void formadePagamento();
+void vistoriaCarro(int indiceCliente);
 
 int clienteAtual = -1;
 

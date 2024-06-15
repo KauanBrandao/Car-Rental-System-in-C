@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 #include "menuFuncionario.h"
 #include "menuCliente.h"
@@ -200,25 +201,6 @@ void carrosDisponiveis() {
         printf("Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
         printf( "------------------\n\n");
     }
-    
-    FILE *file = fopen("CarrosDisponiveis.txt", "a");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
-        return;
-    }
-    
-
-    for (int i = 0; i < totalVeiculos; i++) {
-        fprintf(file, "Carro %d\n", i+1);
-        fprintf(file, "Nome: %s\n", veiculos[i].nomeVeiculo);
-        fprintf(file, "Categoria: %s\n", veiculos[i].categoria);
-        fprintf(file, "Ano: %s\n", veiculos[i].ano);
-        fprintf(file, "Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
-        fprintf(file, "Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
-        fprintf(file, "------------------\n\n");
-    }
-
-    fclose(file); 
 	
     system("pause");
     system("cls");
@@ -226,75 +208,108 @@ void carrosDisponiveis() {
     
 }
 
-
-/*void vistoriaCarro(int indiceCliente) {
-	char resposta1;
-	char resposta2;
+void vistoriaCarro(int indiceCliente) {
+	char resposta1, resposta2, resposta3;
+	float valorPago, valorTotal;
+	int totalProblemas = 0;
+	float percentualAumento;
 	
     if (!clienteTemCarroAlugado(indiceCliente)) {
         printf("Cliente não possui carro alugado para vistoria.\n");
-        return;
+        return menuCliente();
     }
 
-    printf("Realizando vistoria no carro %s...\n", info[indiceCliente].carroAlugado);
-
-    printf("Perguntas durante a vistoria:\n");
-    printf("1. O carro está limpo por dentro? (S/N): ");
+    printf("Começando vistoria no veículo '%s'...\n\n", info[indiceCliente].carroAlugado);
+	sleep(2);
+	
+    printf("Perguntas:\n");
+    printf("1. O carro está limpo? (S/N): ");
     scanf(" %c", &resposta1);
-
-    printf("2. Há algum dano visível no carro? (S/N): ");
+    
+    if (resposta1 == 'N' || resposta1 == 'n'){
+    	totalProblemas++;
+	}
+	
+    printf("\n2. Há algum dano visível no carro? (S/N): ");
     scanf(" %c", &resposta2);
+    
+    if (resposta2 == 'S' || resposta2 == 's'){
+    	totalProblemas++;
+	}
+    
+    printf("\n3. O carro está sendo entregue com tanque cheio? [S/N]: ");
+    scanf(" %c", &resposta3);
     system("cls");
-    if (resposta1 == 'N' || resposta1 == 'n'|| resposta2 == 'S' || resposta1 == 's') {
+    
+    if (resposta3 == 'N' || resposta3 == 'n'){
+    	totalProblemas++;
+	}
+    
+    if (totalProblemas > 0) {
+    	percentualAumento = 1 + (0.1 * totalProblemas); 
+    	valorTotal = veiculos[indiceCliente].valorDiaria * veiculos[indiceCliente].dias * percentualAumento;
     	
         printf("Houve problemas encontrados durante a vistoria.\n");
-        printf("Custo do aluguel será aumentado em 20%%.\n");
-        info[indiceCliente].custoAluguel *= 1.2; 
-        printf("Novo valor do aluguel: R$ %.2f\n", info[indiceCliente].custoAluguel);
-
-        printf("Por favor, insira o valor de R$ %.2f para concluir a devolução: ", info[indiceCliente].custoAluguel);
-        float valorPago;
-        scanf("%f", &valorPago);
+        printf("Custo da locação foi aumentado em %d%%.\n\n", 10 * totalProblemas);
+        
+        sleep(3);
+        
         system("cls");
+        printf("Novo valor da locação: R$ %.2f\n", valorTotal);
+		
+		fflush(stdin);
+        printf("Por favor, insira o valor de R$ %.2f para concluir a devolução: ", valorTotal);
+        scanf(" %f", &valorPago);
+        system("cls");
+        
+        int valorTotalCentavos = round(valorTotal * 100);
+        int valorPagoCentavos = round(valorPago * 100);
 
-        if (valorPago >= info[indiceCliente].custoAluguel) {
-            printf("Pagamento recebido. Carro devolvido com sucesso.\n\n");
-        } else {
-            printf("Valor pago insuficiente. Devolução não concluída.\n\n");
-        }
-    } else {
-        printf("Vistoria concluída. Carro em bom estado.\n");
-        strcpy(info[indiceCliente].carroAlugado, "");
-        printf("Carro devolvido com sucesso.\n\n");
-    }
-
+        if (valorPagoCentavos == valorTotalCentavos) {
+            printf("Pagamento recebido.\n");
+            
+            totalLocacoes--;
+    		strcpy(info[indiceCliente].carroAlugado, "");
+    		veiculos[clienteAtual].disponivel = true;
     
-    if (clienteTemCarroAlugado(indiceCliente)) {
-        printf("Cliente ainda está com o carro alugado: %s\n", info[indiceCliente].carroAlugado);
-    } else {
-        printf("Cliente não está mais com nenhum carro alugado.\n");
+			printf("Carro devolvido com sucesso.\n\n");
+			system("pause");
+			system("cls");
+			return menuCliente();
+        } else {
+            printf("Valor pago é diferente. Devolução não concluída.\n\n");
+            system("pause");
+            system("cls");
+            return menuCliente();
+        }
+    }
+    if(totalProblemas == 0){
+        printf("Vistoria concluída. Carro em bom estado.\n\n");
+        
+        totalLocacoes--;
+    	strcpy(info[indiceCliente].carroAlugado, "");
+    	veiculos[clienteAtual].disponivel = true;
+    
+		printf("Carro devolvido com sucesso.\n\n");
+		system("pause");
+		system("cls");
+		return menuCliente();
     }
 }
 
 void devolverCarro(int indiceCliente) {
     if (!clienteTemCarroAlugado(indiceCliente)) {
         printf("Você não possui nenhum carro alugado.\n\n");
-        return;
+        return menuCliente();
     }
 
-    printf("Você está devolvendo o carro %s.\n", info[indiceCliente].carroAlugado);
-
-    
+    printf("Você está devolvendo o carro %s.\n\n", info[indiceCliente].carroAlugado);
+	system("pause");
+	
+	system("cls");
     vistoriaCarro(indiceCliente);
-
-   
-    strcpy(info[indiceCliente].carroAlugado, "");
-
-    printf("Carro devolvido com sucesso.\n\n");
-    
-    return menuCliente();
 }
-*/
+
 void regrasLocadora(){
     printf("******** Regras da Locadora ********\n\n");
 
@@ -498,7 +513,7 @@ void controleMenuCliente(char opcao){
             simularAluguel();
             break;
         case '4':
-        	//devolverCarro(clienteAtual);
+        	devolverCarro(clienteAtual);
         	break;
         case '5':
             regrasLocadora();

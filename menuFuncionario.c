@@ -4,7 +4,6 @@
 #include <string.h>
 #include <ctype.h>
 
-
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
@@ -35,19 +34,24 @@ void liberarVeiculo(char codigo[]) {
         if (strcmp(veiculos[i].codigo, codigo) == 0) {
             if (!veiculos[i].disponivel) {
                 veiculos[i].disponivel = true;
-                printf("Veículo %s liberado com sucesso.\n", veiculos[i].nomeVeiculo);
+                printf("Veículo %s liberado com sucesso.\n\n", veiculos[i].nomeVeiculo);
+                
+                totalLocacoes--;
+    			strcpy(info[clienteAtual].carroAlugado, "");
+    			veiculos[clienteAtual].disponivel = true;
+                
                 system("pause");
                 system("cls");
                 menuFuncionario();
             } else {
-                printf("O veículo %s já está disponível.\n", veiculos[i].nomeVeiculo);
+                printf("O veículo %s já está disponível.\n\n", veiculos[i].nomeVeiculo);
                 system("pause");
                 system("cls");
                 menuFuncionario();
             }
         }
     }
-    printf("Veículo com código %s não encontrado.\n", codigo);
+    printf("Veículo com código %s não encontrado.\n\n", codigo);
     system("pause");
     system("cls");
     menuFuncionario();
@@ -129,6 +133,23 @@ void cadastrarVeiculo(){
     	printf("Erro: Já existe um veículo com esse código!\n\n");
     	return menuFuncionario();
 	}
+	
+	FILE *file = fopen("CarrosDisponiveis.txt", "a");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+    
+    for (int i = 0; i < totalVeiculos; i++) {
+        fprintf(file, "Carro %d\n", i+1);
+        fprintf(file, "Nome: %s\n", veiculos[i].nomeVeiculo);
+        fprintf(file, "Categoria: %s\n", veiculos[i].categoria);
+        fprintf(file, "Ano: %s\n", veiculos[i].ano);
+        fprintf(file, "Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
+        fprintf(file, "Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
+        fprintf(file, "------------------\n\n");
+    }
+
 	
 	veiculos[totalVeiculos].disponivel = true;
     totalVeiculos++;
@@ -313,9 +334,9 @@ void consultarLocacoes(){
     printf("**** Lista de locações ****\n\n");
     for (int i = 0; i < totalLocacoes; i++) {
     	printf("Cliente nº %d\n", i+1);
-        printf("Nome: %s\n", info[i].nomeCliente);
-        printf("Carro: %s\n", veiculos[i].nomeVeiculo);
-        printf("Dias Reservados: %d\n", veiculos[i].dias);
+        printf("Nome: %s\n", info[clienteAtual].nomeCliente);
+        printf("Carro: %s\n", info[clienteAtual].carroAlugado);
+        printf("Dias Reservados: %d\n", veiculos[clienteAtual].dias);
         printf("--------------------\n\n");
     }
     
