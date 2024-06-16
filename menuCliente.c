@@ -3,20 +3,13 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <windows.h>
 
 #include "menuFuncionario.h"
 #include "menuCliente.h"
+#include "menuFrontEnd.h"
 
-
-
-void printBanner1() {
-    printf("L       OOO    CCCC    A     N   N    A     I\n");
-    printf("L      O   O  C       A A    NN  N   A A    I\n");
-    printf("L      O   O  C      A   A   N N N  A   A   I\n");
-    printf("L      O   O  C      AAAAA   N  NN  AAAAA   I\n");
-    printf("L      O   O  C      A   A   N   N  A   A   I\n");
-    printf("LLLLL   OOO    CCCC  A   A   N   N  A   A   I\n");
-}
+void printCompleteBanner(); 
 
 bool usuarioOuSenhaInvalido(char usuario[20], char senha[20]){
     if (strlen(usuario) > 20 || strlen(senha) > 20) {
@@ -56,7 +49,7 @@ bool clienteTemCarroAlugado(int indiceCliente) {
 void registroCliente(){
     fflush(stdin);
     
-    printBanner1();
+    printCompleteBanner(); 
     printf("\n \n");
     
     
@@ -140,7 +133,7 @@ void loginCliente(){
     char operador [10];
 	
 	
-	printBanner1();
+	void printCompleteBanner(); 
 	printf("\n \n");
 	
 
@@ -184,7 +177,7 @@ void menuClienteRegistro(){
     char opcao;
 
 
-	printBanner1();
+	void printCompleteBanner(); 
     printf("\n \n");
     
     
@@ -214,7 +207,7 @@ void menuClienteRegistro(){
 
 void carrosDisponiveis() {
 	
-	printBanner1();
+	void printCompleteBanner(); 
     printf("\n \n"); 
     
     
@@ -246,7 +239,7 @@ void vistoriaCarro(int indiceCliente) {
 	int totalProblemas = 0;
 	float percentualAumento;
 	
-	printBanner1();
+	void printCompleteBanner(); 
     printf("\n \n");
 	
     if (!clienteTemCarroAlugado(indiceCliente)) {
@@ -255,7 +248,7 @@ void vistoriaCarro(int indiceCliente) {
     }
 
     printf("Começando vistoria no veículo '%s'...\n\n", info[indiceCliente].carroAlugado);
-	sleep(2);
+	//sleep(2);
 	
     printf("Perguntas:\n");
     printf("1. O carro está limpo? (S/N): ");
@@ -287,7 +280,7 @@ void vistoriaCarro(int indiceCliente) {
         printf("\033[31mHouve problemas encontrados durante a vistoria.\n");
         printf("\033[33mCusto da locação foi aumentado em %d%%.\n\n", 10 * totalProblemas);
         
-        sleep(3);
+        //sleep(3);
         
         system("cls");
         printf("Novo valor da locação: R$ %.2f\n", valorTotal);
@@ -334,7 +327,7 @@ void vistoriaCarro(int indiceCliente) {
 
 void devolverCarro(int indiceCliente) {
 	
-	printBanner1();
+	void printCompleteBanner(); 
     printf("\n \n");
     
     
@@ -353,7 +346,7 @@ void devolverCarro(int indiceCliente) {
 void regrasLocadora() {
 	
 	
-	printBanner1();
+	void printCompleteBanner(); 
     printf("\n \n");
     
     
@@ -398,7 +391,7 @@ void regrasLocadora() {
 void minhasInfo() {
     char cpfCnpj[20];
      
-    printBanner1();
+    void printCompleteBanner(); 
     printf("\n \n");
 
     fflush(stdin);
@@ -440,7 +433,7 @@ void alugarVeiculo(){
 	float valorTotal;
 	bool carroEncontrado = false;
 	
-	printBanner1();
+	void printCompleteBanner(); 
     printf("\n \n");
 	
 	printf("***** ALUGAR CARRO *****\n\n");
@@ -540,7 +533,7 @@ void simularAluguel(){
 	bool carroEncontrado = false;
 	int diaSimulacao;
 	
-	printBanner1();
+	void printCompleteBanner(); 
     printf("\n \n");
 	
 	printf("***** SIMULAR LOCAÇÃO *****\n\n");
@@ -614,7 +607,7 @@ void controleMenuCliente(char opcao){
 void menuCliente(){
     char opcao;
     
-    printBanner1();
+    void printCompleteBanner(); 
     printf("\n \n");
 
     printf("******* Menu de Clientes *******\n\n");

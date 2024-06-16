@@ -6,21 +6,15 @@
 
 #include "menuFuncionario.h"
 #include "menuCliente.h"
+#include "menuFrontEnd.h"
 
-void printBanner3() {
-    printf("L       OOO    CCCC    A     N   N    A     I\n");
-    printf("L      O   O  C       A A    NN  N   A A    I\n");
-    printf("L      O   O  C      A   A   N N N  A   A   I\n");
-    printf("L      O   O  C      AAAAA   N  NN  AAAAA   I\n");
-    printf("L      O   O  C      A   A   N   N  A   A   I\n");
-    printf("LLLLL   OOO    CCCC  A   A   N   N  A   A   I\n");
-}
+void printCompleteBanner(); 
 
 void loginFuncionario(){
     char login[10];
     char senha[10];
     
-    printBanner3();
+    printCompleteBanner(); 
     printf("\n \n");
  
     fflush(stdin);
@@ -43,7 +37,7 @@ void loginFuncionario(){
 }
 void liberarVeiculo(char codigo[]) {
 	
-	printBanner3();
+	void printCompleteBanner(); 
     printf("\n \n");
     
     for (int i = 0; i < totalVeiculos; i++) {
@@ -76,7 +70,7 @@ void liberarVeiculo(char codigo[]) {
 void auxLiberarveiculo(){
 	char codigo[10];
 	
-	printBanner3();
+	void printCompleteBanner(); 
     printf("\n \n");
 	
 	printf("Digite o código do veículo a ser liberado: ");
@@ -111,7 +105,7 @@ bool codigoVeiculoInvalido(char codigo[10]){
 void cadastrarVeiculo(){
 	char categoria[15];
 	
-	printBanner3();
+	void printCompleteBanner(); 
     printf("\n \n");
 	
     if (totalVeiculos >= MAX_VEICULOS) {
@@ -193,7 +187,7 @@ void removerVeiculo(){
 	char nomeCarro[40];
 	bool carroEncontrado = false;
 	
-	printBanner3();
+	void printCompleteBanner(); 
     printf("\n \n");
 	
     if (totalVeiculos == 0) {
@@ -275,7 +269,7 @@ void buscarVeiculo(){
 	char nomeCarro[40];
 	bool carroEncontrado = false;
 	
-	printBanner3();
+	void printCompleteBanner(); 
     printf("\n \n");
 	
     if (totalVeiculos == 0) {
@@ -355,7 +349,7 @@ void buscarVeiculo(){
 
 void consultarLocacoes(){
 	
-	printBanner3();
+	void printCompleteBanner(); 
     printf("\n \n");
     
 	if (totalLocacoes == 0) {
@@ -403,7 +397,7 @@ void buscarUsuario() {
     char usuario[20];
     bool encontrado = false;
     
-    printBanner3();
+   void printCompleteBanner(); 
     printf("\n \n");
 
     fflush(stdin);
@@ -521,7 +515,7 @@ void controleMenuFuncionario(char opcao){
 void menuFuncionario(){
     char opcao;
     
-    printBanner3();
+    void printCompleteBanner(); 
     printf("\n \n");
     
     printf("******* Menu de Funcionário *******\n\n");

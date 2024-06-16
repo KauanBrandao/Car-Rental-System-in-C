@@ -4,8 +4,10 @@
 
 #include "menuCliente.c"
 #include "menuFuncionario.c"
-#include "menuFuncionario.h"
+#include "menuFrontEnd.c"
 #include "menuCliente.h"
+#include "menuFuncionario.h"
+#include "menuFrontEnd.h"
 
 void menuPrincipal();
 
@@ -26,15 +28,7 @@ void sair(){
 
 #include <stdio.h>
 
-void printBanner() {
-    printf("L       OOO    CCCC    A     N   N    A     I\n");
-    printf("L      O   O  C       A A    NN  N   A A    I\n");
-    printf("L      O   O  C      A   A   N N N  A   A   I\n");
-    printf("L      O   O  C      AAAAA   N  NN  AAAAA   I\n");
-    printf("L      O   O  C      A   A   N   N  A   A   I\n");
-    printf("LLLLL   OOO    CCCC  A   A   N   N  A   A   I\n");
-}
-
+void printCompleteBanner(); 
 
 void controleMenuPrincipal(char opcao){
 	switch(opcao){
@@ -59,7 +53,7 @@ void controleMenuPrincipal(char opcao){
 void menuPrincipal(){
 	char opcao; 
 	
-	printBanner();
+	printCompleteBanner();
 	
 	
 	printf("\n \n");
