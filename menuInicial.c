@@ -24,6 +24,18 @@ void sair(){
 	printf("\033[32mObrigado por usar nosso sistema!");
 }
 
+#include <stdio.h>
+
+void printBanner() {
+    printf("L       OOO    CCCC    A     N   N    A     I\n");
+    printf("L      O   O  C       A A    NN  N   A A    I\n");
+    printf("L      O   O  C      A   A   N N N  A   A   I\n");
+    printf("L      O   O  C      AAAAA   N  NN  AAAAA   I\n");
+    printf("L      O   O  C      A   A   N   N  A   A   I\n");
+    printf("LLLLL   OOO    CCCC  A   A   N   N  A   A   I\n");
+}
+
+
 void controleMenuPrincipal(char opcao){
 	switch(opcao){
 		case '1':
@@ -46,6 +58,11 @@ void controleMenuPrincipal(char opcao){
 
 void menuPrincipal(){
 	char opcao; 
+	
+	printBanner();
+	
+	
+	printf("\n \n");
 	
 	printf("------- Menu Inicial -------\n\n");
 	printf("|1 - Menu de clientes\n");

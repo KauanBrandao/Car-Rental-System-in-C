@@ -7,6 +7,17 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
+
+
+void printBanner1() {
+    printf("L       OOO    CCCC    A     N   N    A     I\n");
+    printf("L      O   O  C       A A    NN  N   A A    I\n");
+    printf("L      O   O  C      A   A   N N N  A   A   I\n");
+    printf("L      O   O  C      AAAAA   N  NN  AAAAA   I\n");
+    printf("L      O   O  C      A   A   N   N  A   A   I\n");
+    printf("LLLLL   OOO    CCCC  A   A   N   N  A   A   I\n");
+}
+
 bool usuarioOuSenhaInvalido(char usuario[20], char senha[20]){
     if (strlen(usuario) > 20 || strlen(senha) > 20) {
         return true;
@@ -44,6 +55,11 @@ bool clienteTemCarroAlugado(int indiceCliente) {
 
 void registroCliente(){
     fflush(stdin);
+    
+    printBanner1();
+    printf("\n \n");
+    
+    
     printf("Digite o seu nome: ");
     gets(info[codigoCliente].nomeCliente);
 	
@@ -123,6 +139,11 @@ void loginCliente(){
     char senha[20];
     char operador [10];
 	
+	
+	printBanner1();
+	printf("\n \n");
+	
+
     fflush(stdin);
     printf("Insira seu nome de usuário: ");
     gets(usuario);
@@ -162,6 +183,11 @@ void loginCliente(){
 void menuClienteRegistro(){
     char opcao;
 
+
+	printBanner1();
+    printf("\n \n");
+    
+    
     printf("******* Faça seu Registro/Login *******\n\n");
 
     printf("|1 - Registro\n");
@@ -187,9 +213,15 @@ void menuClienteRegistro(){
 }
 
 void carrosDisponiveis() {
+	
+	printBanner1();
+    printf("\n \n"); 
+    
+    
     if (totalVeiculos == 0) {
         printf("\033[31mNenhum veículo cadastrado!\n\n");
-        return; 
+        system("pause");
+        return menuCliente(); 
     }
     
     for (int i = 0; i < totalVeiculos; i++) {
@@ -213,6 +245,9 @@ void vistoriaCarro(int indiceCliente) {
 	float valorPago, valorTotal;
 	int totalProblemas = 0;
 	float percentualAumento;
+	
+	printBanner1();
+    printf("\n \n");
 	
     if (!clienteTemCarroAlugado(indiceCliente)) {
         printf("\033[31mCliente não possui carro alugado para vistoria.\n");
@@ -298,6 +333,11 @@ void vistoriaCarro(int indiceCliente) {
 }
 
 void devolverCarro(int indiceCliente) {
+	
+	printBanner1();
+    printf("\n \n");
+    
+    
     if (!clienteTemCarroAlugado(indiceCliente)) {
         printf("\033[31mVocê não possui nenhum carro alugado.\n\n");
         return menuCliente();
@@ -310,7 +350,13 @@ void devolverCarro(int indiceCliente) {
     vistoriaCarro(indiceCliente);
 }
 
-void regrasLocadora(){
+void regrasLocadora() {
+	
+	
+	printBanner1();
+    printf("\n \n");
+    
+    
     printf("******** Regras da Locadora ********\n\n");
 
     printf("1. O VEÍCULO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
@@ -320,19 +366,47 @@ void regrasLocadora(){
     printf("5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
     printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
     printf("7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n\n");
-    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2% AO MÊS), OU EM ESPÉCIE\n\n ");                                                   
-    system("pause");
+    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2%% AO MÊS), OU EM ESPÉCIE\n\n ");
+    
+	system("pause");
     system("cls");
+    
+
+    
+    FILE *file = fopen("regras.txt", "w");
+    if (file == NULL) {
+        printf("\033[31mErro ao abrir o arquivo!\n");
+        return; 
+    }
+    
+    fprintf(file, "1. O VEÍCULO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
+    fprintf(file, "2. O VEÍCULO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
+    fprintf(file, "3. O VEÍCULO DEVE SER ENTREGUE LIMPO\n");
+    fprintf(file, "4. O LOCADOR DEVE SER RESPONSÁVEL POR QUAISQUER DANOS AO VEÍCULO.\n");
+    fprintf(file, "5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
+    fprintf(file, "6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
+    fprintf(file, "7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n\n");
+    fprintf(file, "8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2%% AO MÊS), OU EM ESPÉCIE\n\n ");
+    
+    fclose(file);
+    
     return menuCliente();
 }
 
+
+
 void minhasInfo() {
     char cpfCnpj[20];
+     
+    printBanner1();
+    printf("\n \n");
 
     fflush(stdin);
     printf("Informe seu CPF/CNPJ: ");
     gets(cpfCnpj);
-
+	
+	
+    
     for (int i = 0; i < codigoCliente; i++) {
         if (strcmp(info[i].cpfCnpj, cpfCnpj) == 0) {
             system("cls");
@@ -366,7 +440,10 @@ void alugarVeiculo(){
 	float valorTotal;
 	bool carroEncontrado = false;
 	
-	printf("***** Alugar carro *****\n\n");
+	printBanner1();
+    printf("\n \n");
+	
+	printf("***** ALUGAR CARRO *****\n\n");
 	
     if (strcmp(info[clienteAtual].carroAlugado, "") != 0) {
         printf("\033[33mVocê já possui um carro alugado.\n\n");
@@ -463,7 +540,10 @@ void simularAluguel(){
 	bool carroEncontrado = false;
 	int diaSimulacao;
 	
-	printf("***** Simular locação *****\n\n");
+	printBanner1();
+    printf("\n \n");
+	
+	printf("***** SIMULAR LOCAÇÃO *****\n\n");
 	
 
 	fflush(stdin);
@@ -533,6 +613,9 @@ void controleMenuCliente(char opcao){
 
 void menuCliente(){
     char opcao;
+    
+    printBanner1();
+    printf("\n \n");
 
     printf("******* Menu de Clientes *******\n\n");
 

@@ -7,9 +7,21 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
+void printBanner3() {
+    printf("L       OOO    CCCC    A     N   N    A     I\n");
+    printf("L      O   O  C       A A    NN  N   A A    I\n");
+    printf("L      O   O  C      A   A   N N N  A   A   I\n");
+    printf("L      O   O  C      AAAAA   N  NN  AAAAA   I\n");
+    printf("L      O   O  C      A   A   N   N  A   A   I\n");
+    printf("LLLLL   OOO    CCCC  A   A   N   N  A   A   I\n");
+}
+
 void loginFuncionario(){
     char login[10];
     char senha[10];
+    
+    printBanner3();
+    printf("\n \n");
  
     fflush(stdin);
     printf("Insira o login: ");
@@ -30,6 +42,10 @@ void loginFuncionario(){
     }
 }
 void liberarVeiculo(char codigo[]) {
+	
+	printBanner3();
+    printf("\n \n");
+    
     for (int i = 0; i < totalVeiculos; i++) {
         if (strcmp(veiculos[i].codigo, codigo) == 0) {
             if (!veiculos[i].disponivel) {
@@ -59,6 +75,9 @@ void liberarVeiculo(char codigo[]) {
 
 void auxLiberarveiculo(){
 	char codigo[10];
+	
+	printBanner3();
+    printf("\n \n");
 	
 	printf("Digite o código do veículo a ser liberado: ");
     scanf(" %s", codigo);
@@ -91,6 +110,9 @@ bool codigoVeiculoInvalido(char codigo[10]){
 
 void cadastrarVeiculo(){
 	char categoria[15];
+	
+	printBanner3();
+    printf("\n \n");
 	
     if (totalVeiculos >= MAX_VEICULOS) {
         printf("\033[31mLimite de veículos cadastrados atingido!\n\n");
@@ -149,6 +171,8 @@ void cadastrarVeiculo(){
         fprintf(file, "Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
         fprintf(file, "------------------\n\n");
     }
+    
+    fclose(file);
 
 	
 	veiculos[totalVeiculos].disponivel = true;
@@ -168,6 +192,9 @@ void removerVeiculo(){
 	char codigoCarro[10];
 	char nomeCarro[40];
 	bool carroEncontrado = false;
+	
+	printBanner3();
+    printf("\n \n");
 	
     if (totalVeiculos == 0) {
         printf("Nenhum veículo cadastrado!\n\n");
@@ -248,6 +275,9 @@ void buscarVeiculo(){
 	char nomeCarro[40];
 	bool carroEncontrado = false;
 	
+	printBanner3();
+    printf("\n \n");
+	
     if (totalVeiculos == 0) {
         printf("\033[31mNenhum veículo cadastrado!\n\n");
         system("pause");
@@ -324,6 +354,10 @@ void buscarVeiculo(){
 }
 
 void consultarLocacoes(){
+	
+	printBanner3();
+    printf("\n \n");
+    
 	if (totalLocacoes == 0) {
         printf("\033[31mNenhuma locação registrada!\n\n");
         system("pause");
@@ -331,7 +365,7 @@ void consultarLocacoes(){
         return menuFuncionario();
     }
 
-    printf("**** Lista de locações ****\n\n");
+    printf("**** LISTA DE LOCAÇÕES ****\n\n");
     for (int i = 0; i < totalLocacoes; i++) {
     	printf("Cliente nº %d\n", i+1);
         printf("Nome: %s\n", info[clienteAtual].nomeCliente);
@@ -339,6 +373,24 @@ void consultarLocacoes(){
         printf("Dias Reservados: %d\n", veiculos[clienteAtual].dias);
         printf("--------------------\n\n");
     }
+    
+    FILE *file = fopen("Locações consultadas.txt", "a");
+    if (file == NULL){
+    	printf("\033[31mErro ao abrir o arquivo!\n");
+    	return;
+	}
+		for (int i = 0; i < totalLocacoes; i++){
+		
+		fprintf(file, "Cliente nº %d\n", i+1);
+        fprintf(file, "Nome: %s\n", info[clienteAtual].nomeCliente);
+        fprintf(file, "Carro: %s\n", info[clienteAtual].carroAlugado);
+        fprintf(file, "Dias Reservados: %d\n", veiculos[clienteAtual].dias);
+        fprintf(file, "--------------------\n\n");
+    }
+        
+        fclose(file);
+	
+	
     
     system("pause");
     system("cls");
@@ -350,6 +402,9 @@ void buscarUsuario() {
     char cpfCnpj[18];
     char usuario[20];
     bool encontrado = false;
+    
+    printBanner3();
+    printf("\n \n");
 
     fflush(stdin);
     printf("Fazer pesquisa por:\n");
@@ -465,6 +520,9 @@ void controleMenuFuncionario(char opcao){
 
 void menuFuncionario(){
     char opcao;
+    
+    printBanner3();
+    printf("\n \n");
     
     printf("******* Menu de Funcionário *******\n\n");
     
