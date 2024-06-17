@@ -4,10 +4,8 @@
 
 #include "menuCliente.c"
 #include "menuFuncionario.c"
-#include "menuFrontEnd.c"
-#include "menuCliente.h"
 #include "menuFuncionario.h"
-#include "menuFrontEnd.h"
+#include "menuCliente.h"
 
 void menuPrincipal();
 
@@ -26,10 +24,6 @@ void sair(){
 	printf("\033[32mObrigado por usar nosso sistema!");
 }
 
-#include <stdio.h>
-
-void printCompleteBanner(); 
-
 void controleMenuPrincipal(char opcao){
 	switch(opcao){
 		case '1':
@@ -45,7 +39,7 @@ void controleMenuPrincipal(char opcao){
 			sair();
 			exit(0);
 		default:
-			printf("\033[37mEscolha uma opção válida!\n\n");
+			printf("\033[31mEscolha uma opção válida!\n\n");
 			menuPrincipal();
 	}
 }
@@ -53,17 +47,14 @@ void controleMenuPrincipal(char opcao){
 void menuPrincipal(){
 	char opcao; 
 	
-	printCompleteBanner();
+	printBanner();
 	
-	
-	printf("\n \n");
-	
-	printf("------- Menu Inicial -------\n\n");
-	printf("|1 - Menu de clientes\n");
-	printf("|2 - Menu de funcionários\n");
-	printf("|3 - Créditos\n");
-	printf("|4 - Sair do sistema\n");
-	printf("Escolha uma opção [1-4]: ");
+	printf("\033[37m------- Menu Inicial -------\n\n");
+	printf("\033[37m|1 - Menu de clientes\n");
+	printf("\033[37m|2 - Menu de funcionários\n");
+	printf("\033[37m|3 - Créditos\n");
+	printf("\033[37m|4 - Sair do sistema\n");
+	printf("\033[33mEscolha uma opção [1-4]: ");
 	scanf(" %c", &opcao);
 	
 	system("cls");

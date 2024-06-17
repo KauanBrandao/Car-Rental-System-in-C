@@ -14,6 +14,14 @@ struct Cliente {
 int codigoCliente = 0;
 extern void menuPrincipal();
 
+void printBanner() {
+    printf("\033[034m    __    _____ _____ ____   __  __  ____   _____ \n");
+    printf("\033[034m   / /   / __  / ___ /   |  / | / / /   |  /   _/ \n");
+    printf("\033[034m  / /   / / / / /   / /| | /  |/ / / /| |  /  /   \n");
+    printf("\033[034m / /___/ /_/ / /___/ ___ |/  /| / / ___ |_/  /    \n");
+    printf("\033[034m/_____/\\____/\\___/__/ / /|_/|/_/__|_/__/____/   \n");
+    printf("\n\n"); 
+}
 void menuClienteRegistro();
 void menuCliente();
 void registroCliente();
