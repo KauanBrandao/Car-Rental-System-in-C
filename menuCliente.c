@@ -42,6 +42,23 @@ bool clienteTemCarroAlugado(int indiceCliente) {
     return strcmp(info[indiceCliente].carroAlugado, "") != 0;
 }
 
+void carregarClientes() {
+    FILE *file = fopen("Clientes.txt", "r");
+
+    while (fscanf(file, "Nome: %[^\n]\n", info[codigoCliente].nomeCliente) != EOF) {
+        fscanf(file, "Data de Nascimento: %02d %02d %04d\n", &info[codigoCliente].dia, &info[codigoCliente].mes, &info[codigoCliente].ano);
+        fscanf(file, "CPF/CNPJ: %[^\n]\n", info[codigoCliente].cpfCnpj);
+        fscanf(file, "Usu rio: %[^\n]\n", info[codigoCliente].usuario);
+        fscanf(file, "Senha: %[^\n]\n", info[codigoCliente].senha);
+        fscanf(file, "---------------------------\n");
+        codigoCliente++;
+    }
+
+    fclose(file);
+}
+
+
+
 void registroCliente(){
     fflush(stdin);
     

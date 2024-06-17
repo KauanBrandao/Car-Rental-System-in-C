@@ -64,5 +64,8 @@ void menuPrincipal(){
 int main(){
 	setlocale(LC_ALL, "Portuguese");
 	
+	carregarClientes();
+	carregarVeiculos();
+	consultarLocacoes();
 	menuPrincipal();
 }

@@ -98,6 +98,27 @@ bool codigoVeiculoInvalido(char codigo[10]){
 	}
 }
 
+void carregarVeiculos() {
+    FILE *file = fopen("CarrosDisponiveis.txt", "r");
+
+    totalVeiculos = 0;
+    while (fscanf(file, "Carro %*d\n") != EOF) {
+        fscanf(file, "Nome: %[^\n]\n", veiculos[totalVeiculos].nomeVeiculo);
+        fscanf(file, "Categoria: %[^\n]\n", veiculos[totalVeiculos].categoria);
+        fscanf(file, "Ano: %[^\n]\n", veiculos[totalVeiculos].ano);
+        fscanf(file, "Quilometragem: %fkm\n", &veiculos[totalVeiculos].quilometragem);
+        fscanf(file, "Valor da diária: %fR$\n", &veiculos[totalVeiculos].valorDiaria);
+        fscanf(file, "------------------\n\n");
+
+        veiculos[totalVeiculos].disponivel = true;
+        totalVeiculos++;
+    }
+
+    fclose(file);
+}
+
+
+
 void cadastrarVeiculo(){
 	char categoria[15];
 	
@@ -337,6 +358,27 @@ void buscarVeiculo(){
     system("cls");
     menuFuncionario();
 }
+
+void carregarLocacoes() {
+    FILE *file = fopen("Locações consultadas.txt", "r");
+    if (file == NULL) {
+        printf("\033[31mErro ao abrir o arquivo!\n");
+        return;
+    }
+
+    totalLocacoes = 0;
+    while (fscanf(file, "Cliente nº %*d\n") != EOF) {
+        fscanf(file, "Nome: %[^\n]\n", info[totalLocacoes].nomeCliente);
+        fscanf(file, "Carro: %[^\n]\n", info[totalLocacoes].carroAlugado);
+        fscanf(file, "Dias Reservados: %d\n", &veiculos[totalLocacoes].dias);
+        fscanf(file, "--------------------\n\n");
+
+        totalLocacoes++;
+	}
+	
+	fclose(file);
+}
+
 
 void consultarLocacoes(){
 	printBanner();
