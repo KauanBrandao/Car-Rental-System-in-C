@@ -10,3 +10,9 @@ CPF/CNPJ: 039203920393929
 Usuário: falck
 Senha: 1
 ---------------------------
+Nome: netox
+Data de Nascimento: 07 00 0000
+CPF/CNPJ: 044040045055
+Usuário: netox
+Senha: 32568917
+---------------------------

@@ -53,11 +53,11 @@ void registroCliente(){
     printf("\n \n");
     
     
-    printf("Digite o seu nome: ");
+    printf("\033[37mDigite o seu nome: ");
     gets(info[codigoCliente].nomeCliente);
 	
 	fflush(stdin);
-    printf("\nInforme a sua Data de Nascimento (DD MM AA): ");
+    printf("\033[37m\nInforme a sua Data de Nascimento (DD MM AA): ");
     scanf("%d %d %d", &info[codigoCliente].dia, &info[codigoCliente].mes, &info[codigoCliente].ano);
     
     if(menorIdade(info[codigoCliente].ano)){
@@ -68,7 +68,7 @@ void registroCliente(){
 	}
 	
 	fflush(stdin);
-    printf("\nDigite o seu CPF/CNPJ: ");
+    printf("\033[37m\nDigite o seu CPF/CNPJ: ");
     gets(info[codigoCliente].cpfCnpj);
     
     if(cpfInvalido(info[codigoCliente].cpfCnpj)){
@@ -77,7 +77,7 @@ void registroCliente(){
     	return registroCliente();
 	}
 
-    printf("\nEscolha seu usuário (MAX 20 CARACTERES): ");
+    printf("\033[37m\nEscolha seu usuário (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].usuario);
     
     if(usuarioExistente(info[codigoCliente].usuario)){
@@ -86,7 +86,7 @@ void registroCliente(){
 		return menuClienteRegistro();
 	}
 
-    printf("\nEscolha sua senha (MAX 20 CARACTERES): ");
+    printf("\033[37m\nEscolha sua senha (MAX 20 CARACTERES): ");
     gets(info[codigoCliente].senha);
 
     if (usuarioOuSenhaInvalido(info[codigoCliente].usuario, info[codigoCliente].senha)) {
@@ -138,10 +138,10 @@ void loginCliente(){
 	
 
     fflush(stdin);
-    printf("Insira seu nome de usuário: ");
+    printf("\033[37mInsira seu nome de usuário: ");
     gets(usuario);
 
-    printf("\nInsira sua senha: ");
+    printf("\033[37m\nInsira sua senha: ");
     gets(senha);
 	
     if (loginInvalido(usuario, senha)) {
@@ -150,7 +150,7 @@ void loginCliente(){
         printf("\033[31mUsuário ou senha inválidos \n");
         system("pause");
         system("cls");
-        printf("Deseja tentar novamente? [S/N]: ");
+        printf("\033[37mDeseja tentar novamente? [S/N]: ");
         scanf(" %c", &opcao);
         system("cls");
         
@@ -181,12 +181,12 @@ void menuClienteRegistro(){
     printf("\n \n");
     
     
-    printf("******* Faça seu Registro/Login *******\n\n");
+    printf("\033[37m******* Faça seu Registro/Login *******\n\n");
 
-    printf("|1 - Registro\n");
-    printf("|2 - Login\n");
-    printf("|3 - Voltar para o menu inicial\n");
-    printf("|Escolha uma opção [1-3]: ");
+    printf("\033[37m|1 - Registro\n");
+    printf("\033[37m|2 - Login\n");
+    printf("\033[37m|3 - Voltar para o menu inicial\n");
+    printf("\033[37m|Escolha uma opção [1-3]: ");
     scanf(" %c", &opcao);
 
     if (opcao == '1') {
@@ -247,7 +247,7 @@ void vistoriaCarro(int indiceCliente) {
         return menuCliente();
     }
 
-    printf("Começando vistoria no veículo '%s'...\n\n", info[indiceCliente].carroAlugado);
+    printf("\033[37mComeçando vistoria no veículo '%s'...\n\n", info[indiceCliente].carroAlugado);
 	//sleep(2);
 	
     printf("Perguntas:\n");
@@ -265,7 +265,7 @@ void vistoriaCarro(int indiceCliente) {
     	totalProblemas++;
 	}
     
-    printf("\n3. O carro está sendo entregue com tanque cheio? [S/N]: ");
+    printf("\033[37m\n3. O carro está sendo entregue com tanque cheio? [S/N]: ");
     scanf(" %c", &resposta3);
     system("cls");
     
@@ -300,7 +300,7 @@ void vistoriaCarro(int indiceCliente) {
     		strcpy(info[indiceCliente].carroAlugado, "");
     		veiculos[clienteAtual].disponivel = true;
     
-			printf("Carro devolvido com sucesso.\n\n");
+			printf("\033[37mCarro devolvido com sucesso.\n\n");
 			system("pause");
 			system("cls");
 			return menuCliente();
@@ -350,16 +350,16 @@ void regrasLocadora() {
     printf("\n \n");
     
     
-    printf("******** Regras da Locadora ********\n\n");
+    printf("\033[37m******** Regras da Locadora ********\n\n");
 
-    printf("1. O VEÍCULO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
-    printf("2. O VEÍCULO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
-    printf("3. O VEÍCULO DEVE SER ENTREGUE LIMPO\n");
-    printf("4. O LOCADOR DEVE SER RESPONSÁVEL POR QUAISQUER DANOS AO VEÍCULO.\n");
-    printf("5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
-    printf("6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
-    printf("7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n\n");
-    printf("8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2%% AO MÊS), OU EM ESPÉCIE\n\n ");
+    printf("\033[37m1. O VEÍCULO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
+    printf("\033[37m2. O VEÍCULO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
+    printf("\033[37m3. O VEÍCULO DEVE SER ENTREGUE LIMPO\n");
+    printf("\033[37m4. O LOCADOR DEVE SER RESPONSÁVEL POR QUAISQUER DANOS AO VEÍCULO.\n");
+    printf("\033[37m5. AS MULTAS DE TRÂNSITO SÃO RESPONSABILIDADE DO LOCADOR\n");
+    printf("\033[37m6. O PAGAMENTO DEVE SER FEITO ANTES DE PEGAR O VEÍCULO\n");
+    printf("\033[37m7. A CAUÇÃO DEVE SER PAGA COM ANTECEDÊNCIA\n\n");
+    printf("\033[37m8. O PAGAMENTO DEVE SER FEITO VIA PIX, NO CARTÃO (EM ATÉ 4x SEM JUROS, OU 8X COM JUROS DE 2%% AO MÊS), OU EM ESPÉCIE\n\n ");
     
 	system("pause");
     system("cls");
@@ -403,18 +403,18 @@ void minhasInfo() {
     for (int i = 0; i < codigoCliente; i++) {
         if (strcmp(info[i].cpfCnpj, cpfCnpj) == 0) {
             system("cls");
-            printf("Usuário encontrado.\n\n");
+            printf("\033[37mUsuário encontrado.\n\n");
 
-            printf("Nome: %s\n", info[i].nomeCliente);
-            printf("Data de Nascimento %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);
-            printf("CPF: %s\n", info[i].cpfCnpj);
+            printf("\033[37mNome: %s\n", info[i].nomeCliente);
+            printf("\033[37mData de Nascimento %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);
+            printf("\033[37mCPF: %s\n", info[i].cpfCnpj);
             
             if(strcmp(info[i].carroAlugado, "") ==0){
             	printf("Carro alugado: Nenhum\n");
 			}else{
 				printf("\033[32mCarro alugado: %s\n", info[i].carroAlugado);
 			}
-            printf("Usuário de Login: %s\n\n", info[i].usuario);
+            printf("\033[37mUsuário de Login: %s\n\n", info[i].usuario);
 
             system("pause");
             system("cls");
@@ -436,7 +436,7 @@ void alugarVeiculo(){
 	void printCompleteBanner(); 
     printf("\n \n");
 	
-	printf("***** ALUGAR CARRO *****\n\n");
+	printf("\033[37m***** ALUGAR CARRO *****\n\n");
 	
     if (strcmp(info[clienteAtual].carroAlugado, "") != 0) {
         printf("\033[33mVocê já possui um carro alugado.\n\n");
@@ -445,9 +445,9 @@ void alugarVeiculo(){
         return menuCliente();
     }
     
-	printf("|1- Escolher carro\n");
-	printf("|2- Voltar ao menu\n");
-	printf("Escolha [1-2]: ");
+	printf("\033[37m|1- Escolher carro\n");
+	printf("\033[37m|2- Voltar ao menu\n");
+	printf("\033[37mEscolha [1-2]: ");
 	scanf(" %c", &opcao);
 	
 	switch(opcao){
@@ -461,7 +461,7 @@ void alugarVeiculo(){
             
 			fflush(stdin);
 			system("cls");
-			printf("Informe o nome do veículo que deseja alugar (Ex. Gol): ");
+			printf("\033[37mInforme o nome do veículo que deseja alugar (Ex. Gol): ");
 			gets(nomeCarro);
 			
 			for(int i = 0; i < totalVeiculos; i++){
@@ -470,18 +470,18 @@ void alugarVeiculo(){
 					carroEncontrado = true;
 					printf("\033[32mVeículo '%s' encontrado!\n\n", nomeCarro);
 						
-					printf("Nome: %s\n", veiculos[i].nomeVeiculo);
-					printf("Categoria: %s\n", veiculos[i].categoria);
-					printf("Valor da diária: %.2f\n\n", veiculos[i].valorDiaria);
+					printf("\033[37mNome: %s\n", veiculos[i].nomeVeiculo);
+					printf("\033[37mCategoria: %s\n", veiculos[i].categoria);
+					printf("\033[37mValor da diária: %.2f\n\n", veiculos[i].valorDiaria);
 						
 					fflush(stdin);			
-					printf("Quantos dias deseja alugar?: ");
+					printf("\033[37mQuantos dias deseja alugar?: ");
 					scanf(" %d", &veiculos[i].dias);
 						
 					valorTotal = veiculos[i].dias * veiculos[i].valorDiaria;
 						
 					fflush(stdin);
-					printf("\nDeseja alugar '%s' por R$%.2f? [S/N]: ", veiculos[i].nomeVeiculo, valorTotal);
+					printf("\033[37m\nDeseja alugar '%s' por R$%.2f? [S/N]: ", veiculos[i].nomeVeiculo, valorTotal);
 					scanf(" %c", &confirmar);
 						
 					fflush(stdin);
@@ -536,30 +536,30 @@ void simularAluguel(){
 	void printCompleteBanner(); 
     printf("\n \n");
 	
-	printf("***** SIMULAR LOCAÇÃO *****\n\n");
+	printf("\033[37m***** SIMULAR LOCAÇÃO *****\n\n");
 	
 
 	fflush(stdin);
-	printf("Qual veículo deseja simular a locação? (Ex. Gol): ");
+	printf("\033[37mQual veículo deseja simular a locação? (Ex. Gol): ");
 	gets(carroSimulacao);
 	
 	for(int i = 0; i < totalVeiculos; i++){
 		if(strcmp(carroSimulacao, veiculos[i].nomeVeiculo) ==0){
 			carroEncontrado = true;
-			printf("\nQuantos dias você deseja passar com o veículo? ");
+			printf("\033[37m\nQuantos dias você deseja passar com o veículo? ");
 			scanf(" %d", &diaSimulacao);
 			
 			float diariaCarro = veiculos[i].valorDiaria;
 			
 			fflush(stdin);
 			system("cls");
-			printf("##### Simulação #####\n\n");
-			printf("Veículo escolhido: %s\n", carroSimulacao);
-			printf("Quantidade de dias: %d\n", diaSimulacao);
-			printf("Valor da diária: %.2f\n", diariaCarro);
+			printf("\033[37m##### Simulação #####\n\n");
+			printf("\033[37mVeículo escolhido: %s\n", carroSimulacao);
+			printf("\033[37mQuantidade de dias: %d\n", diaSimulacao);
+			printf("\033[37mValor da diária: %.2f\n", diariaCarro);
 			
 			float valorTotal = diariaCarro * diaSimulacao;
-			printf("Valor total da locação: %.2f\n\n", valorTotal);
+			printf("\033[37mValor total da locação: %.2f\n\n", valorTotal);
 			
 			system("pause");
 			system("cls");
@@ -599,7 +599,7 @@ void controleMenuCliente(char opcao){
             break;
             
         default:
-            printf("Escolha uma opção válida!\n\n");
+            printf("\033[37mEscolha uma opção válida!\n\n");
             menuCliente();
     }
 }
@@ -610,16 +610,16 @@ void menuCliente(){
     void printCompleteBanner(); 
     printf("\n \n");
 
-    printf("******* Menu de Clientes *******\n\n");
+    printf("\033[37m******* Menu de Clientes *******\n\n");
 
-    printf("|1 - Carros disponíveis\n");
-    printf("|2 - Alugar um veiculo\n");
-    printf("|3 - Simular locação\n");
-    printf("|4 - Devolver veículo\n");
-    printf("|5 - Regras da locadora\n");
-    printf("|6 - Minhas informações\n");
-    printf("|7 - Voltar para o menu inicial\n");
-    printf("|Escolha uma opção [1-7]: ");
+    printf("\033[37m|1 - Carros disponíveis\n");
+    printf("\033[37m|2 - Alugar um veiculo\n");
+    printf("\033[37m|3 - Simular locação\n");
+    printf("\033[37m|4 - Devolver veículo\n");
+    printf("\033[37m|5 - Regras da locadora\n");
+    printf("\033[37m|6 - Minhas informações\n");
+    printf("\033[37m|7 - Voltar para o menu inicial\n");
+    printf("\033[37m|Escolha uma opção [1-7]: ");
     scanf(" %c", &opcao);
 
     system("cls");

@@ -45,7 +45,7 @@ void controleMenuPrincipal(char opcao){
 			sair();
 			exit(0);
 		default:
-			printf("Escolha uma opção válida!\n\n");
+			printf("\033[37mEscolha uma opção válida!\n\n");
 			menuPrincipal();
 	}
 }
