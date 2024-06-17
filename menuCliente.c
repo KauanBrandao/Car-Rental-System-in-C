@@ -48,7 +48,7 @@ void carregarClientes() {
     while (fscanf(file, "Nome: %[^\n]\n", info[codigoCliente].nomeCliente) != EOF) {
         fscanf(file, "Data de Nascimento: %02d %02d %04d\n", &info[codigoCliente].dia, &info[codigoCliente].mes, &info[codigoCliente].ano);
         fscanf(file, "CPF/CNPJ: %[^\n]\n", info[codigoCliente].cpfCnpj);
-        fscanf(file, "Usu rio: %[^\n]\n", info[codigoCliente].usuario);
+        fscanf(file, "Usuário: %[^\n]\n", info[codigoCliente].usuario);
         fscanf(file, "Senha: %[^\n]\n", info[codigoCliente].senha);
         fscanf(file, "---------------------------\n");
         codigoCliente++;
@@ -56,8 +56,6 @@ void carregarClientes() {
 
     fclose(file);
 }
-
-
 
 void registroCliente(){
     fflush(stdin);
@@ -72,7 +70,7 @@ void registroCliente(){
     scanf("%d %d %d", &info[codigoCliente].dia, &info[codigoCliente].mes, &info[codigoCliente].ano);
     
     if(menorIdade(info[codigoCliente].ano)){
-    	printf("\033[37m\nVocê tem menos de 18 anos e por isso não poderá terminar o cadastro!\n\n");
+    	printf("\033[31m\nVocê tem menos de 18 anos e por isso não poderá terminar o cadastro!\n\n");
     	system("pause");
     	system("cls");
     	return menuPrincipal();
@@ -102,15 +100,11 @@ void registroCliente(){
 
     if (usuarioOuSenhaInvalido(info[codigoCliente].usuario, info[codigoCliente].senha)) {
         system("cls");
-        printf("\033[31mERROR: Usuário ou senha maior que 20 caracteres!\n\n");
+        printf("\033[31mErro: Usuário ou senha maior que 20 caracteres!\n\n");
         return menuClienteRegistro();
     }
     
-    FILE *file = fopen("clientes.txt", "a");
-    if (file == NULL) {
-        printf("\033[31mErro ao abrir o arquivo!\n");
-        return;
-    }
+    FILE *file = fopen("Clientes.txt", "a");
 
     fprintf(file, "Nome: %s\n", info[codigoCliente].nomeCliente);
     fprintf(file, "Data de Nascimento: %02d %02d %04d\n", info[codigoCliente].dia, info[codigoCliente].mes, info[codigoCliente].ano);
@@ -186,7 +180,7 @@ void menuClienteRegistro(){
     
 	printBanner();
     
-    printf("******* Faça seu Registro/Login *******\n\n");
+    printf("\033[37m******* Faça seu Registro/Login *******\n\n");
 
     printf("\033[37m|1 - Registro\n");
     printf("\033[37m|2 - Login\n");
@@ -209,6 +203,36 @@ void menuClienteRegistro(){
     }
 }
 
+/*void salvarLocacoes() {
+    FILE *file = fopen("Locacoes.txt", "a");
+
+    for (int i = 0; i < totalLocacoes; i++) {
+        if (strcmp(info[i].carroAlugado, "") != 0) {
+            fprintf(file, "Nome Cliente: %s\n", info[i].nomeCliente);
+            fprintf(file, "Nome Veículo: %s\n", info[i].carroAlugado);
+            fprintf(file, "Dias: %d\n", veiculos[i].dias);
+            fprintf(file, "------------------\n");
+        }
+    }
+
+    fclose(file);
+}
+
+void carregarLocacoes() {
+    FILE *file = fopen("Locacoes.txt", "r");
+
+    totalLocacoes = 0;
+    while (fscanf(file, "Nome Cliente: %[^\n]\n", info[totalLocacoes].nomeCliente) != EOF) {
+        fscanf(file, "Nome Veículo: %[^\n]\n", info[totalLocacoes].carroAlugado);
+        fscanf(file, "Dias Reservados: %d\n", &info[totalLocacoes].dia);
+        fscanf(file, "------------------\n");
+
+        totalLocacoes++;
+    }
+
+    fclose(file);
+}*/
+
 void carrosDisponiveis() {
     if (totalVeiculos == 0) {
         printf("\033[31mNenhum veículo cadastrado!\n\n");
@@ -221,7 +245,8 @@ void carrosDisponiveis() {
         printf("\033[37mAno: %s\n", veiculos[i].ano);
         printf("\033[37mQuilometragem: %.3fkm\n", veiculos[i].quilometragem);
         printf("\033[37mValor da diária: %.2fR$\n", veiculos[i].valorDiaria);
-        printf("------------------\n\n");
+        
+        printf("\033[37m------------------\n\n");
     }
 	
     system("pause");
@@ -245,7 +270,7 @@ void vistoriaCarro(int indiceCliente) {
     printf("\033[37mComeçando vistoria no veículo '%s'...\n\n", info[indiceCliente].carroAlugado);
 	sleep(2);
 	
-    printf("\033[37mPerguntas:\n");
+    printf("\033[33mPerguntas:\n");
     printf("\033[37m1. O carro está limpo? (S/N): ");
     scanf(" %c", &resposta1);
     
@@ -278,7 +303,7 @@ void vistoriaCarro(int indiceCliente) {
         sleep(3);
         
         system("cls");
-        printf("\033[37mNovo valor da locação: R$ %.2f\n", valorTotal);
+        printf("\033[33mNovo valor da locação: R$ %.2f\n", valorTotal);
 		
 		fflush(stdin);
         printf("\033[37mPor favor, insira o valor de R$ %.2f para concluir a devolução: ", valorTotal);
@@ -289,7 +314,7 @@ void vistoriaCarro(int indiceCliente) {
         int valorPagoCentavos = round(valorPago * 100);
 
         if (valorPagoCentavos == valorTotalCentavos) {
-            printf("\033[32mPagamento recebido.\n");
+            printf("\033[37mPagamento recebido.\n");
             
             totalLocacoes--;
     		strcpy(info[indiceCliente].carroAlugado, "");
@@ -336,7 +361,7 @@ void devolverCarro(int indiceCliente) {
 void regrasLocadora() {
 	printBanner();
       
-    printf("\033[37m******** Regras da Locadora ********\n\n");
+    printf("\033[33m******** Regras da Locadora ********\n\n");
 
     printf("\033[33m1. O VEÍCULO DEVE SER ENTREGUE E FEITO O CHECKLIST DE IMEDIATO\n");
     printf("\033[33m2. O VEÍCULO DEVE SER ENTREGUE COM O TANQUE CHEIO\n");
@@ -350,7 +375,7 @@ void regrasLocadora() {
 	system("pause");
     system("cls");
     
-    FILE *file = fopen("regras.txt", "w");
+    FILE *file = fopen("Regras.txt", "w");
     if (file == NULL) {
         printf("\033[31mErro ao abrir o arquivo!\n");
         return; 
@@ -382,7 +407,7 @@ void minhasInfo() {
     for (int i = 0; i < codigoCliente; i++) {
         if (strcmp(info[i].cpfCnpj, cpfCnpj) == 0) {
             system("cls");
-            printf("\033[37mUsuário encontrado.\n\n");
+            printf("\033[32mUsuário encontrado.\n\n");
 
             printf("\033[37mNome: %s\n", info[i].nomeCliente);
             printf("\033[37mData de Nascimento %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);
@@ -469,9 +494,10 @@ void alugarVeiculo(){
 								
 						system("cls");
 						printf("\033[32mCarro alugado!\n\n");
-							
+						
 						veiculos[i].disponivel = false;
 						totalLocacoes++;
+						//salvarLocacoes();
 							
 						return menuCliente();
 					}else if(confirmar == 'N' || confirmar == 'n'){

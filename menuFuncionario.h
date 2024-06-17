@@ -19,6 +19,7 @@ int totalLocacoes = 0;
 int totalVeiculos = 0;
 extern void menuPrincipal();
 
+void carregarVeiculos();
 void menuFuncionario();
 void cadastrarVeiculo();
 void removerVeiculo();

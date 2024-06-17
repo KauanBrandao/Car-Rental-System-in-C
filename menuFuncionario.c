@@ -7,8 +7,6 @@
 #include "menuFuncionario.h"
 #include "menuCliente.h"
 
-void printBanner();
-
 void loginFuncionario(){
     char login[10];
     char senha[10];
@@ -117,8 +115,6 @@ void carregarVeiculos() {
     fclose(file);
 }
 
-
-
 void cadastrarVeiculo(){
 	char categoria[15];
 	
@@ -164,28 +160,23 @@ void cadastrarVeiculo(){
     	printf("\033[31mErro: Já existe um veículo com esse código!\n\n");
     	return menuFuncionario();
 	}
-	totalVeiculos++;
 	
 	veiculos[totalVeiculos].disponivel = true;
+	totalVeiculos++;
+	
     system("cls");
 	
     printf("\033[32m**** Carro cadastrado com sucesso ****\n\n");
 	
 	FILE *file = fopen("CarrosDisponiveis.txt", "a");
-    if (file == NULL) {
-        printf("\033[31mErro ao abrir o arquivo!\n");
-        return;
-    }
-    
-    for (int i = 0; i < totalVeiculos; i++) {
-        fprintf(file, "Carro %d\n", i+1);
-        fprintf(file, "Nome: %s\n", veiculos[i].nomeVeiculo);
-        fprintf(file, "Categoria: %s\n", veiculos[i].categoria);
-        fprintf(file, "Ano: %s\n", veiculos[i].ano);
-        fprintf(file, "Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
-        fprintf(file, "Valor da diária: %.2fR$\n", veiculos[i].valorDiaria);
-        fprintf(file, "------------------\n\n");
-    }
+	
+    fprintf(file, "Carro %d\n", totalVeiculos);
+    fprintf(file, "Nome: %s\n", veiculos[totalVeiculos-1].nomeVeiculo);
+    fprintf(file, "Categoria: %s\n", veiculos[totalVeiculos-1].categoria);
+    fprintf(file, "Ano: %s\n", veiculos[totalVeiculos-1].ano);
+    fprintf(file, "Quilometragem: %.3fkm\n", veiculos[totalVeiculos-1].quilometragem);
+    fprintf(file, "Valor da diária: %.2fR$\n", veiculos[totalVeiculos-1].valorDiaria);
+    fprintf(file, "------------------\n\n");
     
     fclose(file);
     
@@ -307,13 +298,13 @@ void buscarVeiculo(){
 	            if (strcmp(veiculos[i].codigo, codigoCarro) ==0) {
 	                carroEncontrado = true;
 	                
-	                printf("Carro '%s encontrado!'", nomeCarro);
-	                printf("\nNome: %s\n", veiculos[i].nomeVeiculo);
-	                printf("Categoria: %s\n", veiculos[i].categoria);
-	                printf("Ano: %s\n", veiculos[i].ano);
-	                printf("Quilometragem: %.3fkm\n", veiculos[i].quilometragem);
-	                printf("Valor da diária: %.fR$\n", veiculos[i].valorDiaria);
-	                printf("Código: %s\n\n", veiculos[i].codigo);
+	                printf("\033[31mCarro '%s' encontrado!\n", nomeCarro);
+	                printf("\033[37m\nNome: %s\n", veiculos[i].nomeVeiculo);
+	                printf("\033[37mCategoria: %s\n", veiculos[i].categoria);
+	                printf("\033[37mAno: %s\n", veiculos[i].ano);
+	                printf("\033[37mQuilometragem: %.3fkm\n", veiculos[i].quilometragem);
+	                printf("\033[37mValor da diária: %.fR$\n", veiculos[i].valorDiaria);
+	                printf("\033[37mCódigo: %s\n\n", veiculos[i].codigo);
 	                
 	                system("pause");
 	                system("cls");
@@ -359,27 +350,6 @@ void buscarVeiculo(){
     menuFuncionario();
 }
 
-void carregarLocacoes() {
-    FILE *file = fopen("Locações consultadas.txt", "r");
-    if (file == NULL) {
-        printf("\033[31mErro ao abrir o arquivo!\n");
-        return;
-    }
-
-    totalLocacoes = 0;
-    while (fscanf(file, "Cliente nº %*d\n") != EOF) {
-        fscanf(file, "Nome: %[^\n]\n", info[totalLocacoes].nomeCliente);
-        fscanf(file, "Carro: %[^\n]\n", info[totalLocacoes].carroAlugado);
-        fscanf(file, "Dias Reservados: %d\n", &veiculos[totalLocacoes].dias);
-        fscanf(file, "--------------------\n\n");
-
-        totalLocacoes++;
-	}
-	
-	fclose(file);
-}
-
-
 void consultarLocacoes(){
 	printBanner();
     
@@ -390,30 +360,14 @@ void consultarLocacoes(){
         return menuFuncionario();
     }
 
-    printf("**** LISTA DE LOCAÇÕES ****\n\n");
+    printf("\033[37m**** LISTA DE LOCAÇÕES ****\n\n");
     for (int i = 0; i < totalLocacoes; i++) {
     	printf("\033[37mCliente nº %d\n", i+1);
         printf("\033[37mNome: %s\n", info[clienteAtual].nomeCliente);
         printf("\033[37mCarro: %s\n", info[clienteAtual].carroAlugado);
         printf("\033[37mDias Reservados: %d\n", veiculos[clienteAtual].dias);
-        printf("--------------------\n\n");
+        printf("\033[37m--------------------\n\n");
     }
-    
-    FILE *file = fopen("Locações consultadas.txt", "a");
-    if (file == NULL){
-    	printf("\033[31mErro ao abrir o arquivo!\n");
-    	return;
-	}
-		for (int i = 0; i < totalLocacoes; i++){
-		
-		fprintf(file, "Cliente nº %d\n", i+1);
-        fprintf(file, "Nome: %s\n", info[clienteAtual].nomeCliente);
-        fprintf(file, "Carro: %s\n", info[clienteAtual].carroAlugado);
-        fprintf(file, "Dias Reservados: %d\n", veiculos[clienteAtual].dias);
-        fprintf(file, "--------------------\n\n");
-    }
-        
-    fclose(file);
 	
     system("pause");
     system("cls");

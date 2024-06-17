@@ -8,7 +8,6 @@ struct Cliente {
     char usuario[20];
     char senha[20];
     char carroAlugado[40];
-    float custoAluguel;
 }info[]; 
 
 int codigoCliente = 0;
@@ -30,6 +29,7 @@ void menuClienteRegistro();
 void formadePagamento();
 void vistoriaCarro(int indiceCliente);
 void carregarClientes();
+void carregarLocacoes();
 
 int clienteAtual = -1;
 
