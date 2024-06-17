@@ -25,10 +25,26 @@ void loginFuncionario(){
         system("pause");
         system("cls");
         menuFuncionario();
-    } else {
+    }
+    if (loginInvalido(login, senha)) {
+    	char opcao;
         system("cls");
-        printf("\033[31mLogin ou senha inválidos.\n\n");
-        loginFuncionario();
+        printf("\033[31mUsuário ou senha inválidos!\n");
+        printf("\033[33mDeseja tentar novamente? [S/N]: ");
+        scanf(" %c", &opcao);
+        system("cls");
+        
+        if(opcao == 'S' || opcao == 's'){
+        	system("cls");
+        	return loginCliente();
+		}else if(opcao == 'N' || opcao == 'n'){
+			system("cls");
+			return menuPrincipal();
+		} else {
+			system("cls");
+			printf("\033[31mOpção Inválida!\n\n");
+			return menuPrincipal();		
+		}
     }
 }
 void liberarVeiculo(char codigo[]) {
@@ -106,6 +122,8 @@ void carregarVeiculos() {
         fscanf(file, "Ano: %[^\n]\n", veiculos[totalVeiculos].ano);
         fscanf(file, "Quilometragem: %fkm\n", &veiculos[totalVeiculos].quilometragem);
         fscanf(file, "Valor da diária: %fR$\n", &veiculos[totalVeiculos].valorDiaria);
+        fscanf(file, "Valor da diária: %fR$\n", &veiculos[totalVeiculos].valorDiaria);
+        fscanf(file, "Código: %[^\n]\n", veiculos[totalVeiculos].codigo);
         fscanf(file, "------------------\n\n");
 
         veiculos[totalVeiculos].disponivel = true;
@@ -125,9 +143,21 @@ void cadastrarVeiculo(){
         return;
     }
 	
+	printf("\033[37mDigite o código para esse veículo: ");
+    scanf(" %s", veiculos[totalVeiculos].codigo);
+    
+    if(codigoVeiculoInvalido(veiculos[totalVeiculos].codigo)){
+    	system("cls");
+    	printf("\033[31mErro: Já existe um veículo com esse código!\n\n");
+    	return menuFuncionario();
+	}
+	
 	fflush(stdin);
-    printf("\033[37mInforme o nome do carro: ");
+    printf("\033[37m\nInforme o nome do carro: ");
     gets(veiculos[totalVeiculos].nomeVeiculo);
+    for (int i = 0; veiculos[totalVeiculos].nomeVeiculo[i]; i++) {
+        veiculos[totalVeiculos].nomeVeiculo[i] = tolower((unsigned char)veiculos[totalVeiculos].nomeVeiculo[i]);
+    }
 	
 	printf("\033[37m\n-> Hatch\n");
 	printf("\033[37m-> Sedan\n");
@@ -152,21 +182,12 @@ void cadastrarVeiculo(){
 	printf("\033[37m\nInforme o valor da diária do carro (R$): ");
 	scanf(" %f", &veiculos[totalVeiculos].valorDiaria);
 	
-	printf("\033[37m\nDigite o código para esse veículo: ");
-    scanf(" %s", veiculos[totalVeiculos].codigo);
-    
-    if(codigoVeiculoInvalido(veiculos[totalVeiculos].codigo)){
-    	system("cls");
-    	printf("\033[31mErro: Já existe um veículo com esse código!\n\n");
-    	return menuFuncionario();
-	}
-	
 	veiculos[totalVeiculos].disponivel = true;
 	totalVeiculos++;
 	
     system("cls");
 	
-    printf("\033[32m**** Carro cadastrado com sucesso ****\n\n");
+    printf("\033[32m** Carro cadastrado com sucesso **\n\n");
 	
 	FILE *file = fopen("CarrosDisponiveis.txt", "a");
 	
@@ -176,6 +197,7 @@ void cadastrarVeiculo(){
     fprintf(file, "Ano: %s\n", veiculos[totalVeiculos-1].ano);
     fprintf(file, "Quilometragem: %.3fkm\n", veiculos[totalVeiculos-1].quilometragem);
     fprintf(file, "Valor da diária: %.2fR$\n", veiculos[totalVeiculos-1].valorDiaria);
+    fprintf(file, "Código: %s\n", veiculos[totalVeiculos-1].codigo);
     fprintf(file, "------------------\n\n");
     
     fclose(file);
@@ -293,12 +315,17 @@ void buscarVeiculo(){
         	system("cls");
     		printf("\033[37mInforme o código do veículo: ");
     		gets(codigoCarro);
+    		
+    		for (int i = 0; codigoCarro[i]; i++) {
+                codigoCarro[i] = tolower(codigoCarro[i]);
+            }
 
 	        for (int i = 0; i < totalVeiculos; i++) {
 	            if (strcmp(veiculos[i].codigo, codigoCarro) ==0) {
+	            	system("cls");
 	                carroEncontrado = true;
 	                
-	                printf("\033[31mCarro '%s' encontrado!\n", nomeCarro);
+	                printf("\033[32mVeículo '%s' encontrado!\n", veiculos[i].nomeVeiculo);
 	                printf("\033[37m\nNome: %s\n", veiculos[i].nomeVeiculo);
 	                printf("\033[37mCategoria: %s\n", veiculos[i].categoria);
 	                printf("\033[37mAno: %s\n", veiculos[i].ano);
@@ -318,10 +345,16 @@ void buscarVeiculo(){
     		printf("\033[37mInforme o nome do veículo: ");
     		gets(nomeCarro);
     		
+    		for (int i = 0; nomeCarro[i]; i++) {
+                nomeCarro[i] = tolower(nomeCarro[i]);
+            }
+    		
     		for(int i = 0; i < totalVeiculos; i++){
     			if(strcmp(nomeCarro, veiculos[i].nomeVeiculo)==0) {
+    				system("cls");
     				carroEncontrado = true;
 	                
+	                printf("\033[32mVeículo '%s' encontrado!\n", veiculos[i].nomeVeiculo);
 	                printf("\033[37m\nNome: %s\n", veiculos[i].nomeVeiculo);
 	                printf("\033[37mCategoria: %s\n", veiculos[i].categoria);
 	                printf("\033[37mAno: %s\n", veiculos[i].ano);
@@ -400,7 +433,7 @@ void buscarUsuario() {
 	        if (strcmp(cpfCnpj, info[i].cpfCnpj) == 0) {
 	        	encontrado = true;
 	            system("cls");
-	            printf("\033[37mUsuário encontrado.\n\n");
+	            printf("\033[32mUsuário encontrado.\n\n");
 	
 	            printf("\033[37mNome: %s\n", info[i].nomeCliente);
 	            printf("\033[37mData de nascimento: %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);
@@ -429,7 +462,7 @@ void buscarUsuario() {
 	        if (strcmp(usuario, info[i].usuario) == 0) {
 	        	encontrado = true;
 	            system("cls");
-	            printf("\033[37mUsuário encontrado.\n\n");
+	            printf("\033[32mUsuário encontrado.\n\n");
 	
 	            printf("\033[37mNome: %s\n", info[i].nomeCliente);
 	            printf("\033[37mData de nascimento: %d/%d/%d\n", info[i].dia, info[i].mes, info[i].ano);

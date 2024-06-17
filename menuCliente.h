@@ -29,7 +29,6 @@ void menuClienteRegistro();
 void formadePagamento();
 void vistoriaCarro(int indiceCliente);
 void carregarClientes();
-void carregarLocacoes();
 
 int clienteAtual = -1;
 

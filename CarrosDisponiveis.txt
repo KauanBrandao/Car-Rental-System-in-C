@@ -1,0 +1,27 @@
+Carro 1
+Nome: gol
+Categoria: hatch
+Ano: 2014
+Quilometragem: 130,000km
+Valor da diária: 120,00R$
+Código: 1
+------------------
+
+Carro 2
+Nome: corolla
+Categoria: sedan
+Ano: 2023
+Quilometragem: 20,000km
+Valor da diária: 330,00R$
+Código: 2
+------------------
+
+Carro 3
+Nome: jeep compass
+Categoria: suv
+Ano: 2019
+Quilometragem: 45,000km
+Valor da diária: 290,00R$
+Código: 3
+------------------
+
