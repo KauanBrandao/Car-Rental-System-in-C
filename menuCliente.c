@@ -314,15 +314,31 @@ void vistoriaCarro(int indiceCliente) {
     }
     if(totalProblemas == 0){
         printf("\033[32mVistoria concluída. Carro em bom estado.\n\n");
+        sleep(2);
         
-        totalLocacoes--;
-    	strcpy(info[indiceCliente].carroAlugado, "");
-    	veiculos[clienteAtual].disponivel = true;
+        valorTotal = veiculos[indiceCliente].valorDiaria * veiculos[indiceCliente].dias;
+        
+        printf("\033[37mPor favor, insira o valor de R$ %.2f para concluir a devolução: ", valorTotal);
+        scanf(" %f", &valorPago);
+        system("cls");
+        
+        if (valorPago == valorTotal) {
+            printf("\033[37mPagamento recebido.\n");
+            
+            totalLocacoes--;
+    		strcpy(info[indiceCliente].carroAlugado, "");
+    		veiculos[clienteAtual].disponivel = true;
     
-		printf("\033[32mCarro devolvido com sucesso.\n\n");
-		system("pause");
-		system("cls");
-		return menuCliente();
+			printf("\033[32mCarro devolvido com sucesso.\n\n");
+			system("pause");
+			system("cls");
+			return menuCliente();
+        } else {
+            printf("\033[31mValor pago é diferente. Devolução não concluída.\n\n");
+            system("pause");
+            system("cls");
+            return menuCliente();
+        }
     }
 }
 
